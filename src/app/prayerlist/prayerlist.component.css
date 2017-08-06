@@ -1,0 +1,9 @@
+li {
+  list-style: none;
+  margin: 2px;
+  background-color: darkblue;
+  color: white;
+  font-size: 80%;
+  font-weight: bold;
+  cursor: pointer;
+}

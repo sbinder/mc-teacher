@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PrayerlistComponentComponent } from './prayerlist-component.component';
+import { PrayerlistComponent } from './prayerlist.component';
 
-describe('PrayerlistComponentComponent', () => {
-  let component: PrayerlistComponentComponent;
-  let fixture: ComponentFixture<PrayerlistComponentComponent>;
+describe('PrayerlistComponent', () => {
+  let component: PrayerlistComponent;
+  let fixture: ComponentFixture<PrayerlistComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PrayerlistComponentComponent ]
+      declarations: [ PrayerlistComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PrayerlistComponentComponent);
+    fixture = TestBed.createComponent(PrayerlistComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

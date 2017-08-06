@@ -4,12 +4,13 @@ import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
-import { PrayerlistComponentComponent } from './prayerlist-component/prayerlist-component.component';
+import { PrayerlistComponent } from './prayerlist/prayerlist.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    PrayerlistComponentComponent
+    PrayerlistComponent
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule
