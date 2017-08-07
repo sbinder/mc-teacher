@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-// dummy data
-const plist = [
-  {id: 1, name: 'Tallit Blessing', group: 3},
-  {id: 2, name: 'Shehecheyanu', group: 3},
-];
-
+import { PrayersService } from '../services/prayers.service';
 
 @Component({
   selector: 'app-prayerlist',
@@ -14,15 +9,15 @@ const plist = [
 })
 export class PrayerlistComponent implements OnInit {
 
-  prayers =  [
-    {id: 1, name: 'Tallit Blessing', group: 3},
-    {id: 2, name: 'Shehecheyanu', group: 3},
-  ];
+  PrayerService: PrayersService;
+  prayers = [];
 
-
-  constructor() { }
+  constructor(PrayerService: PrayersService) {
+    this.PrayerService = PrayerService;
+  }
 
   ngOnInit() {
+    this.prayers = this.PrayerService.getPrayers();
   }
 
 }

@@ -5,17 +5,21 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { PrayerlistComponent } from './prayerlist/prayerlist.component';
+import { PrayersService } from './services/prayers.service';
+import { StudentsService } from './services/students.service';
+import { RatinglistComponent } from './ratinglist/ratinglist.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PrayerlistComponent
+    PrayerlistComponent,
+    RatinglistComponent
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule
   ],
-  providers: [],
+  providers: [PrayersService, StudentsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
