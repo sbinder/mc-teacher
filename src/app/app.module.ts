@@ -8,13 +8,17 @@ import { PrayerlistComponent } from './prayerlist/prayerlist.component';
 import { PrayersService } from './services/prayers.service';
 import { StudentsService } from './services/students.service';
 import { RatinglistComponent } from './ratinglist/ratinglist.component';
+import { StudentlistComponent } from './studentlist/studentlist.component';
+import { StudentlistheaderComponent } from './studentlist/studentlistheader/studentlistheader.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PrayerlistComponent,
-    RatinglistComponent
+    RatinglistComponent,
+    StudentlistComponent,
+    StudentlistheaderComponent
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule
