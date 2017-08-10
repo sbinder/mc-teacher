@@ -1,5 +1,5 @@
+<app-studentlistheader></app-studentlistheader>
 <ul>
-  <app-studentlistheader></app-studentlistheader>
   <li *ngFor="let student of students"
     (click)="toggleStudent(student.STID)"
     class="{{ student.selected ? 'selected' : ''}}">

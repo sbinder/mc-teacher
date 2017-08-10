@@ -1,1 +1,8 @@
-<li>Group: <span>A</span> <span>B</span> <span>AB</span> </li>
+  Group: <div class="btn-group btn-group-justified" role="group" aria-label="Group">
+    <button type="button" [classList]="getClass('A')" (click)="bclick($event)" value="A">A</button>
+    <button type="button" [classList]="getClass('B')" (click)="bclick($event)" value="B">B</button>
+    <button type="button" class="btn btn-default" #btnAB>A &amp; B</button>
+    <button type="button" class="btn btn-default">(none)</button>
+  </div>
+  <!-- ng-class="{'btn-default': true, 'btn-primary': false}" ng-model='false'>A</button> -->
+
