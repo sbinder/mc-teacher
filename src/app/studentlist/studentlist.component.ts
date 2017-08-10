@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentsService } from '../services/students.service';
+import { Student } from '../models/student.model';
 
 @Component({
   selector: 'app-studentlist',
@@ -9,7 +10,7 @@ import { StudentsService } from '../services/students.service';
 export class StudentlistComponent implements OnInit {
 
   STService: StudentsService;
-  students = [];
+  students: Student[] = [];
   selectedStudent = 0;
 
   constructor(STService: StudentsService) {
@@ -17,14 +18,18 @@ export class StudentlistComponent implements OnInit {
   }
   toggleStudent(id) {
     for (let i = 0 ; i < this.students.length ; i++) {
-      if (this.students[i].id === id) {
+      if (this.students[i].STID === id) {
         this.students[i].selected = !this.students[i].selected;
       }
     }
   }
 
   ngOnInit() {
-    this.students = this.STService.getStudents();
+    const slist = this.STService.getStudents();
+    slist.forEach(element => {
+      const s = new Student(element.id, element.fname, element.lname, element.group);
+      this.students.push(s);
+    });
   }
 
 }

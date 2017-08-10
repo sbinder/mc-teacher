@@ -7,3 +7,7 @@ li {
   color: black;
   cursor: pointer;
 }
+li.selected {
+  background-color: chartreuse;
+}
+
