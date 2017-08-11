@@ -7,7 +7,10 @@
     <div class="row">
       <div class="col-md-9">
         <app-studentlist *ngIf="showstudents"></app-studentlist>
-        <app-prayersheet *ngIf="!showstudents" (goBack)="showstudents = true"></app-prayersheet>
+        <app-prayersheet *ngIf="!showstudents"
+          (goBack)="showstudents = true"
+          [currentPrayer]="workingPrayer" >
+        </app-prayersheet>
       </div>
       <div class="col-md-3">
         <app-prayerlist (pray)="prayerSelected($event)"></app-prayerlist>

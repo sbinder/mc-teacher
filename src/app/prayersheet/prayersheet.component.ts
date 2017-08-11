@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Prayer } from '../models/prayer.model';
 
 @Component({
   selector: 'app-prayersheet',
@@ -9,6 +10,7 @@ export class PrayersheetComponent implements OnInit {
 
   constructor() { }
 
+  @Input() currentPrayer: Prayer;
   @Output() goBack = new EventEmitter();
 
   ngOnInit() {

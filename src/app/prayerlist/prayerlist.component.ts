@@ -22,7 +22,6 @@ export class PrayerlistComponent implements OnInit {
   }
 
   prayerClicked(id: number) {
-    console.log('Prayer ID ' + id);
     this.prayers.forEach(element => {
       if (element.TaskID === +id) {
         this.pray.emit(element);

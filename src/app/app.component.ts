@@ -9,10 +9,10 @@ import { Prayer } from './models/prayer.model';
 export class AppComponent {
   title = 'Group Lesson Portal';
   showstudents = true;
+  workingPrayer: Prayer;
 
   prayerSelected(event: Prayer) {
-    console.log ('Praying ' + event.TaskName );
+    this.workingPrayer = event;
     this.showstudents = false;
-    console.log('Showing Students: ' + this.showstudents);
   }
 }
