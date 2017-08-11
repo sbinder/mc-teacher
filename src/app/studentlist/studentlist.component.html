@@ -1,10 +1,9 @@
-<app-studentlistheader></app-studentlistheader>
+<app-studentlistheader (GroupEvent)="updateGroups($event)"></app-studentlistheader>
 <ul>
   <li *ngFor="let student of students"
     (click)="toggleStudent(student.STID)"
-    class="{{ student.selected ? 'selected' : ''}}">
-  <!--  <input type="checkbox" [value]="student.STID" [(checked)]="student.selected" > -->
-    {{ student.FName }} {{ student.LName }}
+    [ngClass]="student.selected ? 'selected' : ''" >
+      {{ student.FName }} {{ student.LName }}
   </li>
 </ul>
 

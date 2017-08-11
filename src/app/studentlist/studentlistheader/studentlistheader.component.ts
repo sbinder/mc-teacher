@@ -17,7 +17,6 @@ export class StudentlistheaderComponent implements OnInit {
   }
 
   bclick(event) {
-    console.log(event.target.value);
     const num: number = event.target.value;
     this.groupSelected[num] = ! this.groupSelected[num];
     this.GroupEvent.emit({group: num, selected: this.groupSelected[num]});

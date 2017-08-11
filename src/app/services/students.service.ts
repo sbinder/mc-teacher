@@ -4,10 +4,10 @@ import { Injectable } from '@angular/core';
 export class StudentsService {
 
   private students = [
-      {id: 1, fname: 'John', lname: 'Smith', group: 1},
-      {id: 2, fname: 'Plonit', lname: 'BatPloni', group: 0},
-      {id: 3, fname: 'Ploni', lname: 'BenPlonit', group: 1},
-      {id: 4, fname: 'Ima', lname: 'Badkind', group: 3},
+      {STID: 1, FName: 'John', LName: 'Smith', Group: 1},
+      {STID: 2, FName: 'Plonit', LName: 'BatPloni', Group: 0},
+      {STID: 3, FName: 'Ploni', LName: 'BenPlonit', Group: 1},
+      {STID: 4, FName: 'Ima', LName: 'Badkind', Group: 3},
     ];
 
   constructor() { }

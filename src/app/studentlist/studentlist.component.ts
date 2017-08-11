@@ -28,16 +28,20 @@ export class StudentlistComponent implements OnInit {
 
   setGroup(id: number, include: boolean) {
     for (let i = 0 ; i < this.students.length ; i++) {
-      if (this.students[i].Group === id) {
+      if (this.students[i].Group == id) {
         this.students[i].selected = include;
       }
     }
   }
 
+  updateGroups(groupChange: {group: number, selected: boolean}) {
+    this.setGroup(groupChange.group, groupChange.selected);
+  }
+
   ngOnInit() {
     const slist = this.STService.getStudents();
     slist.forEach(element => {
-      const s = new Student(element.id, element.fname, element.lname, element.group);
+      const s = new Student(element.STID, element.FName, element.LName, element.Group);
       this.students.push(s);
     });
   }
