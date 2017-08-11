@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { log } from "util";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-studentlistheader',
@@ -8,38 +9,18 @@ import { log } from "util";
 })
 export class StudentlistheaderComponent implements OnInit {
 
-  groupA = false;
-  groupB = false;
-  grcouAB = false;
-  groupN = false;
-
+  groupSelected = [false, false, false, false];
+  @Output() GroupEvent = new EventEmitter<{group: number, selected: boolean}>();
   constructor() { }
-
-  getClass(btn: string) {
-    let bn = false;
-    switch(btn) {
-      case 'A':
-        bn = this.groupA;
-        break;
-      case 'B':
-        bn = this.groupB;
-    }
-    if (bn) {
-      return 'btn btn-primary';
-    } else {
-      return 'btn btn-default';
-    }
+  getClass(btn: number) {
+    return this.groupSelected[btn] ?  'btn btn-primary' : 'btn btn-default';
   }
 
   bclick(event) {
     console.log(event.target.value);
-    switch(event.target.value) {
-      case 'A':
-        this.groupA = !this.groupA;
-        break;
-      case 'B':
-        this.groupB = !this.groupB;
-    }
+    const num: number = event.target.value;
+    this.groupSelected[num] = ! this.groupSelected[num];
+    this.GroupEvent.emit({group: num, selected: this.groupSelected[num]});
   }
 
   ngOnInit() {
