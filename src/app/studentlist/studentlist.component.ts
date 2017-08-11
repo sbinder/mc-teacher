@@ -28,7 +28,7 @@ export class StudentlistComponent implements OnInit {
 
   setGroup(id: number, include: boolean) {
     for (let i = 0 ; i < this.students.length ; i++) {
-      if (this.students[i].Group == id) {
+      if (this.students[i].Group === +id || +id === 4) {
         this.students[i].selected = include;
       }
     }
@@ -41,9 +41,23 @@ export class StudentlistComponent implements OnInit {
   ngOnInit() {
     const slist = this.STService.getStudents();
     slist.forEach(element => {
-      const s = new Student(element.STID, element.FName, element.LName, element.Group);
+      const s = new Student(element.STID, element.FName, element.LName, element.Group, element.Target);
       this.students.push(s);
     });
   }
 
+  groupName(gid: number) {
+    switch (gid) {
+      case 0:
+        return 'A';
+      case 1:
+        return 'B';
+      case 2:
+        return 'Both';
+      case 3:
+        return 'Custom';
+      default:
+        return 'ALL';
+    }
+  }
 }

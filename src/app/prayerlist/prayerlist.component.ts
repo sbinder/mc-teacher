@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Prayer } from '../models/prayer.model';
 import { PrayersService } from '../services/prayers.service';
 
 @Component({
@@ -10,7 +10,8 @@ import { PrayersService } from '../services/prayers.service';
 export class PrayerlistComponent implements OnInit {
 
   PrayerService: PrayersService;
-  prayers = [];
+  prayers: Prayer[] = [];
+  @Output() pray = new EventEmitter<Prayer>();
 
   constructor(PrayerService: PrayersService) {
     this.PrayerService = PrayerService;
@@ -18,6 +19,16 @@ export class PrayerlistComponent implements OnInit {
 
   ngOnInit() {
     this.prayers = this.PrayerService.getPrayers();
+  }
+
+  prayerClicked(id: number) {
+    console.log('Prayer ID ' + id);
+    this.prayers.forEach(element => {
+      if (element.TaskID === +id) {
+        this.pray.emit(element);
+        return;
+      }
+    });
   }
 
 }

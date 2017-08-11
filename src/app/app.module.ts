@@ -10,6 +10,8 @@ import { StudentsService } from './services/students.service';
 import { RatinglistComponent } from './ratinglist/ratinglist.component';
 import { StudentlistComponent } from './studentlist/studentlist.component';
 import { StudentlistheaderComponent } from './studentlist/studentlistheader/studentlistheader.component';
+import { PrayersheetComponent } from './prayersheet/prayersheet.component';
+import { PrayernodeComponent } from './prayersheet/prayernode/prayernode.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { StudentlistheaderComponent } from './studentlist/studentlistheader/stud
     PrayerlistComponent,
     RatinglistComponent,
     StudentlistComponent,
-    StudentlistheaderComponent
+    StudentlistheaderComponent,
+    PrayersheetComponent,
+    PrayernodeComponent
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule

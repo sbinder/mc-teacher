@@ -19,10 +19,11 @@ export class Student {
   Group: number;
   selected: boolean;
 
-  constructor(id: number, fname: string, lname: string, group: number) {
-    this.STID = id;
-    this.FName = fname;
-    this.LName = lname;
-    this.Group = group;
+  constructor(STID: number, FName: string, LName: string, Group: number, Target: Date) {
+    this.STID = STID;
+    this.FName = FName;
+    this.LName = LName;
+    this.Group = Group;
+    this.Target = Target;
   }
 }

@@ -1,5 +1,5 @@
 <ul>
-  <li *ngFor="let prayer of prayers">
-    {{ prayer.name }}
+  <li *ngFor="let prayer of prayers" (click)="prayerClicked(prayer.TaskID)">
+    {{ prayer.TaskName }}
   </li>
 </ul>

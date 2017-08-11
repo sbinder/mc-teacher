@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Prayer } from '../models/prayer.model';
 
 @Injectable()
 export class PrayersService {
 
 private prayers = [
-      {id: 1, name: 'Tallit Blessing', group: 3},
-      {id: 2, name: 'Shehecheyanu', group: 3},
+  new Prayer(1, 0, 'Tallit Blessing', 1),
+  new Prayer(2, 0, 'Shehecheyanu', 2),
+  new Prayer(3, 0, 'Nissim', 3)
     ];
 
   constructor() { }

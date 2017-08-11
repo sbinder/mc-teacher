@@ -1,15 +1,16 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    Welcome to {{title}}!
+    Mitzvah Central - {{title}}
   </h1>
   <div class="container">
     <div class="row">
       <div class="col-md-9">
-        <app-studentlist></app-studentlist>
+        <app-studentlist *ngIf="showstudents"></app-studentlist>
+        <app-prayersheet *ngIf="!showstudents" (goBack)="showstudents = true"></app-prayersheet>
       </div>
       <div class="col-md-3">
-        <app-prayerlist></app-prayerlist>
+        <app-prayerlist (pray)="prayerSelected($event)"></app-prayerlist>
       </div>
     </div>
   </div>

@@ -9,7 +9,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class StudentlistheaderComponent implements OnInit {
 
-  groupSelected = [false, false, false, false];
+  groupSelected = [false, false, false, false, false];
   @Output() GroupEvent = new EventEmitter<{group: number, selected: boolean}>();
   constructor() { }
   getClass(btn: number) {
@@ -17,7 +17,13 @@ export class StudentlistheaderComponent implements OnInit {
   }
 
   bclick(event) {
-    const num: number = event.target.value;
+    const num = +event.target.value;
+    if (num === 4) {
+      let i = 0;
+      for (; i < 4; i++) {
+        this.groupSelected[i] = false;
+      }
+    }
     this.groupSelected[num] = ! this.groupSelected[num];
     this.GroupEvent.emit({group: num, selected: this.groupSelected[num]});
   }
