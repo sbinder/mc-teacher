@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
+import { Student } from '../models/student.model';
 
 @Injectable()
 export class StudentsService {
 
   private students = [
-      {STID: 1, FName: 'John', LName: 'Smith', Group: 1, Target: new Date('2017-09-01')},
-      {STID: 2, FName: 'Plonit', LName: 'BatPloni', Group: 0, Target: new Date('2017-09-08')},
-      {STID: 3, FName: 'Ploni', LName: 'BenPlonit', Group: 1, Target: new Date('2017-09-08')},
-      {STID: 4, FName: 'Ima', LName: 'Badkind', Group: 3, Target: new Date('2017-09-15')},
-    ];
+    new Student(1, 'John', 'Smith', 1, new Date('2017-09-01')),
+    new Student(2, 'Plonit', 'BatPloni', 0, new Date('2017-09-08')),
+    new Student(3, 'Ploni', 'BenPlonit', 1, new Date('2017-09-08')),
+    new Student(4, 'Ima', 'Badkind', 3, new Date('2017-09-15')),
+  ];
 
   constructor() { }
   getStudents() {
-    return this.students.slice();
+    return this.students; // .slice();
   }
 }

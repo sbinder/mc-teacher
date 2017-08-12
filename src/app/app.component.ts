@@ -10,6 +10,7 @@ export class AppComponent {
   title = 'Group Lesson Portal';
   showstudents = true;
   workingPrayer: Prayer;
+  groupSelected = [false, false, false, false, false];
 
   prayerSelected(event: Prayer) {
     this.workingPrayer = event;

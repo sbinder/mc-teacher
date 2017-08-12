@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 
 
@@ -9,7 +9,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class StudentlistheaderComponent implements OnInit {
 
-  groupSelected = [false, false, false, false, false];
+//  groupSelected = [false, false, false, false, false];
+  @Input() groupSelected: [boolean];
   @Output() GroupEvent = new EventEmitter<{group: number, selected: boolean}>();
   constructor() { }
   getClass(btn: number) {

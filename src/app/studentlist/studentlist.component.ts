@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { StudentsService } from '../services/students.service';
 import { Student } from '../models/student.model';
 
@@ -11,8 +11,9 @@ import { Student } from '../models/student.model';
 export class StudentlistComponent implements OnInit {
 
   STService: StudentsService;
-  students: Student[] = [];
+  students: Student[];
   selectedStudent = 0;
+  @Input() groupSelected: [boolean];
 
   constructor(STService: StudentsService) {
     this.STService = STService;
@@ -39,11 +40,14 @@ export class StudentlistComponent implements OnInit {
   }
 
   ngOnInit() {
-    const slist = this.STService.getStudents();
-    slist.forEach(element => {
-      const s = new Student(element.STID, element.FName, element.LName, element.Group, element.Target);
-      this.students.push(s);
+    this.students = this.STService.getStudents();
+  }
+==> WORKING ON THIS PART:
+  anyStudentSelected() {
+    this.students.forEach(element => {
+      if (element.selected) { return true; }
     });
+    return false;
   }
 
   groupName(gid: number) {

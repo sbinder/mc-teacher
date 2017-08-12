@@ -1,4 +1,7 @@
 <h3><button type="button" class="btn btn-secondary" (click)="returnClicked()">
     <span class="glyphicon glyphicon-star"></span> Return to Students</button> {{ currentPrayer.TaskName }} </h3>
+<div class='row' *ngFor="let student of students">
+    <div class="col-4">{{ student.FName }} {{ student.LName }}</div>
+</div>
 
 

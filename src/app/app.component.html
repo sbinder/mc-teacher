@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-9">
-        <app-studentlist *ngIf="showstudents"></app-studentlist>
+        <app-studentlist *ngIf="showstudents" [groupSelected]="groupSelected"></app-studentlist>
         <app-prayersheet *ngIf="!showstudents"
           (goBack)="showstudents = true"
           [currentPrayer]="workingPrayer" >
