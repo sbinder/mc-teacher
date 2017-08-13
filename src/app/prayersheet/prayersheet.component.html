@@ -2,6 +2,15 @@
   <button type="button" class="btn btn-secondary" (click)="returnClicked()">
     <span class="glyphicon glyphicon-star"></span> Return to Students</button> {{ currentPrayer.TaskName }} </h3>
 <ul>
+  <li>
+      <div class='row'>
+          <div class="col-md-3 bg-success bold">Student</div>
+          <div class="col-md-2 bg-success bold">Progress</div>
+          <div class="col-md-3 bg-success bold">Teacher Comment</div>
+          <div class="col-md-3 bg-success bold">Student Comment</div>
+          <div class="col-md-1 bg-success bold">Age</div>
+      </div>
+  </li>
   <li *ngFor="let student of students">
         <app-prayernode [student]="student"></app-prayernode>
     </li>

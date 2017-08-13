@@ -12,7 +12,8 @@ import { StudentlistComponent } from './studentlist/studentlist.component';
 import { StudentlistheaderComponent } from './studentlist/studentlistheader/studentlistheader.component';
 import { PrayersheetComponent } from './prayersheet/prayersheet.component';
 import { PrayernodeComponent } from './prayersheet/prayernode/prayernode.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PrayernodeComponent } from './prayersheet/prayernode/prayernode.compone
     PrayernodeComponent
   ],
   imports: [
-    NgbModule.forRoot(), BrowserModule
+    NgbModule.forRoot(), BrowserModule, BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [PrayersService, StudentsService],
   bootstrap: [AppComponent]

@@ -9,6 +9,9 @@ import { Student } from '../../models/student.model';
 export class PrayernodeComponent implements OnInit {
   @Input('student') student: Student;
 
+  scomment = '';
+  tcomment = '';
+
   constructor() { }
 
   ngOnInit() {
