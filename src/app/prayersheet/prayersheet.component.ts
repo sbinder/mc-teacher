@@ -11,9 +11,8 @@ import { Student } from '../models/student.model';
 export class PrayersheetComponent implements OnInit {
 
   students: Student[];
-  STService: StudentsService;
 
-  constructor(STService: StudentsService) {
+  constructor(private STService: StudentsService) {
     this.STService = STService;
   }
 
@@ -21,14 +20,7 @@ export class PrayersheetComponent implements OnInit {
   @Output() goBack = new EventEmitter();
 
   ngOnInit() {
-    const slist = this.STService.getStudents();
-    this.students = [];
-    slist.forEach(element => {
-      if (element.selected) {
-        this.students.push(element);
-      }
-    });
-//    this.students = this.STService.getStudents();
+    this.students = this.STService.getSelectedStudents(true);
   }
 
   returnClicked() {

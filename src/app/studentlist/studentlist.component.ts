@@ -6,17 +6,14 @@ import { Student } from '../models/student.model';
   selector: 'app-studentlist',
   templateUrl: './studentlist.component.html',
   styleUrls: ['./studentlist.component.css'],
-
 })
 export class StudentlistComponent implements OnInit {
 
-  STService: StudentsService;
-  students: Student[];
+  students: Student[] = [];
   selectedStudent = 0;
   @Input() groupSelected: [boolean];
 
-  constructor(STService: StudentsService) {
-    this.STService = STService;
+  constructor(private STService: StudentsService) {
   }
 
   toggleStudent(id) {
@@ -42,13 +39,11 @@ export class StudentlistComponent implements OnInit {
   ngOnInit() {
     this.students = this.STService.getStudents();
   }
-==> WORKING ON THIS PART:
-  anyStudentSelected() {
-    this.students.forEach(element => {
-      if (element.selected) { return true; }
-    });
-    return false;
-  }
+
+// ==> Waiting for clarity on how to use this from outside the component
+/*
+
+*/
 
   groupName(gid: number) {
     switch (gid) {
