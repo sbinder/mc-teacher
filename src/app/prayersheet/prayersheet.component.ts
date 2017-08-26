@@ -11,6 +11,7 @@ import { Student } from '../models/student.model';
 export class PrayersheetComponent implements OnInit {
 
   students: Student[];
+   mode = 'A';
 
   constructor(private STService: StudentsService) {
     this.STService = STService;
@@ -18,12 +19,18 @@ export class PrayersheetComponent implements OnInit {
 
   @Input() currentPrayer: Prayer;
   @Output() goBack = new EventEmitter();
+  @Output() displayMode = new EventEmitter<string>();
 
   ngOnInit() {
     this.students = this.STService.getSelectedStudents(true);
+    this.displayMode.emit('A');
   }
 
   returnClicked() {
     this.goBack.emit();
   }
+
+  pClick() { this.mode = 'P'; this.displayMode.emit('P'); }
+  cClick() { this.mode = 'C'; this.displayMode.emit('C'); }
+  aClick() { this.mode = 'A'; this.displayMode.emit('A'); }
 }

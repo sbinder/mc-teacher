@@ -1,6 +1,13 @@
 <div class='row'>
   <div class="col-md-3">{{ student.FName }} {{ student.LName }}</div>
-  <app-progress></app-progress>
+
+  <div class="col-md-8" *ngIf="displayMode == 'P'">
+    <app-progress></app-progress>
+  </div>
+  <div class="col-md-3" *ngIf="displayMode == 'A'">
+      <app-progress></app-progress>
+  </div>
+
   <div class="col-md-3">
       <input type="text" />
 <!--
