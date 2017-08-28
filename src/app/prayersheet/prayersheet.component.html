@@ -1,35 +1,35 @@
 <h3>
   <button type="button" class="btn btn-secondary" (click)="returnClicked()">
     <span class="glyphicon glyphicon-star"></span> Return to Students</button>
-  {{ currentPrayer.TaskName }}
+  {{ currentPrayer.TaskName }} {{ (mode.prayer_display_state | async).mode }}
   <div class="btn-group" role="group" aria-label="View" ng-model="PrayerViewType">
     <button type="button" class="btn"
-      [ngClass]="mode == 'P' ?  'btn-primary' : 'btn-secondary'"
+      [ngClass]="(mode.prayer_display_state | async).mode == 'P' ?  'btn-primary' : 'btn-secondary'"
       (click)="pClick()" >Progress</button>
     <button type="button" class="btn"
-      [ngClass]="mode == 'C' ?  'btn-primary' : 'btn-secondary'"
+      [ngClass]="(mode.prayer_display_state | async).mode == 'C' ?  'btn-primary' : 'btn-secondary'"
       (click)="cClick()" >Comments</button>
     <button type="button" class="btn"
-      [ngClass]="mode == 'A' ?  'btn-primary' : 'btn-secondary'"
+      [ngClass]="(mode.prayer_display_state | async).mode == 'A' ?  'btn-primary' : 'btn-secondary'"
       (click)="aClick()" >All</button>
   </div>
 </h3>
 <ul>
   <li>
-      <div class='row' *ngIf="mode == 'P'">
+      <div class='row' *ngIf="(mode.prayer_display_state | async).mode == 'P'">
           <div class="col-md-3 bg-success bold">Student</div>
           <div class="col-md-8 bg-success bold">Progress</div>
           <div class="col-md-1 bg-success bold">Age</div>
       </div>
 
-      <div class='row' *ngIf="mode == 'C'">
+      <div class='row' *ngIf="(mode.prayer_display_state | async).mode == 'C'">
           <div class="col-md-3 bg-success bold">Student</div>
           <div class="col-md-4 bg-success bold">Teacher Comment</div>
           <div class="col-md-4 bg-success bold">Student Comment</div>
           <div class="col-md-1 bg-success bold">Age</div>
       </div>
 
-      <div class='row' *ngIf="mode == 'A'">
+      <div class='row' *ngIf="(mode.prayer_display_state | async).mode == 'A'">
           <div class="col-md-3 bg-success bold">Student</div>
           <div class="col-md-2 bg-success bold">Progress</div>
           <div class="col-md-3 bg-success bold">Teacher Comment</div>
@@ -39,6 +39,6 @@
 
   </li>
   <li *ngFor="let student of students">
-        <app-prayernode [student]="student"></app-prayernode>
+        <app-prayernode [student]="student" ></app-prayernode>
     </li>
 </ul>

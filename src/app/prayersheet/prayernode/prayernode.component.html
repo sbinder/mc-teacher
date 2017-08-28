@@ -1,10 +1,10 @@
 <div class='row'>
-  <div class="col-md-3">{{ student.FName }} {{ student.LName }}</div>
+  <div class="col-md-3">{{ student.FName }} {{ student.LName }} {{ mode }}</div>
 
-  <div class="col-md-8" *ngIf="displayMode == 'P'">
+  <div class="col-md-8" *ngIf="mode == 'P'">
     <app-progress></app-progress>
   </div>
-  <div class="col-md-3" *ngIf="displayMode == 'A'">
+  <div class="col-md-3" *ngIf="mode == 'A'">
       <app-progress></app-progress>
   </div>
 

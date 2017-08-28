@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Prayer } from '../models/prayer.model';
 import { StudentsService } from '../services/students.service';
 import { Student } from '../models/student.model';
+import { ModeService } from '../services/mode.service';
+// import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-prayersheet',
@@ -11,26 +13,27 @@ import { Student } from '../models/student.model';
 export class PrayersheetComponent implements OnInit {
 
   students: Student[];
-   mode = 'A';
+  mode: ModeService;
 
-  constructor(private STService: StudentsService) {
-    this.STService = STService;
+  constructor(private STService: StudentsService, private MService: ModeService) {
+//    this.STService = STService;
+//    this.MService = MService;
   }
 
   @Input() currentPrayer: Prayer;
   @Output() goBack = new EventEmitter();
-  @Output() displayMode = new EventEmitter<string>();
 
   ngOnInit() {
     this.students = this.STService.getSelectedStudents(true);
-    this.displayMode.emit('A');
+    // this.mode = this.MService.getStatus['prayernode_display'];
+    this.mode = this.MService;
   }
 
   returnClicked() {
     this.goBack.emit();
   }
 
-  pClick() { this.mode = 'P'; this.displayMode.emit('P'); }
-  cClick() { this.mode = 'C'; this.displayMode.emit('C'); }
-  aClick() { this.mode = 'A'; this.displayMode.emit('A'); }
+  pClick() { this.MService.prayer_display_state.next({ mode: 'P' }); }
+  cClick() { this.MService.prayer_display_state.next({ mode: 'C' }); }
+  aClick() { this.MService.prayer_display_state.next({ mode: 'A' }); }
 }

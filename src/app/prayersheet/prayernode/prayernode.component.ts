@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Student } from '../../models/student.model';
+import { ModeService } from '../../services/mode.service';
 
 @Component({
   selector: 'app-prayernode',
@@ -8,16 +9,15 @@ import { Student } from '../../models/student.model';
 })
 export class PrayernodeComponent implements OnInit {
   @Input('student') student: Student;
-  @Input('displayMode') displayMode: string;
 
-  // node = 'A';
-
+  mode: string;
   scomment = '';
   tcomment = '';
 
-  constructor() { }
+  constructor(private MService: ModeService) {} // this.MService = MService; }
 
   ngOnInit() {
+    // this.mode = this.MService.getPrayerNodeMode();
   }
 
 }
