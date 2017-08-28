@@ -33,7 +33,7 @@ export class PrayersheetComponent implements OnInit {
     this.goBack.emit();
   }
 
-  pClick() { this.MService.prayer_display_state.next({ mode: 'P' }); }
-  cClick() { this.MService.prayer_display_state.next({ mode: 'C' }); }
-  aClick() { this.MService.prayer_display_state.next({ mode: 'A' }); }
+  pClick() { this.MService.setPrayerMode('P'); }  // prayer_display_state.next({ mode: 'P' }); }
+  cClick() { this.MService.setPrayerMode('C'); }  // prayer_display_state.next({ mode: 'C' }); }
+  aClick() { this.MService.setPrayerMode('A'); }  // prayer_display_state.next({ mode: 'A' }); }
 }

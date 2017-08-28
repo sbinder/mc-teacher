@@ -3,8 +3,22 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ModeService {
+  prayerState: string;
+  prayer_display_state: Subject<string> = new Subject();
 
-  prayer_display_state: Subject<{ mode: string }> = new Subject();
+  constructor() {
+    this.setPrayerMode('A');
+  }
+
+  setPrayerMode(mode: string) {
+    this.prayerState = mode;
+    this.prayer_display_state.next( this.prayerState );
+  }
+
+  // getPrayerMode() {
+  //   return this.prayerState;
+  // }
+
   // private prayernode_display_status = new Subject<any>();
 
   // constructor() { }

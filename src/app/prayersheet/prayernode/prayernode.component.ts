@@ -10,14 +10,14 @@ import { ModeService } from '../../services/mode.service';
 export class PrayernodeComponent implements OnInit {
   @Input('student') student: Student;
 
-  mode: string;
+  mode: ModeService;
   scomment = '';
   tcomment = '';
 
   constructor(private MService: ModeService) {} // this.MService = MService; }
 
   ngOnInit() {
-    // this.mode = this.MService.getPrayerNodeMode();
+    this.mode = this.MService;
   }
 
 }

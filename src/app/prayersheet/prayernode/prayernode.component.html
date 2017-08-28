@@ -1,28 +1,26 @@
 <div class='row'>
-  <div class="col-md-3">{{ student.FName }} {{ student.LName }} {{ mode }}</div>
+  <div class="col-md-3">{{ student.FName }} {{ student.LName }} {{ mode.prayerState }}</div>
 
-  <div class="col-md-8" *ngIf="mode == 'P'">
+  <div class="col-md-8" *ngIf="mode.prayerState == 'P'">
     <app-progress></app-progress>
   </div>
-  <div class="col-md-3" *ngIf="mode == 'A'">
-      <app-progress></app-progress>
+
+  <div class="col-md-2" *ngIf="mode.prayerState == 'A'">
+    <app-progress></app-progress>
+  </div>
+  <div class="col-md-3"  *ngIf="mode.prayerState == 'A'">
+    <input type="text" />
+  </div>
+  <div class="col-md-3"  *ngIf="mode.prayerState == 'A'">
+    <input type="text" />
   </div>
 
-  <div class="col-md-3">
+    <div class="col-md-4"  *ngIf="mode.prayerState == 'C'">
       <input type="text" />
-<!--
-      <md-input-container>
-      <label>Teacher Comment</label>
-      <input mdInput type="text" ng-model="tcomment">
-    </md-input-container> -->
-  </div>
-  <div class="col-md-3">
+    </div>
+    <div class="col-md-4"  *ngIf="mode.prayerState == 'C'">
       <input type="text" />
-<!--
-      <md-input-container>
-      <label>Student Comment</label>
-      <input mdInput type="text" ng-model="scomment">
-    </md-input-container> -->
-  </div>
+    </div>
+
   <div class="col-md-1">99/99</div>
 </div>
