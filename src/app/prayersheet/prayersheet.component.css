@@ -11,3 +11,6 @@ li {
 .bold {
   font-weight: bold;
 }
+table {
+  margin-left: 10px;
+}

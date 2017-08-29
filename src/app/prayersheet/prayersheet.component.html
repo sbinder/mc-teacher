@@ -1,44 +1,50 @@
-<h3>
-  <button type="button" class="btn btn-secondary" (click)="returnClicked()">
-    <span class="glyphicon glyphicon-star"></span> Return to Students</button>
-  {{ currentPrayer.TaskName }} {{ mode.prayerState }}
-  <div class="btn-group" role="group" aria-label="View" ng-model="PrayerViewType">
-    <button type="button" class="btn"
-      [ngClass]="mode.prayerState == 'P' ?  'btn-primary' : 'btn-secondary'"
-      (click)="pClick()" >Progress</button>
-    <button type="button" class="btn"
-      [ngClass]="mode.prayerState == 'C' ?  'btn-primary' : 'btn-secondary'"
-      (click)="cClick()" >Comments</button>
-    <button type="button" class="btn"
-      [ngClass]="mode.prayerState == 'A' ?  'btn-primary' : 'btn-secondary'"
-      (click)="aClick()" >All</button>
-  </div>
-</h3>
+<table style="width:100%">
+  <tr>
+    <td style="text-align: left"><button type="button" class="btn btn-secondary" (click)="returnClicked()">
+      <i class="fa fa-user-circle"></i> Return to Students</button></td>
+    <td style="text-align: center"><h3>{{ currentPrayer.TaskName }}</h3></td>
+    <td style="text-align: right">
+      <div class="btn-group" role="group" aria-label="View" ng-model="PrayerViewType">
+        <button type="button" class="btn"
+          [ngClass]="mode.prayerState == 'P' ?  'btn-primary' : 'btn-secondary'"
+          (click)="pClick()">Progress</button>
+        <button type="button" class="btn"
+        [ngClass]="mode.prayerState == 'C' ?  'btn-primary' : 'btn-secondary'"
+        (click)="cClick()">Comments</button>
+        <button type="button" class="btn"
+        [ngClass]="mode.prayerState == 'A' ?  'btn-primary' : 'btn-secondary'"
+        (click)="aClick()">All</button>
+      </div>
+    </td>
+  </tr>
+</table>
+
+
 <ul>
   <li>
-      <div class='row' *ngIf="mode.prayerState == 'P'">
-          <div class="col-md-3 bg-success bold">Student</div>
-          <div class="col-md-8 bg-success bold">Progress</div>
-          <div class="col-md-1 bg-success bold">Age</div>
-      </div>
+    <div class='row' *ngIf="mode.prayerState == 'P'">
+      <div class="col-md-3 bg-success bold">Student</div>
+      <div class="col-md-8 bg-success bold">Progress</div>
+      <div class="col-md-1 bg-success bold">Age</div>
+    </div>
 
-      <div class='row' *ngIf="mode.prayerState == 'C'">
-          <div class="col-md-3 bg-success bold">Student</div>
-          <div class="col-md-4 bg-success bold">Teacher Comment</div>
-          <div class="col-md-4 bg-success bold">Student Comment</div>
-          <div class="col-md-1 bg-success bold">Age</div>
-      </div>
+    <div class='row' *ngIf="mode.prayerState == 'C'">
+      <div class="col-md-3 bg-success bold">Student</div>
+      <div class="col-md-4 bg-success bold">Teacher Comment</div>
+      <div class="col-md-4 bg-success bold">Student Comment</div>
+      <div class="col-md-1 bg-success bold">Age</div>
+    </div>
 
-      <div class='row' *ngIf="mode.prayerState == 'A'">
-          <div class="col-md-3 bg-success bold">Student</div>
-          <div class="col-md-2 bg-success bold">Progress</div>
-          <div class="col-md-3 bg-success bold">Teacher Comment</div>
-          <div class="col-md-3 bg-success bold">Student Comment</div>
-          <div class="col-md-1 bg-success bold">Age</div>
-      </div>
+    <div class='row' *ngIf="mode.prayerState == 'A'">
+      <div class="col-md-3 bg-success bold">Student</div>
+      <div class="col-md-2 bg-success bold">Progress</div>
+      <div class="col-md-3 bg-success bold">Teacher Comment</div>
+      <div class="col-md-3 bg-success bold">Student Comment</div>
+      <div class="col-md-1 bg-success bold">Age</div>
+    </div>
 
   </li>
   <li *ngFor="let student of students">
-        <app-prayernode [student]="student" ></app-prayernode>
-    </li>
+    <app-prayernode [student]="student"></app-prayernode>
+  </li>
 </ul>
