@@ -13,8 +13,7 @@ export class StudentlistComponent implements OnInit {
   selectedStudent = 0;
   @Input() groupSelected: [boolean];
 
-  constructor(private STService: StudentsService) {
-  }
+  constructor(private STService: StudentsService) { }
 
   toggleStudent(id) {
     for (let i = 0 ; i < this.students.length ; i++) {
@@ -39,11 +38,6 @@ export class StudentlistComponent implements OnInit {
   ngOnInit() {
     this.students = this.STService.getStudents();
   }
-
-// ==> Waiting for clarity on how to use this from outside the component
-/*
-
-*/
 
   groupName(gid: number) {
     switch (gid) {

@@ -11,20 +11,26 @@ export class StudentsService {
     new Student(4, 'Ima', 'Badkind', 3, new Date('2017-09-15')),
   ];
   private selectedStudents = [];
+  private groupSelected = [false, false, false, false, false];
 
   constructor() { }
   getStudents() {
     return this.students; // .slice();
   }
 
-  getSelectedStudents(orAll = true) {
-    this.selectedStudents = [];
+  getSelections() {
+    return this.groupSelected;
+  }
+
+  getSelectedStudents() {
+    // this.selectedStudents = [];
+    this.selectedStudents.length = 0;
     this.students.forEach(element => {
       if (element.selected) {
         this.selectedStudents.push(element);
       }
     });
-    if (this.selectedStudents.length === 0 && orAll) {
+    if (this.selectedStudents.length === 0) {
       return this.students;
     }
     return this.selectedStudents;
@@ -37,6 +43,16 @@ export class StudentsService {
     return false;
   }
 
+  addStudent(st: Student) {
+    for (var i = 0; i < this.groupSelected.length; i++) {
+      if (this.groupSelected[4] || this.groupSelected[st.Group]) {
+        st.selected = true;
+      }
+    }
+    this.students.push(st);
+    this.getSelectedStudents();
+    console.log(this.students);
+  }
 
 
 }

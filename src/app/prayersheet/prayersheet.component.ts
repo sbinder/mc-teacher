@@ -15,17 +15,13 @@ export class PrayersheetComponent implements OnInit {
   students: Student[];
   mode: ModeService;
 
-  constructor(private STService: StudentsService, private MService: ModeService) {
-//    this.STService = STService;
-//    this.MService = MService;
-  }
+  constructor(private STService: StudentsService, private MService: ModeService) { }
 
   @Input() currentPrayer: Prayer;
   @Output() goBack = new EventEmitter();
 
   ngOnInit() {
-    this.students = this.STService.getSelectedStudents(true);
-    // this.mode = this.MService.getStatus['prayernode_display'];
+    this.students = this.STService.getSelectedStudents();
     this.mode = this.MService;
   }
 

@@ -6,6 +6,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10">
+        <div class="TEMP">
+          <button type="button" class="btn btn-default" (click)="newStudentTest()">Add a student</button>
+        </div>
         <app-studentlist *ngIf="showstudents" [groupSelected]="groupSelected"></app-studentlist>
         <app-prayersheet *ngIf="!showstudents"
           (goBack)="showstudents = true"
