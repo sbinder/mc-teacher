@@ -17,6 +17,8 @@ import { MaterialModule } from '@angular/material';
 import { ProgressComponent } from './prayersheet/prayernode/progress/progress.component';
 import { CommentsComponent } from './prayersheet/prayernode/comments/comments.component';
 import { ModeService } from './services/mode.service';
+import { LessonService } from './services/lesson.service';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -32,9 +34,9 @@ import { ModeService } from './services/mode.service';
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule, BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule, HttpModule
   ],
-  providers: [PrayersService, StudentsService, ModeService],
+  providers: [PrayersService, StudentsService, ModeService, LessonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

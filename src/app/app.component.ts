@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Prayer } from './models/prayer.model';
 import { Student } from './models/student.model';
 import { StudentsService } from './services/students.service';
+import { LessonService } from './services/lesson.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ export class AppComponent implements OnInit {
   workingPrayer: Prayer;
 
 
-  constructor(private StudentService: StudentsService) { }
+  // constructor(private StudentService: StudentsService) {}
+  constructor(private StudentService: StudentsService, private LsnService: LessonService) { }
 
   ngOnInit() {
     this.students = this.StudentService.getStudents();
