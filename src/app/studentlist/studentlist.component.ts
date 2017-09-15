@@ -17,7 +17,7 @@ export class StudentlistComponent implements OnInit {
 
   toggleStudent(id) {
     for (let i = 0 ; i < this.students.length ; i++) {
-      if (this.students[i].STID === id) {
+      if (this.students[i].stid === id) {
         this.students[i].selected = !this.students[i].selected;
       }
     }
@@ -25,7 +25,7 @@ export class StudentlistComponent implements OnInit {
 
   setGroup(id: number, include: boolean) {
     for (let i = 0 ; i < this.students.length ; i++) {
-      if (this.students[i].Group === +id || +id === 4) {
+      if (this.students[i].liturgy === +id || +id === 4) {
         this.students[i].selected = include;
       }
     }

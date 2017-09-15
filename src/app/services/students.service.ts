@@ -44,8 +44,8 @@ export class StudentsService {
   }
 
   addStudent(st: Student) {
-    for (var i = 0; i < this.groupSelected.length; i++) {
-      if (this.groupSelected[4] || this.groupSelected[st.Group]) {
+    for (let i = 0; i < this.groupSelected.length; i++) {
+      if (this.groupSelected[4] || this.groupSelected[st.liturgy]) {
         st.selected = true;
       }
     }

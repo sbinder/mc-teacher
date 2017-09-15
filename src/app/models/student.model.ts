@@ -1,29 +1,26 @@
 export class Student {
-  STID: number;
-  Org: number;
-  Target: Date;
-  LName: string;
-  FName: string;
-  Gender: string;
-  Parent: number;
-  Teacher: number;
-  Email: string;
-  Aux1: string;
-  Aux2: string;
-  Aux3: string;
-  Aux4: string;
-  Username: string;
-  Password: string;
-  Expires: Date;
-  Trial: boolean;
-  Group: number;
+  stid: number;
+  org: number;
+  target: Date;
+  lname: string;
+  fname: string;
+  male: boolean;
+  parent: number;
+  teacher: number;
+  email: string;
+  note: string;
+  username: string;
+  password: string;
+  expires: Date;
+  trial: boolean;
+  liturgy: number;
   selected: boolean;
 
-  constructor(STID: number, FName: string, LName: string, Group: number, Target: Date) {
-    this.STID = STID;
-    this.FName = FName;
-    this.LName = LName;
-    this.Group = Group;
-    this.Target = Target;
+  constructor(stid: number, fname: string, lname: string, liturgy: number, target: Date) {
+    this.stid = stid;
+    this.fname = fname;
+    this.lname = lname;
+    this.liturgy = liturgy;
+    this.target = target;
   }
 }
