@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 // import { MdSliderChange } from '@angular/material/material';
 
 @Component({
   selector: 'app-progress',
   templateUrl: './progress.component.html',
-  styleUrls: ['./progress.component.css']
+  styleUrls: ['./progress.component.css'],
+  // inputs: {''}
 })
 export class ProgressComponent implements OnInit {
-  prayer: object;
+  @Input() prid: number;
+  @Input() stid: number;
   newscore: number;
 
   constructor() { }
@@ -16,10 +18,8 @@ export class ProgressComponent implements OnInit {
   }
  sliderChange(event: Event) {
    this.newscore = event['value'];
-   // this.prayer = event.source;
-  console.log(event);
  }
-  blurry(stid: number, prid: number) {
-    console.log('Changing ' + stid + ', ' + prid + ' to ' + this.newscore);
+  blurry() {
+    console.log('Changing ' + this.stid + ', ' + this.prid + ' to ' + this.newscore);
   }
 }

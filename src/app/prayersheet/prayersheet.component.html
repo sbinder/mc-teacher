@@ -45,6 +45,6 @@
 
   </li>
   <li *ngFor="let student of students">
-    <app-prayernode [student]="student"></app-prayernode>
+    <app-prayernode [student]="student" [prayer]="this.currentPrayer"></app-prayernode>
   </li>
 </ul>
