@@ -23,7 +23,7 @@ export class PrayerlistComponent implements OnInit {
 
   prayerClicked(id: number) {
     this.prayers.forEach(element => {
-      if (element.TaskID === +id) {
+      if (element.taskid === +id) {
         this.pray.emit(element);
         return;
       }

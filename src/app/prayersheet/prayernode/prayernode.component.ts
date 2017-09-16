@@ -11,6 +11,7 @@ import { Prayer } from '../../models/prayer.model';
 export class PrayernodeComponent implements OnInit {
   @Input('student') student: Student;
   @Input('prayer') prayer: Prayer;
+
   mode: ModeService;
   scomment = '';
   tcomment = '';

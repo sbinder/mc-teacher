@@ -1,12 +1,12 @@
 <div class='row'>
-  <div class="col-md-3">{{ student.FName }} {{ student.LName }}</div>
+  <div class="col-md-3">{{ student.fname }} {{ student.lname }}</div>
 
   <div class="col-md-8" *ngIf="mode.prayerState == 'P'">
-    <app-progress [stid]='student.STID' [prid]="prayer.TaskID"></app-progress>
+    <app-progress [stid]='student.stid' [prid]="prayer.taskid"></app-progress>
   </div>
 
   <div class="col-md-2" *ngIf="mode.prayerState == 'A'">
-    <app-progress [stid]='student.STID' [prid]="prayer.TaskID"></app-progress>
+    <app-progress [stid]='student.stid' [prid]="prayer.taskid"></app-progress>
   </div>
   <div class="col-md-3"  *ngIf="mode.prayerState == 'A'">
     <input type="text" />
