@@ -18,7 +18,8 @@ import { ProgressComponent } from './prayersheet/prayernode/progress/progress.co
 import { CommentsComponent } from './prayersheet/prayernode/comments/comments.component';
 import { ModeService } from './services/mode.service';
 import { LessonService } from './services/lesson.service';
-import { HttpModule } from '@angular/http';
+// import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { HttpModule } from '@angular/http';
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule, BrowserAnimationsModule,
-    MaterialModule, HttpModule
+    MaterialModule, HttpClientModule
   ],
   providers: [PrayersService, StudentsService, ModeService, LessonService],
   bootstrap: [AppComponent]

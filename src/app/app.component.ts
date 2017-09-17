@@ -3,6 +3,7 @@ import { Prayer } from './models/prayer.model';
 import { Student } from './models/student.model';
 import { StudentsService } from './services/students.service';
 import { LessonService } from './services/lesson.service';
+import { PrayersService } from './services/prayers.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,8 @@ import { LessonService } from './services/lesson.service';
 export class AppComponent implements OnInit {
 
   students: Student[];
+  public prayers: Prayer[];
+
   groupSelected: boolean[];
 
   title = 'Group Lesson Portal';
@@ -20,11 +23,15 @@ export class AppComponent implements OnInit {
   workingPrayer: Prayer;
 
 
-  // constructor(private StudentService: StudentsService) {}
-  constructor(private StudentService: StudentsService, private LsnService: LessonService) { }
-
+  constructor(private StudentService: StudentsService) {}
+   /*
+  constructor(private prayerService: PrayersService,
+    private StudentService: StudentsService,
+    private LsnService: LessonService) { }
+*/
   ngOnInit() {
-    this.students = this.StudentService.getStudents();
+//    this.students = this.StudentService.getStudents();
+//    this.prayers = this.prayerService.getPrayers();
     this.groupSelected = this.StudentService.getSelections();
   }
 
@@ -39,4 +46,5 @@ export class AppComponent implements OnInit {
     const st = new Student(tm.getSeconds(), 'Test', tm.getSeconds().toString(), 1, tm);
     this.StudentService.addStudent(st);
   }
+
 }

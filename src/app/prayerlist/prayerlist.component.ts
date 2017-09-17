@@ -9,21 +9,23 @@ import { PrayersService } from '../services/prayers.service';
 })
 export class PrayerlistComponent implements OnInit {
 
-  PrayerService: PrayersService;
-  prayers: Prayer[] = [];
+//  PrayerService: PrayersService;
+  prayers: Prayer[]; // = [];
   @Output() pray = new EventEmitter<Prayer>();
 
-  constructor(PrayerService: PrayersService) {
-    this.PrayerService = PrayerService;
+  constructor(private prayerService: PrayersService) {
+    // this.PrayerService = PrayerService;
   }
 
   ngOnInit() {
-    this.prayers = this.PrayerService.getPrayers();
+    this.prayers = this.prayerService.getPrayers();
+  //  console.log('Got this from service : ' + this.prayers);
   }
 
   prayerClicked(id: number) {
+    console.log(this.prayers);
     this.prayers.forEach(element => {
-      if (element.taskid === +id) {
+      if (element.prid === +id) {
         this.pray.emit(element);
         return;
       }
