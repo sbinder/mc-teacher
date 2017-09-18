@@ -19,11 +19,10 @@ export class PrayerlistComponent implements OnInit {
 
   ngOnInit() {
     this.prayers = this.prayerService.getPrayers();
-  //  console.log('Got this from service : ' + this.prayers);
-  }
+    }
 
   prayerClicked(id: number) {
-    console.log(this.prayers);
+    // console.log(this.prayers);
     this.prayers.forEach(element => {
       if (element.prid === +id) {
         this.pray.emit(element);

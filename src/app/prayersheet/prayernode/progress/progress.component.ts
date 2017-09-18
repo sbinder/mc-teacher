@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-// import { MdSliderChange } from '@angular/material/material';
+
+import { Progress } from '../../../models/progress.model';
 
 @Component({
   selector: 'app-progress',
@@ -8,8 +9,10 @@ import { Component, OnInit, Input } from '@angular/core';
   // inputs: {''}
 })
 export class ProgressComponent implements OnInit {
-  @Input() prid: number;
-  @Input() stid: number;
+//  @Input() prid: number;
+//  @Input() stid: number;
+  @Input() progress: Progress;
+
   newscore: number;
 
   constructor() { }
@@ -20,6 +23,7 @@ export class ProgressComponent implements OnInit {
    this.newscore = event['value'];
  }
   blurry() {
-    console.log('Changing ' + this.stid + ', ' + this.prid + ' to ' + this.newscore);
+    console.log('Changing ' + this.progress.stid + ', ' + this.progress.taskid + ' to ' + this.newscore);
   }
+
 }

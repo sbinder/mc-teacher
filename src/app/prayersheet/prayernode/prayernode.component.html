@@ -2,11 +2,12 @@
   <div class="col-md-3">{{ student.fname }} {{ student.lname }}</div>
 
   <div class="col-md-8" *ngIf="mode.prayerState == 'P'">
-    <app-progress [stid]='student.stid' [prid]="prayer.taskid"></app-progress>
+    <app-progress [progress]="progress">
+      </app-progress>
   </div>
 
   <div class="col-md-2" *ngIf="mode.prayerState == 'A'">
-    <app-progress [stid]='student.stid' [prid]="prayer.taskid"></app-progress>
+      <app-progress [progress]="progress"></app-progress>
   </div>
   <div class="col-md-3"  *ngIf="mode.prayerState == 'A'">
     <input type="text" />
@@ -16,10 +17,10 @@
   </div>
 
     <div class="col-md-4"  *ngIf="mode.prayerState == 'C'">
-      <input type="text" />
+      <input type="text" ng-model="progress.tcomment" />
     </div>
     <div class="col-md-4"  *ngIf="mode.prayerState == 'C'">
-      <input type="text" />
+      <input type="text" ng-model="progress.scomment" />
     </div>
 
   <div class="col-md-1">99/99</div>

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Student } from '../../models/student.model';
 import { ModeService } from '../../services/mode.service';
 import { Prayer } from '../../models/prayer.model';
+import { Progress } from '../../models/progress.model';
 
 @Component({
   selector: 'app-prayernode',
@@ -11,6 +12,7 @@ import { Prayer } from '../../models/prayer.model';
 export class PrayernodeComponent implements OnInit {
   @Input('student') student: Student;
   @Input('prayer') prayer: Prayer;
+  @Input('progress') progress: Progress;
 
   mode: ModeService;
   scomment = '';
