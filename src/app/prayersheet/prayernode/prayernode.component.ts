@@ -7,7 +7,7 @@ import { Progress } from '../../models/progress.model';
 @Component({
   selector: 'app-prayernode',
   templateUrl: './prayernode.component.html',
-  styleUrls: ['./prayernode.component.css']
+  styleUrls: ['./prayernode.component.css'],
 })
 export class PrayernodeComponent implements OnInit {
   @Input('student') student: Student;
