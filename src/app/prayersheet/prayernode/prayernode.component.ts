@@ -18,10 +18,13 @@ export class PrayernodeComponent implements OnInit {
   scomment = '';
   tcomment = '';
 
-  constructor(private MService: ModeService) {} // this.MService = MService; }
+  constructor(private MService: ModeService) {}
 
   ngOnInit() {
     this.mode = this.MService;
   }
 
+  gotNewRating(e) {
+    console.log(e);
+  }
 }

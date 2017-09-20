@@ -2,12 +2,12 @@
   <div class="col-md-3">{{ student.fname }} {{ student.lname }}</div>
 
   <div class="col-md-8" *ngIf="mode.prayerState == 'P'">
-    <app-progress [progress]="progress">
+    <app-progress [progress]="progress" (rating)="gotNewRating($event)">
       </app-progress>
   </div>
 
   <div class="col-md-2" *ngIf="mode.prayerState == 'A'">
-      <app-progress [progress]="progress"></app-progress>
+      <app-progress [progress]="progress" (rating)="gotNewRating($event)"></app-progress>
   </div>
   <div class="col-md-3"  *ngIf="mode.prayerState == 'A'">
     <input type="text" [(ngModel)]="progress.tcomment" />

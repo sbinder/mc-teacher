@@ -28,7 +28,6 @@ export class PrayersheetComponent implements OnInit {
 
   ngOnInit() {
     this.students = this.STService.getSelectedStudents();
-    // this.LsnService.loadTasks(this.students);
     this.progress = this.LsnService.getTasks();
     this.mode = this.MService;
 
