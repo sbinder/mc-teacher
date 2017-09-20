@@ -10,17 +10,21 @@
       <app-progress [progress]="progress" (rating)="gotNewRating($event)"></app-progress>
   </div>
   <div class="col-md-3"  *ngIf="mode.prayerState == 'A'">
-    <input type="text" [(ngModel)]="progress.tcomment" />
+    <input type="text" [(ngModel)]="progress.tcomment"
+    (blur)="tcommentBlur($event)" />
   </div>
   <div class="col-md-3"  *ngIf="mode.prayerState == 'A'">
-    <input type="text" [(ngModel)]="progress.scomment" />
+    <input type="text" [(ngModel)]="progress.scomment"
+    (blur)="scommentBlur($event)"/>
   </div>
 
     <div class="col-md-4"  *ngIf="mode.prayerState == 'C'">
-      <input type="text" [(ngModel)]="progress.tcomment" />
+      <input type="text" [(ngModel)]="progress.tcomment"
+      (blur)="tcommentBlur($event)"/>
     </div>
     <div class="col-md-4"  *ngIf="mode.prayerState == 'C'">
-      <input type="text" [(ngModel)]="progress.scomment" />
+      <input type="text" [(ngModel)]="progress.scomment"
+      (blur)="scommentBlur($event)"/>
     </div>
 
   <div class="col-md-1">99/99</div>

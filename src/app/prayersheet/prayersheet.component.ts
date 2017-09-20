@@ -47,7 +47,10 @@ export class PrayersheetComponent implements OnInit {
     if (pr) {
       return pr;
     } else {
-      return new Progress(stid, prid, 1, 0, '', '');
+      const newp = new Progress(stid, prid, 1, 0, '', '');
+      this.progress.push(newp);
+      return newp;
+      // return new Progress(stid, prid, 1, 0, '', '');
     }
   }
 

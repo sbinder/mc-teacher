@@ -10,7 +10,6 @@ import { element } from 'protractor';
 })
 export class ProgressComponent implements OnInit {
   private _progress: Progress;
-  private _origProgress: Progress;
 
   @Input() set progress(p: Progress) {
     this._progress = p;
@@ -19,7 +18,7 @@ export class ProgressComponent implements OnInit {
     }
   }
 
-@Output() rating = new EventEmitter<number>();
+@Output() rating = new EventEmitter<Progress>();
 
   get progress(): Progress {
     return this._progress;
@@ -37,7 +36,9 @@ export class ProgressComponent implements OnInit {
 
   lostFocus($event) {
     if (this._progress.rating !== this.newscore) {
-      this.rating.emit(this.newscore);
+      this._progress.rating = this.newscore;
+      // this.rating.emit(this.newscore);
+      this.rating.emit(this._progress);
     }
   }
 

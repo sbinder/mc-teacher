@@ -10,21 +10,35 @@ import { Progress } from '../../models/progress.model';
   styleUrls: ['./prayernode.component.css'],
 })
 export class PrayernodeComponent implements OnInit {
+  private scomment: string;
+  private tcomment: string;
   @Input('student') student: Student;
   @Input('prayer') prayer: Prayer;
-  @Input('progress') progress: Progress;
 
-  mode: ModeService;
-  scomment = '';
-  tcomment = '';
+  private _progress: Progress;
 
-  constructor(private MService: ModeService) {}
-
-  ngOnInit() {
-    this.mode = this.MService;
+  @Input() set progress(p: Progress) {
+    if (!p) { return; }
+    this._progress = p;
+    if (!this.scomment) {
+      this.scomment = p.scomment;
+      this.tcomment = p.tcomment;
+    }
   }
+  get progress(): Progress { return this._progress; }
+
+  constructor(public mode: ModeService) {}
+
+  ngOnInit() { }
 
   gotNewRating(e) {
     console.log(e);
+  }
+
+  scommentBlur(e) {
+    console.log('Teacher: ' + e.target.value);
+  }
+  tcommentBlur(e) {
+    console.log('Student: ' + e.target.value);
   }
 }
