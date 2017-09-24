@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-// import { Http } from '@angular/http';
 import { Progress } from '../models/progress.model';
 import { HttpClient } from '@angular/common/http';
 import { Student } from '../models/student.model';
@@ -9,9 +8,8 @@ import { Href } from './href.service';
 export class LessonService {
 
   // private tasks: Progress[];
-  private tasks = [
-    new Progress(3, 2, 1, 7.5, 'teacher com', 'student com')
-  ];
+  private tasks = [];
+//  [ new Progress(3, 2, 1, 7.5, 'teacher com', 'student com') ];
 
   constructor(private http: HttpClient) { }
 
@@ -21,14 +19,14 @@ export class LessonService {
   }
 
   loadTasks(students: Student[]) {
+    console.log('Loading tasks.');
     let slist = [];
     students.forEach((s) => {
       slist.push(s.stid);
     });
-    this.http.post<Progress[]>(Href.href + 'progress', slist)
+    this.http.post<Progress[]>(Href.href + 'classroom', slist)
     .subscribe(
       res => {
-        console.log(res);
         if (res) {
           this.tasks.length = 0;
           res.forEach((t) => {
@@ -37,10 +35,11 @@ export class LessonService {
         }
       },
       err => {
-        // console.log('ERROR: ' + err);
+
         console.log(err);
       }
     );
+    // console.log('loaded task list: ', this.tasks);
   }
 
   getTasks() {

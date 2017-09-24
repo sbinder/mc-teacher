@@ -21,7 +21,7 @@ export class PrayersheetComponent implements OnInit {
 
   constructor(private STService: StudentsService,
     private MService: ModeService,
-    private LsnService: LessonService) { }
+    private LsnService: LessonService,) { }
 
   @Input() currentPrayer: Prayer;
   @Output() goBack = new EventEmitter();
@@ -31,26 +31,28 @@ export class PrayersheetComponent implements OnInit {
     this.progress = this.LsnService.getTasks();
     this.mode = this.MService;
 
+    this.LsnService.loadTasks(this.students);
   }
 
   returnClicked() {
     this.goBack.emit();
   }
 
-  myPrayer(stid: number, prid: number) {
+  myPrayer(stid: number, taskid: number) {
     let pr: Progress;
     this.progress.forEach((p) => {
-      if (p.stid === stid && p.taskid === prid) {
+      if (p.stid === stid && p.taskid === taskid) {
         pr = p;
       }
     });
     if (pr) {
       return pr;
     } else {
-      const newp = new Progress(stid, prid, 1, 0, '', '');
+      // FIX TEACHER ID!
+      // Create a new (temporary) progress marker if none is found
+      const newp = new Progress(stid, taskid, 1, 0, '', '');
       this.progress.push(newp);
       return newp;
-      // return new Progress(stid, prid, 1, 0, '', '');
     }
   }
 

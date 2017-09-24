@@ -13,8 +13,8 @@ export class ProgressComponent implements OnInit {
 
   @Input() set progress(p: Progress) {
     this._progress = p;
-    if (!this.newscore) {
-      this.newscore = p.rating;
+    if (!this.origScore) {
+      this.origScore = p.rating;
     }
   }
 
@@ -24,19 +24,19 @@ export class ProgressComponent implements OnInit {
     return this._progress;
   }
 
-   newscore: number;
+  origScore: number;
 
   constructor() { }
 
   ngOnInit() { }
-
+/*
   sliderChange(event: Event) {
     this.newscore = event['value'];
   }
-
+*/
   lostFocus($event) {
-    if (this._progress.rating !== this.newscore) {
-      this._progress.rating = this.newscore;
+    if (this._progress.rating !== this.origScore) {
+      // this._progress.rating = this.newscore;
       // this.rating.emit(this.newscore);
       this.rating.emit(this._progress);
     }

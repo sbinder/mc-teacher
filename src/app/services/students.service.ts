@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Student } from '../models/student.model';
+import { Href } from './href.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class StudentsService {
@@ -13,7 +15,28 @@ export class StudentsService {
   private selectedStudents = [];
   private groupSelected = [false, false, false, false, false];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  loadStudents() {
+
+    this.http.get<Student[]>(Href.href + 'classroom')
+    .subscribe(
+      res => {
+        // console.log(res);
+        if (res) {
+          this.students.length = 0;
+          res.forEach((t) => {
+            this.students.push(t);
+          });
+        }
+      },
+      err => {
+
+        console.log(err);
+      }
+    );
+  }
+
   getStudents() {
     return this.students; // .slice();
   }

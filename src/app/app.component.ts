@@ -23,7 +23,8 @@ export class AppComponent implements OnInit {
   workingPrayer: Prayer;
 
 
-  constructor(private StudentService: StudentsService) {}
+  constructor(private StudentService: StudentsService,
+    private lessonservice: LessonService) {}
    /*
   constructor(private prayerService: PrayersService,
     private StudentService: StudentsService,
@@ -32,7 +33,9 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 //    this.students = this.StudentService.getStudents();
 //    this.prayers = this.prayerService.getPrayers();
+    this.StudentService.loadStudents();
     this.groupSelected = this.StudentService.getSelections();
+    this.lessonservice.loadTasks(this.StudentService.getStudents());
   }
 
 

@@ -10,19 +10,17 @@ import { Progress } from '../../models/progress.model';
   styleUrls: ['./prayernode.component.css'],
 })
 export class PrayernodeComponent implements OnInit {
-  private scomment: string;
-  private tcomment: string;
   @Input('student') student: Student;
   @Input('prayer') prayer: Prayer;
 
   private _progress: Progress;
+  private _origProgress: Progress;
 
   @Input() set progress(p: Progress) {
-    if (!p) { return; }
     this._progress = p;
-    if (!this.scomment) {
-      this.scomment = p.scomment;
-      this.tcomment = p.tcomment;
+    // console.log(this.student, this.progress);
+    if (!this._origProgress) {
+      this._origProgress = {...p};
     }
   }
   get progress(): Progress { return this._progress; }
@@ -31,14 +29,28 @@ export class PrayernodeComponent implements OnInit {
 
   ngOnInit() { }
 
+  checkFields() {
+    if (this._progress.rating !== this._origProgress.rating ||
+      this.progress.tcomment !== this._origProgress.tcomment ||
+      this.progress.scomment !== this._origProgress.scomment) {
+
+        console.log(this._origProgress, this._progress);
+
+        // update DB
+
+        // only do this on success:
+        this._origProgress = { ...this._progress };
+      }
+  }
+
   gotNewRating(e) {
-    console.log(e);
+    this.checkFields();
   }
 
   scommentBlur(e) {
-    console.log('Teacher: ' + e.target.value);
+    this.checkFields();
   }
   tcommentBlur(e) {
-    console.log('Student: ' + e.target.value);
+    this.checkFields();
   }
 }
