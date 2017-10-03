@@ -31,7 +31,7 @@ export class PrayersheetComponent implements OnInit {
     this.progress = this.LsnService.getTasks();
     this.mode = this.MService;
 
-    this.LsnService.loadTasks(this.students);
+    // this.LsnService.loadTasks(this.students);
   }
 
   returnClicked() {

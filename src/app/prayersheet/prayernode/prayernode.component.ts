@@ -3,6 +3,7 @@ import { Student } from '../../models/student.model';
 import { ModeService } from '../../services/mode.service';
 import { Prayer } from '../../models/prayer.model';
 import { Progress } from '../../models/progress.model';
+import { LessonService } from '../../services/lesson.service';
 
 @Component({
   selector: 'app-prayernode',
@@ -20,12 +21,12 @@ export class PrayernodeComponent implements OnInit {
     this._progress = p;
     // console.log(this.student, this.progress);
     if (!this._origProgress) {
-      this._origProgress = {...p};
+      this._origProgress = { ...p };
     }
   }
   get progress(): Progress { return this._progress; }
 
-  constructor(public mode: ModeService) {}
+  constructor(public mode: ModeService, private lessonService: LessonService) { }
 
   ngOnInit() { }
 
@@ -33,24 +34,58 @@ export class PrayernodeComponent implements OnInit {
     if (this._progress.rating !== this._origProgress.rating ||
       this.progress.tcomment !== this._origProgress.tcomment ||
       this.progress.scomment !== this._origProgress.scomment) {
-
-        console.log(this._origProgress, this._progress);
-
-        // update DB
-
-        // only do this on success:
-        this._origProgress = { ...this._progress };
-      }
+      const my = this;
+      // update DB
+      this.lessonService.saveTask(this._progress)
+        .subscribe(
+        (res) => {
+          my._progress.changed = new Date();
+          if (!my._progress.assigned) {
+            my._progress.assigned = my._progress.changed;
+          }
+          my._origProgress = { ...my._progress };
+        },
+        (err) => {
+          console.log('Error', err);
+        });
+    }
   }
 
   gotNewRating(e) {
+    if (e.target === document.activeElement) { return; }
     this.checkFields();
   }
 
   scommentBlur(e) {
+    if (e.target.classList.contains('ng-pristine')) { return; }
     this.checkFields();
   }
   tcommentBlur(e) {
+    if (e.target.classList.contains('ng-pristine')) { return; }
     this.checkFields();
   }
+
+  weeksSince(o: any) {
+    if (!o) {
+      return '';
+    }
+    const n = Date.now();
+    const a = new Date(o);
+    const d = n - +a;
+    const w = Math.floor((d / 604800000));
+    // console.log('N', n, 'A', a, 'Dif', d, 'weeks:', w );
+    if (w === NaN) {return '';}
+    return w.toString();
+  }
+
+
+  age() {
+    return this.weeksSince(this._progress.assigned);
+  }
+
+  lastheard()
+  {
+    return this.weeksSince(this._progress.changed);
+  }
+
 }

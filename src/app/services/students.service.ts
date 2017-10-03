@@ -19,7 +19,7 @@ export class StudentsService {
 
   loadStudents() {
 
-    this.http.get<Student[]>(Href.href + 'classroom')
+    this.http.get<Student[]>(Href.href + 'student')
     .subscribe(
       res => {
         // console.log(res);

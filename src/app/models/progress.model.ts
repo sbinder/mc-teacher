@@ -5,6 +5,8 @@ export class Progress {
   rating: number;
   scomment: string;
   tcomment: string;
+  assigned: Date;
+  changed: Date;
 
   constructor(stid: number, taskid: number, tid: number, rating: number,
     tcomment: string, scomment: string) {

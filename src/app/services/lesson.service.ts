@@ -3,32 +3,35 @@ import { Progress } from '../models/progress.model';
 import { HttpClient } from '@angular/common/http';
 import { Student } from '../models/student.model';
 import { Href } from './href.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class LessonService {
 
-  // private tasks: Progress[];
-  private tasks = [];
-//  [ new Progress(3, 2, 1, 7.5, 'teacher com', 'student com') ];
+    private tasks = [];
 
   constructor(private http: HttpClient) { }
 
   saveTask(task: Progress) {
-
-    this.http.put(Href.href + 'progress', Progress);
+    console.log('saving', task);
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    return this.http.put(Href.href + 'progress', JSON.stringify(task), {headers});
   }
 
-  loadTasks(students: Student[]) {
+  loadTasks(students: Student[], all = true) {
     console.log('Loading tasks.');
     let slist = [];
     students.forEach((s) => {
       slist.push(s.stid);
     });
-    this.http.post<Progress[]>(Href.href + 'classroom', slist)
+    this.http.post<Progress[]>(Href.href + 'progress', slist)
     .subscribe(
       res => {
         if (res) {
-          this.tasks.length = 0;
+          if (all) {
+            this.tasks.length = 0;
+          }
           res.forEach((t) => {
             this.tasks.push(t);
           });
@@ -36,7 +39,7 @@ export class LessonService {
       },
       err => {
 
-        console.log(err);
+        console.log('ERROR:', err);
       }
     );
     // console.log('loaded task list: ', this.tasks);
