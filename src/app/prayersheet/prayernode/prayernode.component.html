@@ -1,6 +1,7 @@
-<div class='row'[ngStyle]="{'border': lastheard() === '' ? '1px solid green' : 'none'}">
-  <div class="col-md-3" [ngStyle]="{'color': lastheard() === '0' ? 'LightBlue' : 'black'}">{{ student.fname }} {{ student.lname }}</div>
-
+<div class='row'[ngStyle]="getStyles()">
+  <div class="col-md-3" [ngStyle]=
+  "{'color': ageHeard === '0' ? 'LightBlue' : 'black'}">{{ student.fname }} {{ student.lname }}
+</div>
   <div class="col-md-8" *ngIf="mode.prayerState == 'P'">
     <app-progress [progress]="progress" (rating)="gotNewRating($event)">
       </app-progress>
@@ -27,5 +28,5 @@
       (blur)="scommentBlur($event)"/>
     </div>
 
-  <div class="col-md-1">{{lastheard(progress)}}/{{ age(progress) }}</div>
+  <div class="col-md-1">{{ ageString }}</div>
 </div>

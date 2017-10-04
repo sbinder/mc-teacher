@@ -4,6 +4,7 @@ import { ModeService } from '../../services/mode.service';
 import { Prayer } from '../../models/prayer.model';
 import { Progress } from '../../models/progress.model';
 import { LessonService } from '../../services/lesson.service';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-prayernode',
@@ -17,9 +18,13 @@ export class PrayernodeComponent implements OnInit {
   private _progress: Progress;
   private _origProgress: Progress;
 
+  ageString = '';
+  ageHeard = '';
+  ageAssigned = '';
+
   @Input() set progress(p: Progress) {
     this._progress = p;
-    // console.log(this.student, this.progress);
+    this.ageString = this.getAgeString();
     if (!this._origProgress) {
       this._origProgress = { ...p };
     }
@@ -65,27 +70,49 @@ export class PrayernodeComponent implements OnInit {
     this.checkFields();
   }
 
-  weeksSince(o: any) {
+  weeksSince(o: any): string {
     if (!o) {
       return '';
     }
-    const n = Date.now();
-    const a = new Date(o);
-    const d = n - +a;
-    const w = Math.floor((d / 604800000));
-    // console.log('N', n, 'A', a, 'Dif', d, 'weeks:', w );
-    if (w === NaN) {return '';}
+    const w = Math.floor((Date.now() - +(new Date(o))) / 604800000);
+    if (w === NaN) { return ''; }
     return w.toString();
+  }
+
+  getAgeString(): string {
+    const a = this.age();
+    const l = this.lastheard();
+    if (a.length > 0 && l.length > 0) {
+      return l + '/' + a;
+    } else {
+      return a;
+    }
   }
 
 
   age() {
-    return this.weeksSince(this._progress.assigned);
+    this.ageAssigned = this.weeksSince(this._progress.assigned);
+    return this.ageAssigned;
   }
 
-  lastheard()
-  {
-    return this.weeksSince(this._progress.changed);
+  lastheard() {
+    this.ageHeard =  this.weeksSince(this._progress.changed);
+    return this.ageHeard;
   }
 
+  getStyles() {
+    var color: string;
+    if (+this.ageHeard > 3) {
+      color = 'orange';
+    } else if (!this.ageAssigned) {
+      color = 'Gainsboro';
+    } else {
+      color = 'white';
+    }
+    const styles = {
+      'background-color': color
+    };
+    return styles;
+    // {'border': +ageHeard > 3 ? '1px solid red' : 'none',
+  }
 }
