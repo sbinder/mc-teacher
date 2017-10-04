@@ -19,6 +19,10 @@ export class LessonService {
     return this.http.put(Href.href + 'progress', JSON.stringify(task), {headers});
   }
 
+  updateTask(task: Progress) {
+    console.log('should be updating task here');
+  }
+
   loadTasks(students: Student[], all = true) {
     console.log('Loading tasks.');
     let slist = [];
