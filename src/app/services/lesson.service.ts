@@ -17,7 +17,7 @@ export class LessonService {
   public changedProgress = new Subject<Progress>();
 
   constructor(private http: HttpClient) {
-    console.log('initializing connection')
+    console.log('initializing lesson connection');
     const my = this;
     // Declare a proxy to reference the hub.
     $.connection.hub.url = 'http://localhost:55199/signalr'; // TESTING ONLY

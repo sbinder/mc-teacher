@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { StudentsService } from '../services/students.service';
 import { Student } from '../models/student.model';
 
@@ -7,13 +7,13 @@ import { Student } from '../models/student.model';
   templateUrl: './studentlist.component.html',
   styleUrls: ['./studentlist.component.css'],
 })
-export class StudentlistComponent implements OnInit {
+export class StudentlistComponent implements OnInit, OnDestroy {
 
   students: Student[] = [];
   selectedStudent = 0;
   @Input() groupSelected: [boolean];
 
-  constructor(private STService: StudentsService) { }
+  constructor(private STService: StudentsService, private changes: ChangeDetectorRef) { }
 
   toggleStudent(id) {
     for (let i = 0 ; i < this.students.length ; i++) {
@@ -36,7 +36,13 @@ export class StudentlistComponent implements OnInit {
   }
 
   ngOnInit() {
+    const my = this;
     this.students = this.STService.getStudents();
+    this.STService.studentChange.subscribe(s => {
+        console.log('student list change', my.students);
+        my.changes.detectChanges();
+    });
+
   }
 
   groupName(gid: number) {
@@ -52,5 +58,9 @@ export class StudentlistComponent implements OnInit {
       default:
         return 'ALL';
     }
+  }
+
+  ngOnDestroy() {
+    this.STService.studentChange.unsubscribe();
   }
 }

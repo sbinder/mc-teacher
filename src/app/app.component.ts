@@ -44,10 +44,4 @@ export class AppComponent implements OnInit {
     this.showstudents = false;
   }
 
-  newStudentTest() {
-    const tm = new Date();
-    const st = new Student(tm.getSeconds(), 'Test', tm.getSeconds().toString(), 1, tm);
-    this.StudentService.addStudent(st);
-  }
-
 }

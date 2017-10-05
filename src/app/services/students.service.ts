@@ -2,25 +2,62 @@ import { Injectable } from '@angular/core';
 import { Student } from '../models/student.model';
 import { Href } from './href.service';
 import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs/Subject';
+
+declare var jquery: any;
+declare var $: any;
 
 @Injectable()
 export class StudentsService {
+  ClassHub: any;
 
+  private students: Student[] = [];
+/*
   private students = [
     new Student(1, 'John', 'Smith', 1, new Date('2017-09-01')),
     new Student(2, 'Plonit', 'BatPloni', 0, new Date('2017-09-08')),
     new Student(3, 'Ploni', 'BenPlonit', 1, new Date('2017-09-08')),
     new Student(4, 'Ima', 'Badkind', 3, new Date('2017-09-15')),
   ];
+  */
   private selectedStudents = [];
   private groupSelected = [false, false, false, false, false];
 
-  constructor(private http: HttpClient) { }
+  public studentChange = new Subject<{s: number, p: boolean}>();
+
+  constructor(private http: HttpClient) {
+    console.log('initializing students connection');
+    const my = this;
+    // Declare a proxy to reference the hub.
+    $.connection.hub.url = 'http://localhost:55199/signalr'; // TESTING ONLY
+    this.ClassHub = $.connection.classHub;
+
+    // Create a function that the hub can call to broadcast messages.
+    this.ClassHub.client.broadcastCheckin = function (stid: number, status: boolean) {
+      // console.log('Got a broadcast:', stid, status);
+      if (status) {
+        my.addStudent(stid);
+      } else {
+        my.removeStudent(stid);
+      }
+    };
+
+    $.connection.hub.start()
+      .done(() => {
+        my.ClassHub.server.joinGroup(1);
+      });
+
+  }
+
+  emitChange(alert: {s: number, p: boolean}) {
+    this.studentChange.next(alert);
+  }
+
 
   loadStudents() {
 
     this.http.get<Student[]>(Href.href + 'student')
-    .subscribe(
+      .subscribe(
       res => {
         // console.log(res);
         if (res) {
@@ -34,7 +71,7 @@ export class StudentsService {
 
         console.log(err);
       }
-    );
+      );
   }
 
   getStudents() {
@@ -66,16 +103,56 @@ export class StudentsService {
     return false;
   }
 
-  addStudent(st: Student) {
-    for (let i = 0; i < this.groupSelected.length; i++) {
-      if (this.groupSelected[4] || this.groupSelected[st.liturgy]) {
-        st.selected = true;
+  // addStudent(st: Student) {
+  addStudent(stn: number) {
+    const my = this;
+    this.http.get<Student>(Href.href + 'student/' + stn)
+      .subscribe(st => {
+        // console.log(st);
+        if (st) {
+          for (const s of my.students) {
+            if (s.stid === stn) {
+              return;
+            }
+          }
+          for (let i = 0; i < my.groupSelected.length; i++) {
+            if (my.groupSelected[4] || my.groupSelected[st.liturgy]) {
+              st.selected = true;
+            }
+          }
+          my.students.push({...st});
+          my.getSelectedStudents();
+          my.emitChange({s: stn, p: true});
+        }
+      },
+
+      err => {
+        console.log(err);
+      });
+
+
+  }
+  removeStudent(stn: number) {
+    for (let i = 0; i < this.students.length; i++) {
+      if (this.students[i].stid === stn) {
+        this.students.splice(i, 1);
+        // console.log('removed', stn);
+        this.emitChange({s: stn, p: false});
+        return;
       }
     }
-    this.students.push(st);
-    this.getSelectedStudents();
-    console.log(this.students);
-  }
 
+    /*
+    const s = { ...this.students };
+    this.students.length = 0;
+    s.forEach(student => {
+      if (student.stid !== stn) {
+        this.students.push(student);
+      } else {console.log('removed', stn);}
+    });
+    console.log('after removal:', this.students);
+*/
+
+  }
 
 }
