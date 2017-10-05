@@ -3,11 +3,13 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ModeService {
+  classroom: boolean;
   prayerState: string;
   prayer_display_state: Subject<string> = new Subject();
 
   constructor() {
     this.setPrayerMode('A');
+    this.classroom = true;
   }
 
   setPrayerMode(mode: string) {

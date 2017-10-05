@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Student } from '../../models/student.model';
 import { ModeService } from '../../services/mode.service';
 import { Prayer } from '../../models/prayer.model';
@@ -11,7 +11,7 @@ import { element } from 'protractor';
   templateUrl: './prayernode.component.html',
   styleUrls: ['./prayernode.component.css'],
 })
-export class PrayernodeComponent implements OnInit {
+export class PrayernodeComponent implements OnInit, OnDestroy {
   @Input('student') student: Student;
   @Input('prayer') prayer: Prayer;
 
@@ -23,6 +23,7 @@ export class PrayernodeComponent implements OnInit {
   ageAssigned = '';
 
   @Input() set progress(p: Progress) {
+//    console.log('progress setter');
     this._progress = p;
     this.ageString = this.getAgeString();
     if (!this._origProgress) {
@@ -31,9 +32,18 @@ export class PrayernodeComponent implements OnInit {
   }
   get progress(): Progress { return this._progress; }
 
-  constructor(public mode: ModeService, private lessonService: LessonService) { }
+  constructor(public mode: ModeService,
+    private lessonService: LessonService,
+    private changes: ChangeDetectorRef) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.lessonService.changedProgress.subscribe(p => {
+      if (this._progress.stid === p.stid && this._progress.taskid === p.taskid) {
+        this.progress = p;
+        this.changes.detectChanges();
+      }
+    });
+  }
 
   checkFields() {
     if (this._progress.rating !== this._origProgress.rating ||
@@ -41,18 +51,22 @@ export class PrayernodeComponent implements OnInit {
       this.progress.scomment !== this._origProgress.scomment) {
       const my = this;
       // update DB
-      this.lessonService.saveTask(this._progress)
-        .subscribe(
-        (res) => {
-          my._progress.changed = new Date();
-          if (!my._progress.assigned) {
-            my._progress.assigned = my._progress.changed;
-          }
-          my._origProgress = { ...my._progress };
-        },
-        (err) => {
-          console.log('Error', err);
-        });
+      if (this.mode.classroom) {
+        this.lessonService.saveTask(this._progress);
+      } else {
+        this.lessonService.saveTask(this._progress)
+          .subscribe(
+          (res) => {
+            my._progress.changed = new Date();
+            if (!my._progress.assigned) {
+              my._progress.assigned = my._progress.changed;
+            }
+            my._origProgress = { ...my._progress };
+          },
+          (err) => {
+            console.log('Error', err);
+          });
+      }
     }
   }
 
@@ -96,7 +110,7 @@ export class PrayernodeComponent implements OnInit {
   }
 
   lastheard() {
-    this.ageHeard =  this.weeksSince(this._progress.changed);
+    this.ageHeard = this.weeksSince(this._progress.changed);
     return this.ageHeard;
   }
 
@@ -114,5 +128,9 @@ export class PrayernodeComponent implements OnInit {
     };
     return styles;
     // {'border': +ageHeard > 3 ? '1px solid red' : 'none',
+  }
+
+  ngOnDestroy() {
+    this.lessonService.changedProgress.unsubscribe();
   }
 }
