@@ -51,6 +51,7 @@ export class LessonService {
   }
 
   loadTasks(students: Student[], all = true) {
+    if (students.length == 0) { return; }
     console.log('Loading tasks.');
     let slist = [];
     students.forEach((s) => {
@@ -67,10 +68,11 @@ export class LessonService {
             this.tasks.push(t);
           });
         }
+        console.log('Tasks', this.tasks);
       },
       err => {
 
-        console.log('ERROR:', err);
+        console.log('ERROR:', err, err.statusText);
       }
       );
     // console.log('loaded task list: ', this.tasks);

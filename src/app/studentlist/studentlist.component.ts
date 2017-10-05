@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { StudentsService } from '../services/students.service';
 import { Student } from '../models/student.model';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 @Component({
   selector: 'app-studentlist',
@@ -9,6 +11,11 @@ import { Student } from '../models/student.model';
 })
 export class StudentlistComponent implements OnInit, OnDestroy {
 
+  students$ = this.STService.studentChange.subscribe(s => {
+    console.log('student list change', this.students);
+    this.changes.detectChanges();
+  });
+
   students: Student[] = [];
   selectedStudent = 0;
   @Input() groupSelected: [boolean];
@@ -16,7 +23,7 @@ export class StudentlistComponent implements OnInit, OnDestroy {
   constructor(private STService: StudentsService, private changes: ChangeDetectorRef) { }
 
   toggleStudent(id) {
-    for (let i = 0 ; i < this.students.length ; i++) {
+    for (let i = 0; i < this.students.length; i++) {
       if (this.students[i].stid === id) {
         this.students[i].selected = !this.students[i].selected;
       }
@@ -24,25 +31,19 @@ export class StudentlistComponent implements OnInit, OnDestroy {
   }
 
   setGroup(id: number, include: boolean) {
-    for (let i = 0 ; i < this.students.length ; i++) {
+    for (let i = 0; i < this.students.length; i++) {
       if (this.students[i].liturgy === +id || +id === 4) {
         this.students[i].selected = include;
       }
     }
   }
 
-  updateGroups(groupChange: {group: number, selected: boolean}) {
+  updateGroups(groupChange: { group: number, selected: boolean }) {
     this.setGroup(groupChange.group, groupChange.selected);
   }
 
   ngOnInit() {
-    const my = this;
     this.students = this.STService.getStudents();
-    this.STService.studentChange.subscribe(s => {
-        console.log('student list change', my.students);
-        my.changes.detectChanges();
-    });
-
   }
 
   groupName(gid: number) {
@@ -61,6 +62,8 @@ export class StudentlistComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.STService.studentChange.unsubscribe();
+    if (this.students$ !== undefined) {
+      this.students$.unsubscribe();
+    }
   }
 }

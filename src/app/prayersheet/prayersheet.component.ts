@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Prayer } from '../models/prayer.model';
 import { StudentsService } from '../services/students.service';
 import { Student } from '../models/student.model';
@@ -12,7 +12,12 @@ import { Progress } from '../models/progress.model';
   templateUrl: './prayersheet.component.html',
   styleUrls: ['./prayersheet.component.css']
 })
-export class PrayersheetComponent implements OnInit {
+export class PrayersheetComponent implements OnInit, OnDestroy {
+
+  students$ = this.STService.studentChange.subscribe(s => {
+    console.log('prayersheet student list change');
+    this.changes.detectChanges();
+  });
 
   students: Student[];
   mode: ModeService;
@@ -21,7 +26,8 @@ export class PrayersheetComponent implements OnInit {
 
   constructor(private STService: StudentsService,
     private MService: ModeService,
-    private LsnService: LessonService,) { }
+    private LsnService: LessonService,
+    private changes: ChangeDetectorRef) { }
 
   @Input() currentPrayer: Prayer;
   @Output() goBack = new EventEmitter();
@@ -31,8 +37,8 @@ export class PrayersheetComponent implements OnInit {
     this.progress = this.LsnService.getTasks();
     this.mode = this.MService;
 
-    // this.LsnService.loadTasks(this.students);
-  }
+
+}
 
   returnClicked() {
     this.goBack.emit();
@@ -56,7 +62,13 @@ export class PrayersheetComponent implements OnInit {
     }
   }
 
-  pClick() { this.MService.setPrayerMode('P'); }  // prayer_display_state.next({ mode: 'P' }); }
-  cClick() { this.MService.setPrayerMode('C'); }  // prayer_display_state.next({ mode: 'C' }); }
-  aClick() { this.MService.setPrayerMode('A'); }  // prayer_display_state.next({ mode: 'A' }); }
+  pClick() { this.MService.setPrayerMode('P'); }
+  cClick() { this.MService.setPrayerMode('C'); }
+  aClick() { this.MService.setPrayerMode('A'); }
+
+  ngOnDestroy() {
+    if (this.students$ !== undefined) {
+      this.students$.unsubscribe();
+    }
+  }
 }

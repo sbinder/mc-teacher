@@ -3,6 +3,7 @@ import { Student } from '../models/student.model';
 import { Href } from './href.service';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
+import { LessonService } from './lesson.service';
 
 declare var jquery: any;
 declare var $: any;
@@ -25,7 +26,7 @@ export class StudentsService {
 
   public studentChange = new Subject<{s: number, p: boolean}>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private lessonService: LessonService) {
     console.log('initializing students connection');
     const my = this;
     // Declare a proxy to reference the hub.
@@ -65,6 +66,7 @@ export class StudentsService {
           res.forEach((t) => {
             this.students.push(t);
           });
+          this.lessonService.loadTasks(this.students);
         }
       },
       err => {
@@ -75,7 +77,7 @@ export class StudentsService {
   }
 
   getStudents() {
-    return this.students; // .slice();
+    return this.students;
   }
 
   getSelections() {
@@ -122,6 +124,7 @@ export class StudentsService {
           }
           my.students.push({...st});
           my.getSelectedStudents();
+          my.lessonService.loadTasks([st], false);
           my.emitChange({s: stn, p: true});
         }
       },

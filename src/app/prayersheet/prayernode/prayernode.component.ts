@@ -5,6 +5,7 @@ import { Prayer } from '../../models/prayer.model';
 import { Progress } from '../../models/progress.model';
 import { LessonService } from '../../services/lesson.service';
 import { element } from 'protractor';
+import { StudentsService } from '../../services/students.service';
 
 @Component({
   selector: 'app-prayernode',
@@ -14,6 +15,14 @@ import { element } from 'protractor';
 export class PrayernodeComponent implements OnInit, OnDestroy {
   @Input('student') student: Student;
   @Input('prayer') prayer: Prayer;
+
+  progress$ = this.lessonService.changedProgress.subscribe(p => {
+    if (this._progress.stid === p.stid && this._progress.taskid === p.taskid) {
+      this.progress = p;
+      this.changes.detectChanges();
+    }
+  });
+
 
   private _progress: Progress;
   private _origProgress: Progress;
@@ -37,12 +46,11 @@ export class PrayernodeComponent implements OnInit, OnDestroy {
     private changes: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.lessonService.changedProgress.subscribe(p => {
-      if (this._progress.stid === p.stid && this._progress.taskid === p.taskid) {
-        this.progress = p;
-        this.changes.detectChanges();
-      }
-    });
+//    this.STService.studentChange.subscribe(s => {
+//      console.log('prayernode student list change');
+//      this.changes.detectChanges();
+//    });
+
   }
 
   checkFields() {
@@ -131,6 +139,11 @@ export class PrayernodeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.lessonService.changedProgress.unsubscribe();
+    if (this.progress$ !== undefined) {
+      this.progress$.unsubscribe();
+    }
+//    if (this.STService.studentChange !== undefined) {
+//      this.STService.studentChange.unsubscribe();
+//    }
   }
 }
