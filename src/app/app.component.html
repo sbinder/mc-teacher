@@ -6,9 +6,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10">
-        <app-studentlist *ngIf="showstudents" [groupSelected]="groupSelected"></app-studentlist>
-        <app-prayersheet *ngIf="!showstudents"
-          (goBack)="showstudents = true"
+        <app-modeselect *ngIf="DisplayMode === ''"></app-modeselect>
+        <app-studentlist *ngIf="DisplayMode === 'S'" [groupSelected]="groupSelected"></app-studentlist>
+        <app-prayersheet *ngIf="DisplayMode === 'P'"
+          (goBack)="DisplayMode = 'S'"
           [currentPrayer]="workingPrayer" >
         </app-prayersheet>
       </div>

@@ -20,6 +20,7 @@ import { ModeService } from './services/mode.service';
 import { LessonService } from './services/lesson.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ModeselectComponent } from './modeselect/modeselect.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     PrayersheetComponent,
     PrayernodeComponent,
     ProgressComponent,
-    CommentsComponent
+    CommentsComponent,
+    ModeselectComponent,
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule, BrowserAnimationsModule,

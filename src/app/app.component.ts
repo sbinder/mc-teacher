@@ -19,20 +19,15 @@ export class AppComponent implements OnInit {
   groupSelected: boolean[];
 
   title = 'Group Lesson Portal';
-  showstudents = true;
+  DisplayMode = '';
+  // showstudents = true;
   workingPrayer: Prayer;
 
 
   constructor(private StudentService: StudentsService,
     private lessonservice: LessonService) {}
-   /*
-  constructor(private prayerService: PrayersService,
-    private StudentService: StudentsService,
-    private LsnService: LessonService) { }
-*/
+
   ngOnInit() {
-//    this.students = this.StudentService.getStudents();
-//    this.prayers = this.prayerService.getPrayers();
     this.StudentService.loadStudents();
     this.groupSelected = this.StudentService.getSelections();
     this.lessonservice.loadTasks(this.StudentService.getStudents());
@@ -41,7 +36,8 @@ export class AppComponent implements OnInit {
 
   prayerSelected(event: Prayer) {
     this.workingPrayer = event;
-    this.showstudents = false;
+    this.DisplayMode = 'P';
+    // this.showstudents = false;
   }
 
 }
