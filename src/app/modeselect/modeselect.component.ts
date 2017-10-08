@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModeService } from '../services/mode.service';
 
 @Component({
   selector: 'app-modeselect',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModeselectComponent implements OnInit {
 
-  constructor() { }
+  constructor(public modeService: ModeService) { }
 
   ngOnInit() {
   }

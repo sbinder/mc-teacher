@@ -21,6 +21,7 @@ import { LessonService } from './services/lesson.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ModeselectComponent } from './modeselect/modeselect.component';
+import { LessonComponent } from './lesson/lesson.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ModeselectComponent } from './modeselect/modeselect.component';
     ProgressComponent,
     CommentsComponent,
     ModeselectComponent,
+    LessonComponent,
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule, BrowserAnimationsModule,

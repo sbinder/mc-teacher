@@ -4,18 +4,19 @@
     Mitzvah Central - {{title}}
   </h1>
   <div class="container">
-    <div class="row">
+    <app-modeselect *ngIf="teachingMode === undefined || teachingMode === ''"></app-modeselect>
+    <div class="row" *ngIf="teachingMode === 'C'">
       <div class="col-md-10">
-        <app-modeselect *ngIf="DisplayMode === ''"></app-modeselect>
         <app-studentlist *ngIf="DisplayMode === 'S'" [groupSelected]="groupSelected"></app-studentlist>
-        <app-prayersheet *ngIf="DisplayMode === 'P'"
-          (goBack)="DisplayMode = 'S'"
-          [currentPrayer]="workingPrayer" >
+        <app-prayersheet *ngIf="DisplayMode === 'P'" (goBack)="DisplayMode = 'S'" [currentPrayer]="workingPrayer">
         </app-prayersheet>
       </div>
       <div class="col-md-2">
         <app-prayerlist (pray)="prayerSelected($event)"></app-prayerlist>
       </div>
+    </div>
+    <div class="row" *ngIf="teachingMode === 'L'">
+      <app-lesson></app-lesson>
     </div>
   </div>
 </div>
