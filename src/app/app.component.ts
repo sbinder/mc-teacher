@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private modeService: ModeService) {}
 
   ngOnInit() {
-    this.StudentService.loadStudents();
+    this.StudentService.loadStudents(); // checked-in students only!
     this.groupSelected = this.StudentService.getSelections();
     this.lessonservice.loadTasks(this.StudentService.getStudents());
     this.tmSubscription = this.modeService.teaching_mode.subscribe(m => {

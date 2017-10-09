@@ -31,7 +31,7 @@ export class LessonService {
 
     $.connection.hub.start()
       .done(() => {
-        my.ClassHub.server.joinGroup(1);
+        // my.ClassHub.server.joinGroup(1);
       });
   }
 

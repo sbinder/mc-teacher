@@ -13,21 +13,21 @@ export class StudentsService {
   ClassHub: any;
 
   private students: Student[] = [];
-/*
-  private students = [
-    new Student(1, 'John', 'Smith', 1, new Date('2017-09-01')),
-    new Student(2, 'Plonit', 'BatPloni', 0, new Date('2017-09-08')),
-    new Student(3, 'Ploni', 'BenPlonit', 1, new Date('2017-09-08')),
-    new Student(4, 'Ima', 'Badkind', 3, new Date('2017-09-15')),
-  ];
-  */
+  /*
+    private students = [
+      new Student(1, 'John', 'Smith', 1, new Date('2017-09-01')),
+      new Student(2, 'Plonit', 'BatPloni', 0, new Date('2017-09-08')),
+      new Student(3, 'Ploni', 'BenPlonit', 1, new Date('2017-09-08')),
+      new Student(4, 'Ima', 'Badkind', 3, new Date('2017-09-15')),
+    ];
+    */
   private selectedStudents = [];
   private groupSelected = [false, false, false, false, false];
 
-  public studentChange = new Subject<{s: number, p: boolean}>();
+  public studentChange = new Subject<{ s: number, p: boolean }>();
 
   constructor(private http: HttpClient, private lessonService: LessonService) {
-    console.log('initializing students connection');
+    console.log('initializing Signalr connection');
     const my = this;
     // Declare a proxy to reference the hub.
     $.connection.hub.url = 'http://localhost:55199/signalr'; // TESTING ONLY
@@ -50,14 +50,14 @@ export class StudentsService {
 
   }
 
-  emitChange(alert: {s: number, p: boolean}) {
+  emitChange(alert: { s: number, p: boolean }) {
     this.studentChange.next(alert);
   }
 
 
   loadStudents() {
 
-    this.http.get<Student[]>(Href.href + 'student')
+    this.http.post<Student[]>(Href.href + 'student', '')
       .subscribe(
       res => {
         // console.log(res);
@@ -66,7 +66,10 @@ export class StudentsService {
           res.forEach((t) => {
             this.students.push(t);
           });
-          this.lessonService.loadTasks(this.students);
+          if (this.students.length > 0) {
+            this.lessonService.loadTasks(this.students);
+            this.emitChange({ s: 0, p: true });
+          }
         }
       },
       err => {
@@ -122,10 +125,10 @@ export class StudentsService {
               st.selected = true;
             }
           }
-          my.students.push({...st});
+          my.students.push({ ...st });
           my.getSelectedStudents();
           my.lessonService.loadTasks([st], false);
-          my.emitChange({s: stn, p: true});
+          my.emitChange({ s: stn, p: true });
         }
       },
 
@@ -139,8 +142,8 @@ export class StudentsService {
     for (let i = 0; i < this.students.length; i++) {
       if (this.students[i].stid === stn) {
         this.students.splice(i, 1);
-        // console.log('removed', stn);
-        this.emitChange({s: stn, p: false});
+        this.getSelectedStudents();
+        this.emitChange({ s: stn, p: false });
         return;
       }
     }
