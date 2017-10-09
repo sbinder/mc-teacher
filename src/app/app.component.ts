@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public teachingMode = 'C';  // : string;
   tmSubscription: Subscription;
-  DisplayMode = 'C';
+  DisplayMode = 'S';
   students: Student[];
   public prayers: Prayer[];
 

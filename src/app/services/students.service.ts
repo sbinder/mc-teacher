@@ -60,7 +60,7 @@ export class StudentsService {
     this.http.post<Student[]>(Href.href + 'student', '')
       .subscribe(
       res => {
-        // console.log(res);
+        console.log('preloading students', res);
         if (res) {
           this.students.length = 0;
           res.forEach((t) => {

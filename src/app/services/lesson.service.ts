@@ -25,7 +25,6 @@ export class LessonService {
 
     // Create a function that the hub can call to broadcast messages.
     this.ClassHub.client.broadcastProgress = function (progress: Progress) {
-      console.log('Got a broadcast:', progress);
       my.updateTask(progress);
     };
 
@@ -41,7 +40,6 @@ export class LessonService {
 
   saveTask(task: Progress, classroom: boolean = true) {
     if (classroom) {
-      console.log('broadcasting', task);
       this.ClassHub.server.progressUpdate(1, task);
     } else {
       const headers = new HttpHeaders()
@@ -51,8 +49,9 @@ export class LessonService {
   }
 
   loadTasks(students: Student[], all = true) {
-    if (students.length == 0) { return; }
-    console.log('Loading tasks.');
+    if (students.length === 0) {
+      return;
+    }
     let slist = [];
     students.forEach((s) => {
       slist.push(s.stid);
@@ -68,14 +67,12 @@ export class LessonService {
             this.tasks.push(t);
           });
         }
-        console.log('Tasks', this.tasks);
       },
       err => {
 
         console.log('ERROR:', err, err.statusText);
       }
       );
-    // console.log('loaded task list: ', this.tasks);
   }
 
   getTasks() {

@@ -3,6 +3,7 @@ import { StudentsService } from '../services/students.service';
 import { Student } from '../models/student.model';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-studentlist',
@@ -11,10 +12,7 @@ import 'rxjs/Rx';
 })
 export class StudentlistComponent implements OnInit, OnDestroy {
 
-  students$ = this.STService.studentChange.subscribe(s => {
-    console.log('student list change', this.students);
-    this.changes.detectChanges();
-  });
+  students$: Subscription;
 
   students: Student[] = [];
   selectedStudent = 0;
@@ -44,6 +42,10 @@ export class StudentlistComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.students = this.STService.getStudents();
+    this.students$ = this.STService.studentChange.subscribe(s => {
+      this.changes.detectChanges();
+    });
+
   }
 
   groupName(gid: number) {

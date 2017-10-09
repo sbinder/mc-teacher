@@ -15,7 +15,6 @@ import { Progress } from '../models/progress.model';
 export class PrayersheetComponent implements OnInit, OnDestroy {
 
   students$ = this.STService.studentChange.subscribe(s => {
-    console.log('prayersheet student list change');
     this.changes.detectChanges();
   });
 
