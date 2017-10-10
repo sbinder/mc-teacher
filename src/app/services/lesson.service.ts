@@ -36,8 +36,9 @@ export class LessonService {
 
   saveTask(task: Progress, classroom: boolean = true) {
     if (classroom) {
-      // this.ClassHub.server.progressUpdate(1, task);
-      this.hub.ClassHub.server.progressUpdate(1, task);
+      if (this.hub.ClassHub !== undefined) {
+        this.hub.ClassHub.server.progressUpdate(1, task);
+      }
     } else {
       const headers = new HttpHeaders()
         .set('Content-Type', 'application/json');

@@ -16,10 +16,13 @@ export class Hub {
     // Declare a proxy to reference the hub.
     $.connection.hub.url = 'http://localhost:55199/signalr'; // TESTING ONLY
     this.ClassHub = $.connection.classHub;
-
-    $.connection.hub.start()
-    .done(() => {
-      this.ClassHub.server.joinGroup(1);
-    });
+    if (this.ClassHub === undefined) {
+      alert('Error contacting server. Is Checkin running?');
+    } else {
+      $.connection.hub.start()
+        .done(() => {
+          this.ClassHub.server.joinGroup(1);
+        });
+    }
   }
 }

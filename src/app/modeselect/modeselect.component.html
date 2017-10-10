@@ -2,6 +2,28 @@
   <div (click)="modeService.setMode('C')" >Classroom Mode</div>
 <div (click)="modeService.setMode('L')" >Lesson Mode</div>
 -->
-<a routerLink="/class">Classroom Mode</a>
 
-<a routerLink="/teacher">Lesson Mode</a>
+<a routerLink="/class">
+<div>
+  <h2>Classroom Mode</h2>
+  <p>
+Use this in a classroom setting where students check in using the Checkin screen (below).
+  </p>
+</div>
+</a>
+<a routerLink="/teacher">
+  <div>
+    <h2>Lesson Mode</h2>
+    <p>
+Use this in a private setting for individual or small group lessons.
+    </p>
+  </div>
+</a>
+<a href="/checkin">
+  <div>
+    <h2>Class Checkin</h2>
+    <p>
+Use this with the Classroom Mode (above) to allow students to check in.
+    </p>
+  </div>
+</a>

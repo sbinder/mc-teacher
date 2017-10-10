@@ -24,10 +24,11 @@ import { ModeselectComponent } from './modeselect/modeselect.component';
 import { LessonComponent } from './lesson/lesson.component';
 import { ClassComponent } from './class/class.component';
 import { Hub } from './services/hub.service';
+import { ClasslistComponent } from './classlist/classlist.component';
 
 const appRoutes: Routes = [
   { path: '', component: ModeselectComponent },
-  { path: 'teacher', component: LessonComponent },
+  { path: 'lesson', component: LessonComponent },
   { path: 'class', component: ClassComponent }
 ];
 
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
     CommentsComponent,
     ModeselectComponent,
     LessonComponent,
-    ClassComponent
+    ClassComponent,
+    ClasslistComponent
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule, BrowserAnimationsModule,

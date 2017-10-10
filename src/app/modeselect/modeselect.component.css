@@ -1,0 +1,11 @@
+div {
+  margin: 30px auto;
+  border: 2px solid darkred;
+  border-radius: 8px;
+  background-color: tomato;
+  color: white;
+  max-width: 30em;
+}
+a, a:hover, a:visited {
+  text-decoration: none;
+}

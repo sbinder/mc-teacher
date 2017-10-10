@@ -9,3 +9,28 @@ div {
   padding: 0;
   margin: 0;
 }
+
+div.mc-menubar {
+  min-height: 2em;
+}
+
+div.container {
+  margin-top: 8px;
+}
+
+span.left {
+  float: left;
+  margin-left: 10px;
+}
+span.right {
+  float: right;
+  margin-right: 10px;
+}
+span.buttons a {
+  margin: 2px;
+  padding: 0 4px;
+}
+div.mc-menubar {
+  background-color: skyblue;
+  border-bottom: 2px solid darkblue;
+}
