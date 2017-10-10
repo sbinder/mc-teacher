@@ -4,13 +4,10 @@ import { Href } from './href.service';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 import { LessonService } from './lesson.service';
-
-declare var jquery: any;
-declare var $: any;
+import { Hub } from './hub.service';
 
 @Injectable()
 export class StudentsService {
-  ClassHub: any;
 
   private students: Student[] = [];
   /*
@@ -26,16 +23,15 @@ export class StudentsService {
 
   public studentChange = new Subject<{ s: number, p: boolean }>();
 
-  constructor(private http: HttpClient, private lessonService: LessonService) {
+  constructor(private http: HttpClient, private lessonService: LessonService,
+    private hub: Hub) {
     console.log('initializing Signalr connection');
-    const my = this;
+
     // Declare a proxy to reference the hub.
-    $.connection.hub.url = 'http://localhost:55199/signalr'; // TESTING ONLY
-    this.ClassHub = $.connection.classHub;
 
     // Create a function that the hub can call to broadcast messages.
-    this.ClassHub.client.broadcastCheckin = function (stid: number, status: boolean) {
-      // console.log('Got a broadcast:', stid, status);
+    let my = this;
+    this.hub.ClassHub.client.broadcastCheckin = function (stid: number, status: boolean) {
       if (status) {
         my.addStudent(stid);
       } else {
@@ -43,10 +39,10 @@ export class StudentsService {
       }
     };
 
-    $.connection.hub.start()
-      .done(() => {
-        my.ClassHub.server.joinGroup(1);
-      });
+//    $.connection.hub.start()
+//      .done(() => {
+//        my.ClassHub.server.joinGroup(1);
+//      });
 
   }
 
@@ -73,8 +69,8 @@ export class StudentsService {
         }
       },
       err => {
-
-        console.log(err);
+        alert('Cannot connect to class server. Is Checkin page running?');
+        // console.log(err);
       }
       );
   }
@@ -113,7 +109,6 @@ export class StudentsService {
     const my = this;
     this.http.get<Student>(Href.href + 'student/' + stn)
       .subscribe(st => {
-        // console.log(st);
         if (st) {
           for (const s of my.students) {
             if (s.stid === stn) {

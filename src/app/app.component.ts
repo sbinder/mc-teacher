@@ -7,7 +7,8 @@ import { PrayersService } from './services/prayers.service';
 import { ModeService } from './services/mode.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,44 +17,43 @@ import { Subscription } from 'rxjs';
 
 })
 export class AppComponent implements OnInit, OnDestroy {
+  public currentRoute: string;
 
   public teachingMode = 'C';  // : string;
-  tmSubscription: Subscription;
-  DisplayMode = 'S';
-  students: Student[];
-  public prayers: Prayer[];
 
-  groupSelected: boolean[];
-
-  title = this.DisplayMode === 'L' ?
-    'Lesson Portal': 'Group Lesson Portal';
+//  title = this.DisplayMode === 'L' ?
+//    'Lesson Portal': 'Group Lesson Portal';
 
   // showstudents = true;
-  workingPrayer: Prayer;
 
 
   constructor(private StudentService: StudentsService,
-    private lessonservice: LessonService,
+    private lessonservice: LessonService, public router: Router,
     private modeService: ModeService) {}
 
   ngOnInit() {
     this.StudentService.loadStudents(); // checked-in students only!
-    this.groupSelected = this.StudentService.getSelections();
+    // this.groupSelected = this.StudentService.getSelections();
     this.lessonservice.loadTasks(this.StudentService.getStudents());
-    this.tmSubscription = this.modeService.teaching_mode.subscribe(m => {
-      this.teachingMode = m;
-    });
+    // this.tmSubscription = this.modeService.teaching_mode.subscribe(m => {
+      // this.teachingMode = m;
+    // });
     console.log('Teaching Mode: ', this.teachingMode);
-  }
+      this.router.events.subscribe(r => {
+        this.currentRoute = this.router.url.toString();
+        console.log('current route', this.currentRoute);
+      });
+    }
 
 
-  prayerSelected(event: Prayer) {
-    this.workingPrayer = event;
-    this.DisplayMode = 'P';
-    // this.showstudents = false;
+  public prayerSelected(event: Prayer) {
+//    this.workingPrayer = event;
+    this.modeService.setDisplayMode('P');
+//    this.DisplayMode = 'P';
   }
+
 
   ngOnDestroy() {
-    if (this.tmSubscription !== undefined) { this.tmSubscription.unsubscribe(); }
+  //  if (this.tmSubscription !== undefined) { this.tmSubscription.unsubscribe(); }
   }
 }

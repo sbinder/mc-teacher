@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Prayer } from '../models/prayer.model';
 import { PrayersService } from '../services/prayers.service';
+import { ModeService } from '../services/mode.service';
 
 @Component({
   selector: 'app-prayerlist',
@@ -13,8 +14,8 @@ export class PrayerlistComponent implements OnInit {
   prayers: Prayer[]; // = [];
   @Output() pray = new EventEmitter<Prayer>();
 
-  constructor(private prayerService: PrayersService) {
-    // this.PrayerService = PrayerService;
+  constructor(private prayerService: PrayersService,
+    private modeService: ModeService) {
   }
 
   ngOnInit() {
@@ -25,7 +26,9 @@ export class PrayerlistComponent implements OnInit {
     // console.log(this.prayers);
     this.prayers.forEach(element => {
       if (element.taskid === +id) {
-        this.pray.emit(element);
+        this.modeService.setWorkingPrayer(element);
+
+//        this.pray.emit(element);
         return;
       }
     });

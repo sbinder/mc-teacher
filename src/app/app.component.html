@@ -1,22 +1,12 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    Mitzvah Central - {{title}}
+    Mitzvah Central {{title}}
   </h1>
   <div class="container">
-    <app-modeselect *ngIf="teachingMode === undefined || teachingMode === ''"></app-modeselect>
-    <div class="row" *ngIf="teachingMode === 'C'">
-      <div class="col-md-10">
-        <app-studentlist *ngIf="DisplayMode === 'S'" [groupSelected]="groupSelected"></app-studentlist>
-        <app-prayersheet *ngIf="DisplayMode === 'P'" (goBack)="DisplayMode = 'S'" [currentPrayer]="workingPrayer">
-        </app-prayersheet>
+        <router-outlet></router-outlet>
       </div>
-      <div class="col-md-2">
-        <app-prayerlist (pray)="prayerSelected($event)"></app-prayerlist>
-      </div>
+      <!--
+      <div class="col-md-2" *ngIf="this.currentRoute !== '/teacher'">
+<app-prayerlist (pray)="prayerSelected($event)"></app-prayerlist>
+      </div> -->
     </div>
-    <div class="row" *ngIf="teachingMode === 'L'">
-      <app-lesson></app-lesson>
-    </div>
-  </div>
-</div>

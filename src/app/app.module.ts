@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { PrayerlistComponent } from './prayerlist/prayerlist.component';
 import { PrayersService } from './services/prayers.service';
@@ -22,6 +22,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ModeselectComponent } from './modeselect/modeselect.component';
 import { LessonComponent } from './lesson/lesson.component';
+import { ClassComponent } from './class/class.component';
+import { Hub } from './services/hub.service';
+
+const appRoutes: Routes = [
+  { path: '', component: ModeselectComponent },
+  { path: 'teacher', component: LessonComponent },
+  { path: 'class', component: ClassComponent }
+];
 
 @NgModule({
   declarations: [
@@ -36,12 +44,14 @@ import { LessonComponent } from './lesson/lesson.component';
     CommentsComponent,
     ModeselectComponent,
     LessonComponent,
+    ClassComponent
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule, BrowserAnimationsModule,
-    MaterialModule, HttpClientModule, FormsModule
+    MaterialModule, HttpClientModule, FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [PrayersService, StudentsService, ModeService, LessonService],
+  providers: [PrayersService, StudentsService, ModeService, LessonService, Hub],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

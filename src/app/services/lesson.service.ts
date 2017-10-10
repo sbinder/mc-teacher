@@ -5,33 +5,29 @@ import { Student } from '../models/student.model';
 import { Href } from './href.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
-
-declare var jquery: any;
-declare var $: any;
+import { Hub } from './hub.service';
 
 @Injectable()
 export class LessonService {
-  ClassHub: any;
+
   private tasks = [];
 
   public changedProgress = new Subject<Progress>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private hub: Hub) {
     console.log('initializing lesson connection');
-    const my = this;
-    // Declare a proxy to reference the hub.
-    $.connection.hub.url = 'http://localhost:55199/signalr'; // TESTING ONLY
-    this.ClassHub = $.connection.classHub;
+    // const my = this;
 
     // Create a function that the hub can call to broadcast messages.
-    this.ClassHub.client.broadcastProgress = function (progress: Progress) {
-      my.updateTask(progress);
+    this.hub.ClassHub.client.broadcastProgress = function (progress: Progress) {
+      this.updateTask(progress);
     };
 
-    $.connection.hub.start()
-      .done(() => {
-        // my.ClassHub.server.joinGroup(1);
-      });
+
+//    this.ClassHub.client.broadcastProgress = function (progress: Progress) {
+//      my.updateTask(progress);
+//    };
+
   }
 
   emitProgress(progress: Progress) {
@@ -40,7 +36,8 @@ export class LessonService {
 
   saveTask(task: Progress, classroom: boolean = true) {
     if (classroom) {
-      this.ClassHub.server.progressUpdate(1, task);
+      // this.ClassHub.server.progressUpdate(1, task);
+      this.hub.ClassHub.server.progressUpdate(1, task);
     } else {
       const headers = new HttpHeaders()
         .set('Content-Type', 'application/json');
