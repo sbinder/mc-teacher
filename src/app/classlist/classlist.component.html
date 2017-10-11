@@ -1,3 +1,15 @@
-<p>
-  classlist works!
-</p>
+<div>
+  <div class="bcenter">
+    <button class="btn btn-success">Start Lesson</button>
+  </div>
+  <ng-template ngFor let-student [ngForOf]="students">
+    <div *ngIf="checkDate(student.target)" class="datemark">
+      {{getdate(student.target) | date:'MMM d, y'}}
+    </div>
+    <div [ngClass]="{'student' : true, 'selected' : student.selected}" (click)="gotClicked(student.stid)">{{student.lname}}, {{student.fname}}
+    </div>
+  </ng-template>
+  <div class="bcenter">
+    <button class="btn" [ngClass]="{ 'btn-success' : isSelection}">Start Lesson</button>
+  </div>
+</div>
