@@ -17,8 +17,9 @@ export class ProgressComponent implements OnInit {
       this.origScore = p.rating;
     }
   }
+  @Input() readOnly = false;
 
-@Output() rating = new EventEmitter<Progress>();
+  @Output() rating = new EventEmitter<Progress>();
 
   get progress(): Progress {
     return this._progress;

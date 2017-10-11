@@ -2,3 +2,9 @@
 
 
   {{student.fname}} {{student.lname}}
+  <ul>
+  <li *ngFor="let prayer of prayers">
+      <app-prayernode [student]="student" [prayer]="prayer" [lessonMode]="true"
+      [progress]="myPrayer(student.stid, prayer.taskid)"></app-prayernode>
+    </li>
+  </ul>

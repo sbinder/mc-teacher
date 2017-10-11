@@ -4,17 +4,15 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class PrayersService {
-  private prayers = // [];
-  [
-    new Prayer(1, 'Tallit Blessing', 1),
-    new Prayer(2, 'Shehecheyanu', 2),
-    new Prayer(3, 'Nissim', 3)
-  ];
+  private prayers = [];
+//  [
+//    new Prayer(1, 'Tallit Blessing', 1),
+//    new Prayer(2, 'Shehecheyanu', 2),
+//    new Prayer(3, 'Nissim', 3)
+//  ];
 
 
   constructor(private httpClient: HttpClient ) {
-    console.log('Initializing Prayers');
-
     this.httpClient.get<Prayer[]>('http://localhost:55199/api/prayers')
       .subscribe(
         prs => {

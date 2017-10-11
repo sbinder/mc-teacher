@@ -16,11 +16,11 @@ export class LessonService {
 
   constructor(private http: HttpClient, private hub: Hub) {
     console.log('initializing lesson connection');
-    // const my = this;
+    const my = this;
 
     // Create a function that the hub can call to broadcast messages.
     this.hub.ClassHub.client.broadcastProgress = function (progress: Progress) {
-      this.updateTask(progress);
+      my.updateTask(progress);
     };
 
 

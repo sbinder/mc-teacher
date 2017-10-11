@@ -1,30 +1,36 @@
 <div class='row'[ngStyle]="getStyles()">
-  <div class="col-md-3" [ngStyle]=
+  <div class="col-md-3" *ngIf="!lessonMode" [ngStyle]=
   "{'color': ageHeard === '0' ? 'LightBlue' : 'black'}">{{ student.fname }} {{ student.lname }}
 </div>
+    <div class="col-md-3" *ngIf="lessonMode" [ngStyle]=
+    "{'color': ageHeard === '0' ? 'LightBlue' : 'black'}">{{ prayer.description }}
+  </div>
+
   <div class="col-md-8" *ngIf="mode.prayerState == 'P'">
-    <app-progress [progress]="progress" (rating)="gotNewRating($event)">
+    <app-progress [progress]="progress" (rating)="gotNewRating($event)"
+    (readOnly)="readOnly">
       </app-progress>
   </div>
 
   <div class="col-md-2" *ngIf="mode.prayerState == 'A'">
-      <app-progress [progress]="progress" (rating)="gotNewRating($event)"></app-progress>
+      <app-progress [progress]="progress" (rating)="gotNewRating($event)"
+      (readOnly)="readOnly"></app-progress>
   </div>
   <div class="col-md-3"  *ngIf="mode.prayerState == 'A'">
-    <input type="text" [(ngModel)]="progress.tcomment"
+    <input type="text" [(ngModel)]="progress.tcomment" ng-disabled="readOnly"
     (blur)="tcommentBlur($event)" />
   </div>
   <div class="col-md-3"  *ngIf="mode.prayerState == 'A'">
-    <input type="text" [(ngModel)]="progress.scomment"
+    <input type="text" [(ngModel)]="progress.scomment" ng-disabled="readOnly"
     (blur)="scommentBlur($event)"/>
   </div>
 
     <div class="col-md-4"  *ngIf="mode.prayerState == 'C'">
-      <input type="text" [(ngModel)]="progress.tcomment"
+      <input type="text" [(ngModel)]="progress.tcomment" ng-disabled="readOnly"
       (blur)="tcommentBlur($event)"/>
     </div>
     <div class="col-md-4"  *ngIf="mode.prayerState == 'C'">
-      <input type="text" [(ngModel)]="progress.scomment"
+      <input type="text" [(ngModel)]="progress.scomment" ng-disabled="readOnly"
       (blur)="scommentBlur($event)"/>
     </div>
 

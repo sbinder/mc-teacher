@@ -16,6 +16,9 @@ export class PrayernodeComponent implements OnInit, OnDestroy {
   @Input('student') student: Student;
   @Input('prayer') prayer: Prayer;
 
+  readOnly = false;
+  @Input('lessonMode') lessonMode: boolean;
+
   progress$ = this.lessonService.changedProgress.subscribe(p => {
     if (this._progress.stid === p.stid && this._progress.taskid === p.taskid) {
       this.progress = p;
