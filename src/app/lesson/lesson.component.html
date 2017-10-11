@@ -1,2 +1,2 @@
-<app-classlist></app-classlist>
-
+<app-classlist (studentSelected)="studentSelect($event)" *ngIf="!selectedStudent"></app-classlist>
+<app-lessoncontent (endLesson)="lessonDone()" *ngIf="selectedStudent" [student]="selectedStudent"></app-lessoncontent>

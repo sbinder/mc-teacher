@@ -41,7 +41,7 @@ export class AppComponent implements OnInit, OnDestroy {
     console.log('Teaching Mode: ', this.teachingMode);
       this.router.events.subscribe(r => {
         this.currentRoute = this.router.url.toString();
-        console.log('current route', this.currentRoute);
+        // console.log('current route', this.currentRoute);
       });
     }
 

@@ -25,6 +25,7 @@ import { LessonComponent } from './lesson/lesson.component';
 import { ClassComponent } from './class/class.component';
 import { Hub } from './services/hub.service';
 import { ClasslistComponent } from './classlist/classlist.component';
+import { LessoncontentComponent } from './lessoncontent/lessoncontent.component';
 
 const appRoutes: Routes = [
   { path: '', component: ModeselectComponent },
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
     ModeselectComponent,
     LessonComponent,
     ClassComponent,
-    ClasslistComponent
+    ClasslistComponent,
+    LessoncontentComponent
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule, BrowserAnimationsModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
 import { StudentsService } from '../services/students.service';
 import { Student } from '../models/student.model';
 
@@ -11,6 +11,8 @@ export class ClasslistComponent implements OnInit {
 
   lastdate: string;
   students: Student[];
+  @Output() studentSelected = new EventEmitter();
+
   constructor(private studentService: StudentsService,
     private changes: ChangeDetectorRef) { }
 
@@ -36,12 +38,8 @@ export class ClasslistComponent implements OnInit {
     return d;
   }
 
-  gotClicked(id) {
-    this.students.forEach(element => {
-      if (element.stid === id) {
-        element.selected = !element.selected;
-      }
-    });
+  gotClicked(student: Student) {  // (id) {
+    this.studentSelected.emit(student);
   }
 
   isSelection() {

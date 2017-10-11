@@ -1,15 +1,17 @@
 <div>
+  <!--
   <div class="bcenter">
     <button class="btn btn-success">Start Lesson</button>
-  </div>
+  </div> -->
   <ng-template ngFor let-student [ngForOf]="students">
     <div *ngIf="checkDate(student.target)" class="datemark">
       {{getdate(student.target) | date:'MMM d, y'}}
     </div>
-    <div [ngClass]="{'student' : true, 'selected' : student.selected}" (click)="gotClicked(student.stid)">{{student.lname}}, {{student.fname}}
+    <div class="student" (click)="gotClicked(student)">{{student.lname}}, {{student.fname}}
+      <!-- [ngClass]="{'student' : true, 'selected' : student.selected}" -->
     </div>
   </ng-template>
-  <div class="bcenter">
+  <!-- <div class="bcenter">
     <button class="btn" [ngClass]="{ 'btn-success' : isSelection}">Start Lesson</button>
-  </div>
+  </div> -->
 </div>
