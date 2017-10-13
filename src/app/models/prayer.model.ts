@@ -3,9 +3,10 @@ export class Prayer {
   org: number;
   description: string;
   ordinal: number;
-  groupa: boolean;
-  groupb: boolean;
-  groupx: boolean;
+  group: [boolean];
+//  groupa: boolean;
+//  groupb: boolean;
+//  groupx: boolean;
   active: boolean;
   date: Date;
 
@@ -17,8 +18,9 @@ export class Prayer {
     this.description = description;
     this.ordinal = ordinal;
     this.active = active;
-    this.groupa = groupa;
-    this.groupb = groupb;
-    this.groupx = groupx;
+    this.group = [groupa, groupb, groupx];
+    // this.groupa = groupa;
+    // this.groupb = groupb;
+    // this.groupx = groupx;
   }
 }

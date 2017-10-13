@@ -1,5 +1,6 @@
 <ul>
-  <li *ngFor="let prayer of prayers" (click)="prayerClicked(prayer.taskid)">
+  <li *ngFor="let prayer of prayers" (click)="prayerClicked(prayer.taskid)"
+  [ngClass]="{'dim': isInactive(prayer)}">
     {{ prayer.description }}
   </li>
 </ul>

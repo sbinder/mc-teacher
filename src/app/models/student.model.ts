@@ -13,14 +13,14 @@ export class Student {
   password: string;
   expires: Date;
   trial: boolean;
-  liturgy: number;
+  group: number;
   selected: boolean;
 
-  constructor(stid: number, fname: string, lname: string, liturgy: number, target: Date) {
+  constructor(stid: number, fname: string, lname: string, group: number, target: Date) {
     this.stid = stid;
     this.fname = fname;
     this.lname = lname;
-    this.liturgy = liturgy;
+    this.group = group;
     this.target = target;
   }
 }

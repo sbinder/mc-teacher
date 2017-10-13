@@ -1,11 +1,12 @@
 <div class="row">
   <div class="col-md-10">
 
-    <app-studentlist *ngIf="DisplayMode === 'S'" [groupSelected]="groupSelected"></app-studentlist>
+    <app-studentlist *ngIf="DisplayMode === 'S'" ></app-studentlist>
     <app-prayersheet *ngIf="DisplayMode === 'P'" (goBack)="DisplayMode = 'S'" [currentPrayer]="workingPrayer">
     </app-prayersheet>
   </div>
   <div class="col-md-2">
-    <app-prayerlist></app-prayerlist>
+    <app-prayerlist ></app-prayerlist>
+
   </div>
 </div>

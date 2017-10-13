@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { Prayer } from '../models/prayer.model';
 import { PrayersService } from '../services/prayers.service';
 import { ModeService } from '../services/mode.service';
@@ -8,11 +8,18 @@ import { ModeService } from '../services/mode.service';
   templateUrl: './prayerlist.component.html',
   styleUrls: ['./prayerlist.component.css']
 })
-export class PrayerlistComponent implements OnInit {
+export class PrayerlistComponent implements OnInit, OnDestroy {
 
 //  PrayerService: PrayersService;
   prayers: Prayer[]; // = [];
   @Output() pray = new EventEmitter<Prayer>();
+  // @Input() groupSelected: { group: num, selected: boolean };
+  groups = [false, false, false, false];
+
+  selected$  = this.modeService.workingGroup.subscribe(g => {
+      this.groups = g;
+  });
+
 
   constructor(private prayerService: PrayersService,
     private modeService: ModeService) {
@@ -33,5 +40,15 @@ export class PrayerlistComponent implements OnInit {
       }
     });
   }
+  isInactive(prayer: Prayer) {
+    if (prayer === undefined) { return false; }
+    for (let i = 0; i < 3; i++) {
+      if (prayer.group[i] && this.groups[i]) { return false; }
+    }
+    return true;
+  }
 
+  ngOnDestroy() {
+    if (this.selected$ !== undefined) { this.selected$.unsubscribe(); }
+  }
 }

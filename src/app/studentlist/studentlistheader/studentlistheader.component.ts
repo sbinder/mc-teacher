@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ModeService } from '../../services/mode.service';
 
 
 
@@ -9,11 +10,17 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 })
 export class StudentlistheaderComponent implements OnInit {
 
-  @Input() groupSelected: [boolean];
-  @Output() GroupEvent = new EventEmitter<{group: number, selected: boolean}>();
-  constructor() { }
+  buttonSelected = [false, false, false, false];
+  // @Output() GroupEvent = new EventEmitter<{group: number, selected: boolean}>();
+
+  constructor(private mode: ModeService) { }
+
+  ngOnInit() {
+
+      }
+
   getClass(btn: number) {
-    return this.groupSelected[btn] ?  'btn btn-primary' : 'btn btn-default';
+    return this.buttonSelected[btn] ? 'btn btn-primary' : 'btn btn-default';
   }
 
   bclick(event) {
@@ -21,13 +28,19 @@ export class StudentlistheaderComponent implements OnInit {
     if (num === 4) {
       let i = 0;
       for (; i < 4; i++) {
-        this.groupSelected[i] = false;
+        this.buttonSelected[i] = false;
       }
     }
-    this.groupSelected[num] = ! this.groupSelected[num];
-    this.GroupEvent.emit({group: num, selected: this.groupSelected[num]});
+    this.buttonSelected[num] = !this.buttonSelected[num];
+    this.mode.workingGroup.next([
+      this.buttonSelected[0] || this.buttonSelected[2] || this.buttonSelected[4],
+      this.buttonSelected[1] || this.buttonSelected[2] || this.buttonSelected[4],
+      this.buttonSelected[3] || this.buttonSelected[4]
+    ]);
   }
+  // this.GroupEvent.emit({group: num, selected: this.groupSelected[num]});
 
-  ngOnInit() {
-  }
 }
+
+
+

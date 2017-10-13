@@ -13,12 +13,14 @@ export class PrayersService {
 
 
   constructor(private httpClient: HttpClient ) {
-    this.httpClient.get<Prayer[]>('http://localhost:55199/api/prayers')
+    this.httpClient.get<any[]>('http://localhost:55199/api/prayers')
       .subscribe(
         prs => {
           this.prayers.length = 0;
           prs.forEach(prayer => {
-            this.prayers.push(prayer);
+            const px = new Prayer(prayer.taskid, prayer.description, prayer.ordinal,
+            prayer.groupa, prayer.groupb, prayer.groupx, prayer.active, prayer.date);
+            this.prayers.push(px);
           });
         },
         err => {

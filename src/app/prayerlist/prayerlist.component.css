@@ -7,3 +7,6 @@ li {
   font-weight: bold;
   cursor: pointer;
 }
+li.dim {
+  background-color: lightblue;
+}

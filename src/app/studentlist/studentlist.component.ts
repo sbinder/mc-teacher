@@ -4,6 +4,7 @@ import { Student } from '../models/student.model';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import { Subscription } from 'rxjs';
+import { ModeService } from '../services/mode.service';
 
 @Component({
   selector: 'app-studentlist',
@@ -14,23 +15,33 @@ export class StudentlistComponent implements OnInit, OnDestroy {
 
   students$: Subscription;
 
+  groups = [false, false, false, false];
+
+  selected$  = this.modeService.workingGroup.subscribe(g => {
+    this.groups = g;
+  });
+
   students: Student[] = [];
   selectedStudent = 0;
-  @Input() groupSelected: [boolean];
+  // @Input() groupSelected: [boolean];
 
-  constructor(private STService: StudentsService, private changes: ChangeDetectorRef) { }
+  constructor(private STService: StudentsService, private changes: ChangeDetectorRef,
+    private modeService: ModeService) { }
 
   toggleStudent(id) {
     for (let i = 0; i < this.students.length; i++) {
       if (this.students[i].stid === id) {
         this.students[i].selected = !this.students[i].selected;
+      //  if (this.students[i].selected &&
+      //    !this.groups[this.students[i].group] ) {
+      //  }
       }
     }
   }
 
   setGroup(id: number, include: boolean) {
     for (let i = 0; i < this.students.length; i++) {
-      if (this.students[i].liturgy === +id || +id === 4) {
+      if (this.students[i].group === +id || +id === 4) {
         this.students[i].selected = include;
       }
     }
@@ -43,7 +54,7 @@ export class StudentlistComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.students = this.STService.getStudents();
     this.students$ = this.STService.studentChange.subscribe(s => {
-      console.log('got student', s);
+      // console.log('got student', s);
       this.changes.detectChanges();
     });
 

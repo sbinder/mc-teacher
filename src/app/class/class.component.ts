@@ -26,13 +26,13 @@ export class ClassComponent implements OnInit, OnDestroy {
   students: Student[];
   public prayers: Prayer[];
 
-  groupSelected: boolean[];
+  // groupSelected: boolean[];
 
   constructor(private StudentService: StudentsService,
     private lessonservice: LessonService, private modeService: ModeService) {}
 
   ngOnInit() {
-    this.groupSelected = this.StudentService.getSelections();
+    // this.groupSelected = this.StudentService.getSelections();
     this.lessonservice.loadTasks(this.StudentService.getStudents());
 //    this.tmSubscription = this.modeService.teaching_mode.subscribe(m => {
 //      this.teachingMode = m;
