@@ -1,6 +1,9 @@
 <div class='row'[ngStyle]="getStyles()">
-  <div class="col-md-3" *ngIf="!lessonMode" [ngStyle]=
-  "{'color': ageHeard === '0' ? 'LightBlue' : 'black'}">{{ student.fname }} {{ student.lname }}
+  <div class="col-md-3 xtooltip" *ngIf="!lessonMode" [ngStyle]=
+  "{'color': ageHeard === '0' ? 'LightBlue' : 'black'}">
+  <span *ngIf="prayer.description === 'Torah'" class='tooltiptext'>{{student.torah}}</span>
+  <span *ngIf="prayer.description === 'Haftara'" class='tooltiptext'>{{student.haftara}}</span>
+  {{ student.fname }} {{ student.lname }}
 </div>
     <div class="col-md-3" *ngIf="lessonMode" [ngStyle]=
     "{'color': ageHeard === '0' ? 'LightBlue' : 'black'}">{{ prayer.description }}

@@ -49,11 +49,6 @@ export class PrayernodeComponent implements OnInit, OnDestroy {
     private changes: ChangeDetectorRef) { }
 
   ngOnInit() {
-//    this.STService.studentChange.subscribe(s => {
-//      console.log('prayernode student list change');
-//      this.changes.detectChanges();
-//    });
-
   }
 
   checkFields() {

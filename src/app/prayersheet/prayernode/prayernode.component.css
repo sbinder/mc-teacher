@@ -8,3 +8,29 @@ input {
   width: 100%;
   background-color: transparent;
 }
+
+/* Tooltip container */
+.xtooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.xtooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: navy;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.xtooltip:hover .tooltiptext {
+  visibility: visible;
+}

@@ -23,7 +23,11 @@ export class StudentlistComponent implements OnInit, OnDestroy {
 
   students: Student[] = [];
   selectedStudent = 0;
-  // @Input() groupSelected: [boolean];
+
+  private divisor = 1000 * 60 * 60 * 24 * 7;
+  private now = new Date().valueOf() / this.divisor;
+
+
 
   constructor(private STService: StudentsService, private changes: ChangeDetectorRef,
     private modeService: ModeService) { }
@@ -73,6 +77,14 @@ export class StudentlistComponent implements OnInit, OnDestroy {
       default:
         return 'ALL';
     }
+  }
+
+  weeksUntil(target: string) {
+    const then = (new Date(+target.substr(0, 4),
+      +target.substr(5, 2), +target.substr(7, 2)))
+      .valueOf() / this.divisor;
+        // return (target.valueOf() - new Date().valueOf());
+    return Math.floor( then - this.now );
   }
 
   ngOnDestroy() {

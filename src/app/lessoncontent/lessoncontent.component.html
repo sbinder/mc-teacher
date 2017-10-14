@@ -1,7 +1,6 @@
-  <button class="btn btn-danger" (click)="sendEnd()">End Lesson</button>
-
-
-  {{student.fname}} {{student.lname}}
+   <h3>{{student.fname}} {{student.lname}}</h3>
+   <p>Torah - {{student.torah}} &nbsp;&nbsp;&nbsp; Haftara - {{student.haftara}}
+     <button class="btn btn-sm btn-danger" (click)="sendEnd()">End Lesson</button></p>
   <ul>
   <li *ngFor="let prayer of prayers"
     [ngStyle]="{'display': prayer.group[student.group] ? 'inherit' : 'none'}">

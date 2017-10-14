@@ -14,6 +14,8 @@ export class Student {
   expires: Date;
   trial: boolean;
   group: number;
+  torah: string;
+  haftara: string;
   selected: boolean;
 
   constructor(stid: number, fname: string, lname: string, group: number, target: Date) {
