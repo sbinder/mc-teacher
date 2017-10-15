@@ -19,6 +19,7 @@ export class LessonService {
     const my = this;
 
     // Create a function that the hub can call to broadcast messages.
+    if (this.hub.ClassHub === undefined) { return; }
     this.hub.ClassHub.client.broadcastProgress = function (progress: Progress) {
       my.updateTask(progress);
     };

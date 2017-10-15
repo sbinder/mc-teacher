@@ -38,7 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // this.tmSubscription = this.modeService.teaching_mode.subscribe(m => {
       // this.teachingMode = m;
     // });
-    console.log('Teaching Mode: ', this.teachingMode);
+    // console.log('Teaching Mode: ', this.teachingMode);
       this.router.events.subscribe(r => {
         this.currentRoute = this.router.url.toString();
         // console.log('current route', this.currentRoute);

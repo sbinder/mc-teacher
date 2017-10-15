@@ -30,13 +30,12 @@ export class StudentsService {
 
     // Create a function that the hub can call to broadcast messages.
     const my = this;
-    if (this.hub.ClassHub !== undefined) {
-      this.hub.ClassHub.client.broadcastCheckin = function (stid: number, status: boolean) {
-        if (status) {
-          my.addStudent(stid);
-        } else {
-          my.removeStudent(stid);
-        }
+    if (this.hub.ClassHub === undefined) { return; }
+    this.hub.ClassHub.client.broadcastCheckin = function (stid: number, status: boolean) {
+      if (status) {
+        my.addStudent(stid);
+      } else {
+        my.removeStudent(stid);
       }
     }
   }
