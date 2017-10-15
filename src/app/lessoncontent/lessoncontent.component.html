@@ -3,7 +3,8 @@
      <button class="btn btn-sm btn-danger" (click)="sendEnd()">End Lesson</button></p>
   <ul>
   <li *ngFor="let prayer of prayers"
-    [ngStyle]="{'display': prayer.group[student.group] ? 'inherit' : 'none'}">
+  [ngStyle]="{'display': inGroup(prayer, student.group) ? 'inherit' : 'none'}"
+    >
       <app-prayernode [student]="student" [prayer]="prayer" [lessonMode]="true"
       [progress]="myPrayer(student.stid, prayer.taskid)"></app-prayernode>
     </li>

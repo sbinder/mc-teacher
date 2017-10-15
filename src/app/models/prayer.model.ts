@@ -4,9 +4,7 @@ export class Prayer {
   description: string;
   ordinal: number;
   group: [boolean];
-//  groupa: boolean;
-//  groupb: boolean;
-//  groupx: boolean;
+
   active: boolean;
   date: Date;
 
@@ -19,8 +17,12 @@ export class Prayer {
     this.ordinal = ordinal;
     this.active = active;
     this.group = [groupa, groupb, groupx];
-    // this.groupa = groupa;
-    // this.groupb = groupb;
-    // this.groupx = groupx;
+  }
+
+  public inGroup (g: number): boolean {
+    if (this.group[g]) { return true; } // a or b
+    if (g === 2 ) { return true; } // both
+    if (g === 3 && this.group[3] ) { return true; } // special
+    return false;
   }
 }

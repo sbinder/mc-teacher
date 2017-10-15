@@ -47,4 +47,8 @@ export class LessoncontentComponent implements OnInit {
       return newp;
     }
   }
+
+  inGroup(prayer: Prayer, group: number) {
+    return prayer.inGroup(group);
+  }
 }

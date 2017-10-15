@@ -34,6 +34,7 @@ export class ClasslistComponent implements OnInit {
   }
 
   getdate(ds: string) {
+    console.log('making date from', ds);
     const d = new Date(+ds.substr(0, 4), +ds.substr(5, 2), +ds.substr(7, 2));
     return d;
   }
