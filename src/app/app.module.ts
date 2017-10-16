@@ -26,11 +26,17 @@ import { ClassComponent } from './class/class.component';
 import { Hub } from './services/hub.service';
 import { ClasslistComponent } from './classlist/classlist.component';
 import { LessoncontentComponent } from './lessoncontent/lessoncontent.component';
+import { SigninComponent } from './signin/signin.component';
+import { AuthService } from './services/auth.service';
+import { TokenInterceptor } from './services/token.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './services/jwt.interceptor';
 
 const appRoutes: Routes = [
   { path: '', component: ModeselectComponent },
   { path: 'lesson', component: LessonComponent },
-  { path: 'class', component: ClassComponent }
+  { path: 'class', component: ClassComponent },
+  { path: 'login', component: SigninComponent }
 ];
 
 @NgModule({
@@ -48,14 +54,25 @@ const appRoutes: Routes = [
     LessonComponent,
     ClassComponent,
     ClasslistComponent,
-    LessoncontentComponent
+    LessoncontentComponent,
+    SigninComponent
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule, BrowserAnimationsModule,
     MaterialModule, HttpClientModule, FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [PrayersService, StudentsService, ModeService, LessonService, Hub],
+  providers: [PrayersService, StudentsService, ModeService, LessonService, Hub, AuthService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: JwtInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

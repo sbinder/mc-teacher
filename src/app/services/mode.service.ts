@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Prayer } from '../models/prayer.model';
+import { Teacher } from '../models/teacher.model';
 
 @Injectable()
 export class ModeService {
+  user: Teacher;
   classroom: boolean;
   prayerState: string;
   Mode: string;

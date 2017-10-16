@@ -9,6 +9,8 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -28,10 +30,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   constructor(private StudentService: StudentsService,
-    private lessonservice: LessonService, public router: Router,
-    private modeService: ModeService) {}
+    private lessonservice: LessonService, public router: Router, private http: HttpClient,
+    private modeService: ModeService, private authService: AuthService) {}
 
   ngOnInit() {
+
     this.StudentService.loadStudents(); // checked-in students only!
     // this.groupSelected = this.StudentService.getSelections();
     this.lessonservice.loadTasks(this.StudentService.getStudents());

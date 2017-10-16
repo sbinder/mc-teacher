@@ -24,10 +24,10 @@ export class StudentsService {
 
   constructor(private http: HttpClient, private lessonService: LessonService,
     private modeService: ModeService, private hub: Hub) {
-    console.log('initializing Signalr connection');
 
-    // Declare a proxy to reference the hub.
+    // check auth?
 
+      console.log('initializing Signalr connection');
     // Create a function that the hub can call to broadcast messages.
     const my = this;
     if (this.hub.ClassHub === undefined) { return; }
@@ -67,8 +67,8 @@ export class StudentsService {
         }
       },
       err => {
+        // if (err.status === 401) {}
         alert('Cannot connect to class server. Is Checkin page running?');
-        // console.log(err);
       }
       );
   }
