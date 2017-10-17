@@ -6,4 +6,5 @@ export class Teacher {
   email: string;
   username: string;
   password: string;
+  orgid: string;
 }

@@ -72,7 +72,8 @@ const appRoutes: Routes = [
     provide: HTTP_INTERCEPTORS,
     useClass: JwtInterceptor,
     multi: true
-  }],
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

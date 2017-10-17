@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { HttpRequest, HttpClient } from '@angular/common/http';
+import { inject } from '@angular/core/testing';
 
 @Injectable()
 export class AuthService {
   cachedRequests: Array<HttpRequest<any>> = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private injector: Injector) { }
 
   public getToken() {
     return localStorage.getItem('token');
@@ -19,8 +20,9 @@ export class AuthService {
   public retryFailedRequests(): void {
     // retry the requests. this method can
     // be called after the token is refreshed
+    const http = this.injector.get(HttpClient);
     this.cachedRequests.forEach( req => {
-      this.http.request(req);
+      http.request(req);
     });
   }
 
