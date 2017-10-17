@@ -16,35 +16,39 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class CheckinlistComponent implements OnInit {
 
-  // ClassHub: any;
-
-  students$: Subscription;
+  // students$: Subscription;
 
   constructor(private changeDetector: ChangeDetectorRef, private hub: Hub,
     private studentService: StudentsService) { }
 
   lastdate: string;
 
-  slist: Student[];
-  // @Input() slist: any[];
+  slist = new Array<Student>();
 
   ngOnInit() {
-    this.students$  = this.studentService.studentChange.subscribe(x => {
-      if (x.s !== 0) { return; }
+    const my = this;
+    this.studentService.allStudentRequest().subscribe(x => {
+    // this.students$  = this.studentService.studentChange.subscribe(x => {
+      // if (x.s !== 0) { return; }
       console.log('Initializing Checkin List');
-      this.slist = this.studentService.getStudents();
-      this.sortslist();
+      // this.slist = this.studentService.getStudents();
+      my.slist.length = 0;
+      x.forEach( s => {
+        my.slist.push(s);
+      })
+      my.sortslist();
     });
 
     // this.slist = this.studentService.getStudents();
     // this.sortslist();
-    const my = this;
+    // const my = this;
     //    $.connection.hub.url = 'http://localhost:55199/signalr'; // TESTING ONLY
     //    // Declare a proxy to reference the hub.
     //    this.ClassHub = $.connection.classHub;
     //    // Create a function that the hub can call to broadcast messages.
     //    this.ClassHub.client.broadcastCheckin = function (stid, status) {
     this.hub.ClassHub.client.broadcastCheckin = function (stid, status) {
+      console.log('Checkin:', stid, status);
       if (status) {
         my.setStatus(stid, 'present');
       } else {
@@ -80,7 +84,7 @@ export class CheckinlistComponent implements OnInit {
 
   getdate(ds: string) {
     // console.log('date from server', ds);
-    const d = new Date(+ds.substr(0, 4), +ds.substr(4, 2) - 1, +ds.substr(6));
+    const d = new Date(+ds.substr(0, 4), +ds.substr(5, 2) - 1, +ds.substr(8,2));
     return d;
   }
 
@@ -116,8 +120,7 @@ export class CheckinlistComponent implements OnInit {
   }
 
   sortslist() {
-    console.log('Sorting', this.slist);
-    this.slist.sort((a, b) => {
+      this.slist.sort((a, b) => {
       if (a.target < b.target) {
         return -1;
       } else if (a.target > b.target) {
@@ -133,6 +136,5 @@ export class CheckinlistComponent implements OnInit {
       } else { return 0; }
 
     });
-    // console.log(this.slist);
   }
 }

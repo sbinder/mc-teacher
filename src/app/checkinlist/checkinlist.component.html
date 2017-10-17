@@ -1,11 +1,11 @@
   <h2>Student Checkin</h2>
   <div>
       <ng-template ngFor let-student [ngForOf]="slist">
-          <div *ngIf="checkDate(student.d)" class="datemark">
-              {{getdate(student.d) | date:'MMM d, y'}}
+          <div *ngIf="checkDate(student.target)" class="datemark">
+              {{getdate(student.target) | date:'MMM d, y'}}
           </div>
-        <div [ngClass]="student.c + ' student'"
-          (click)="gotClicked(student.s)">{{student.n}}
+        <div class="student" [ngClass]="student.present ? 'present' : ''"
+          (click)="gotClicked(student.stid)">{{student.lname}}, {{student.fname}}
         </div>
         </ng-template>
   </div>
