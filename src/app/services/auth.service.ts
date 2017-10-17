@@ -28,6 +28,7 @@ export class AuthService {
     // be called after the token is refreshed
     const http = this.injector.get(HttpClient);
     this.cachedRequests.forEach( req => {
+      console.log('Retrying request', req);
       http.request(req);
     });
   }
