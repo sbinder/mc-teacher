@@ -15,6 +15,7 @@ export class StudentsService {
   private selectedStudents = [];
   private groupSelected = [false, false, false, false];
 
+  public studentsLoaded = new Subject();
   public studentChange = new Subject<{ s: number, p: boolean }>();
   selected$ = this.modeService.workingGroup.subscribe(g => {
     this.groupSelected = g;

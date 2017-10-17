@@ -17,6 +17,7 @@ export class Student {
   torah: string;
   haftara: string;
   selected: boolean;
+  present: boolean;
 
   constructor(stid: number, fname: string, lname: string, group: number, target: Date) {
     this.stid = stid;

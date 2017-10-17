@@ -31,12 +31,14 @@ import { AuthService } from './services/auth.service';
 import { TokenInterceptor } from './services/token.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './services/jwt.interceptor';
+import { CheckinlistComponent } from './checkinlist/checkinlist.component';
 
 const appRoutes: Routes = [
   { path: '', component: ModeselectComponent },
   { path: 'lesson', component: LessonComponent },
   { path: 'class', component: ClassComponent },
-  { path: 'login', component: SigninComponent }
+  { path: 'login', component: SigninComponent },
+  { path: 'checkin', component: CheckinlistComponent }
 ];
 
 @NgModule({
@@ -55,7 +57,8 @@ const appRoutes: Routes = [
     ClassComponent,
     ClasslistComponent,
     LessoncontentComponent,
-    SigninComponent
+    SigninComponent,
+    CheckinlistComponent
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule, BrowserAnimationsModule,
