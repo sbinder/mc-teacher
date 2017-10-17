@@ -68,7 +68,7 @@ export class StudentsService {
       },
       err => {
         // if (err.status === 401) {}
-        alert('Cannot connect to class server. Is Checkin page running?');
+        // alert('Cannot connect to class server. Is Checkin page running?');
       }
       );
   }

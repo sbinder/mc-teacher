@@ -23,40 +23,30 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public teachingMode = 'C';  // : string;
 
-//  title = this.DisplayMode === 'L' ?
-//    'Lesson Portal': 'Group Lesson Portal';
-
-  // showstudents = true;
-
-
   constructor(private StudentService: StudentsService,
     private lessonservice: LessonService, public router: Router, private http: HttpClient,
-    private modeService: ModeService, private authService: AuthService) {}
+    private modeService: ModeService, public authService: AuthService) { }
 
   ngOnInit() {
 
     this.StudentService.loadStudents(); // checked-in students only!
     // this.groupSelected = this.StudentService.getSelections();
     this.lessonservice.loadTasks(this.StudentService.getStudents());
-    // this.tmSubscription = this.modeService.teaching_mode.subscribe(m => {
-      // this.teachingMode = m;
-    // });
-    // console.log('Teaching Mode: ', this.teachingMode);
-      this.router.events.subscribe(r => {
-        this.currentRoute = this.router.url.toString();
-        // console.log('current route', this.currentRoute);
-      });
-    }
+    this.router.events.subscribe(r => {
+      this.currentRoute = this.router.url.toString();
+      // console.log('current route', this.currentRoute);
+    });
+  }
 
 
   public prayerSelected(event: Prayer) {
-//    this.workingPrayer = event;
+    //    this.workingPrayer = event;
     this.modeService.setDisplayMode('P');
-//    this.DisplayMode = 'P';
+    //    this.DisplayMode = 'P';
   }
 
 
   ngOnDestroy() {
-  //  if (this.tmSubscription !== undefined) { this.tmSubscription.unsubscribe(); }
+    //  if (this.tmSubscription !== undefined) { this.tmSubscription.unsubscribe(); }
   }
 }
