@@ -35,13 +35,15 @@ import { CheckinlistComponent } from './checkinlist/checkinlist.component';
 import { EditParentComponent } from './editors/edit-parent/edit-parent.component';
 import { EditStudentComponent } from './editors/edit-student/edit-student.component';
 import { EditTeacherComponent } from './editors/edit-teacher/edit-teacher.component';
+import { SelectParentComponent } from './editors/select-parent/select-parent.component';
 
 const appRoutes: Routes = [
   { path: '', component: ModeselectComponent },
   { path: 'lesson', component: LessonComponent },
   { path: 'class', component: ClassComponent },
   { path: 'login', component: SigninComponent },
-  { path: 'checkin', component: CheckinlistComponent }
+  { path: 'checkin', component: CheckinlistComponent },
+  { path: 'parent', component: EditParentComponent }
 ];
 
 @NgModule({
@@ -64,7 +66,8 @@ const appRoutes: Routes = [
     CheckinlistComponent,
     EditParentComponent,
     EditStudentComponent,
-    EditTeacherComponent
+    EditTeacherComponent,
+    SelectParentComponent
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule, BrowserAnimationsModule,
