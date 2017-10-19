@@ -14,7 +14,8 @@ export class Hub {
 
   constructor(private http: HttpClient) {
     // Declare a proxy to reference the hub.
-    $.connection.hub.url = 'http://localhost:55199/signalr'; // TESTING ONLY
+    $.connection.hub.url = Href.signalr;
+    // $.connection.hub.url = 'http://localhost:55199/signalr'; // TESTING ONLY
     this.ClassHub = $.connection.classHub;
     if (this.ClassHub === undefined) {
       alert('Error contacting server. Is Checkin running?');
@@ -22,6 +23,7 @@ export class Hub {
       $.connection.hub.start()
         .done(() => {
           this.ClassHub.server.joinGroup(1);
+          console.log('Connection to hub established.')
         });
     }
   }

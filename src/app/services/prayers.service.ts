@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Prayer } from '../models/prayer.model';
 import { HttpClient } from '@angular/common/http';
+import { Href } from './href.service';
 
 @Injectable()
 export class PrayersService {
@@ -13,7 +14,7 @@ export class PrayersService {
 
 
   constructor(private httpClient: HttpClient ) {
-    this.httpClient.get<any[]>('http://localhost:55199/api/prayers')
+    this.httpClient.get<any[]>(Href.href + 'prayers') // 'http://localhost:55199/api/prayers')
       .subscribe(
         prs => {
           this.prayers.length = 0;

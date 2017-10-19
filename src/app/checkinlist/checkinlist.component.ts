@@ -27,26 +27,7 @@ export class CheckinlistComponent implements OnInit {
 
   ngOnInit() {
     const my = this;
-    this.studentService.allStudentRequest().subscribe(x => {
-    // this.students$  = this.studentService.studentChange.subscribe(x => {
-      // if (x.s !== 0) { return; }
-      console.log('Initializing Checkin List');
-      // this.slist = this.studentService.getStudents();
-      my.slist.length = 0;
-      x.forEach( s => {
-        my.slist.push(s);
-      })
-      my.sortslist();
-    });
-
-    // this.slist = this.studentService.getStudents();
-    // this.sortslist();
-    // const my = this;
-    //    $.connection.hub.url = 'http://localhost:55199/signalr'; // TESTING ONLY
-    //    // Declare a proxy to reference the hub.
-    //    this.ClassHub = $.connection.classHub;
-    //    // Create a function that the hub can call to broadcast messages.
-    //    this.ClassHub.client.broadcastCheckin = function (stid, status) {
+    console.log('Initializing Checkin Broadcast function');
     this.hub.ClassHub.client.broadcastCheckin = function (stid, status) {
       console.log('Checkin:', stid, status);
       if (status) {
@@ -56,18 +37,15 @@ export class CheckinlistComponent implements OnInit {
       }
       my.changeDetector.detectChanges();
     };
-    //    $.connection.hub.start()
-    //    .done(() => {
-    //      my.ClassHub.server.joinGroup(1);
-    //    });
-    //    // set up initial display
-    //    let pcount = 0;
-    //    this.slist.forEach(element => {
-    //      if (element.present) {
-    //        element.c = 'present';
-    //        pcount ++;
-    //      }
-    //    });
+
+    this.studentService.allStudentRequest().subscribe(x => {
+      console.log('Initializing Checkin List');
+      my.slist.length = 0;
+      x.forEach( s => {
+        my.slist.push(s);
+      })
+      my.sortslist();
+    });
   }
 
   sendMessage(stid: number, status: boolean) {
@@ -114,7 +92,7 @@ export class CheckinlistComponent implements OnInit {
     this.slist.forEach((element, i) => {
       if (id === element.stid) {
         element.present = (newstat === 'present');
-        // console.log(this.slist);
+        console.log('setting ' + id + ' to ' + newstat);
       }
     });
   }
