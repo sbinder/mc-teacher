@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Href } from '../services/href.service';
 import { Teacher } from '../models/teacher.model';
 import { HttpParams } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-signin',
@@ -31,7 +31,7 @@ export class SigninComponent implements OnInit {
     const params = new HttpParams().set('orgid', this.user.orgid)
     .set('un', this.user.un).set('pw', this.user.pw);
 
-    this.http.get<{key: string, value: string}>(Href.href + 'token', { params }).subscribe(
+    this.http.get<{key: string, value: string}>(environment.href + 'token', { params }).subscribe(
     res => {
       // console.log('recd token', res);
       const t = res['token'];

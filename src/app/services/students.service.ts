@@ -1,11 +1,11 @@
 import { Injectable, OnInit, OnDestroy } from '@angular/core';
 import { Student } from '../models/student.model';
-import { Href } from './href.service';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 import { LessonService } from './lesson.service';
 import { Hub } from './hub.service';
 import { ModeService } from './mode.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class StudentsService {
@@ -42,7 +42,7 @@ export class StudentsService {
   }
 
   allStudentRequest() {
-    return this.http.get<Student[]>(Href.href + 'student');
+    return this.http.get<Student[]>(environment.href + 'student');
   }
 
   emitChange(alert: { s: number, p: boolean }) {
@@ -52,7 +52,7 @@ export class StudentsService {
 
   loadStudents() {
 
-    this.http.post<Student[]>(Href.href + 'student', '')
+    this.http.post<Student[]>(environment.href + 'student', '')
       .subscribe(
       res => {
         // console.log('preloading students', res);
@@ -116,7 +116,7 @@ export class StudentsService {
   // addStudent(st: Student) {
   addStudent(stn: number) {
     const my = this;
-    this.http.get<Student>(Href.href + 'student/' + stn)
+    this.http.get<Student>(environment.href + 'student/' + stn)
       .subscribe(st => {
         if (st) {
           for (const s of my.students) {

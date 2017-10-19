@@ -30,12 +30,12 @@ export class CheckinlistComponent implements OnInit {
     console.log('Initializing Checkin Broadcast function');
     this.hub.ClassHub.client.broadcastCheckin = function (stid, status) {
       console.log('Checkin:', stid, status);
-      if (status) {
-        my.setStatus(stid, 'present');
-      } else {
-        my.setStatus(stid, '');
-      }
-      my.changeDetector.detectChanges();
+//      if (status) {
+//        my.setStatus(stid, 'present');
+//      } else {
+//        my.setStatus(stid, '');
+//      }
+//      my.changeDetector.detectChanges();
     };
 
     this.studentService.allStudentRequest().subscribe(x => {
@@ -67,15 +67,23 @@ export class CheckinlistComponent implements OnInit {
   }
 
   gotClicked(id) {
-    switch (this.getStatus(id)) {
-      case 'present':
-        this.setStatus(id, '');  // preemptively
-        this.sendMessage(id, false);
-        break;
-      default:
-        this.setStatus(id, 'sent');
-        this.sendMessage(id, true);
-    }
+    this.slist.forEach(element => {
+      if (element.stid === id) {
+        element.present = !element.present;
+        this.sendMessage(id, element.present);
+      }
+    });
+//    console.log('dispatching click', this.slist);
+//    switch (this.getStatus(id)) {
+//      case 'present':
+//        this.setStatus(id, '');  // preemptively
+//        this.sendMessage(id, false);
+//        break;
+//      default:
+//        this.setStatus(id, 'sent');
+//        this.sendMessage(id, true);
+//    }
+//    console.log('click result', this.slist);
   }
 
   getStatus(id): string {

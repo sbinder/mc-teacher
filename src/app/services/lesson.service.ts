@@ -2,10 +2,10 @@ import { Injectable, OnInit } from '@angular/core';
 import { Progress } from '../models/progress.model';
 import { HttpClient } from '@angular/common/http';
 import { Student } from '../models/student.model';
-import { Href } from './href.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 import { Hub } from './hub.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class LessonService {
@@ -43,7 +43,7 @@ export class LessonService {
     } else {
       const headers = new HttpHeaders()
         .set('Content-Type', 'application/json');
-      return this.http.put(Href.href + 'progress', JSON.stringify(task), { headers });
+      return this.http.put(environment.href + 'progress', JSON.stringify(task), { headers });
     }
   }
 
@@ -55,7 +55,7 @@ export class LessonService {
     students.forEach((s) => {
       slist.push(s.stid);
     });
-    this.http.post<Progress[]>(Href.href + 'progress', slist)
+    this.http.post<Progress[]>(environment.href + 'progress', slist)
       .subscribe(
       res => {
         if (res) {

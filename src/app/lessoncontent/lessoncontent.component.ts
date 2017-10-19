@@ -16,6 +16,9 @@ export class LessoncontentComponent implements OnInit {
   prayers: Prayer[];
   progress: Progress[];
 
+  private divisor = 1000 * 60 * 60 * 24 * 7;
+  private now = new Date().valueOf() / this.divisor;
+
   constructor(private prayerService: PrayersService,
     private lessonService: LessonService) { }
 
@@ -46,6 +49,12 @@ export class LessoncontentComponent implements OnInit {
       this.progress.push(newp);
       return newp;
     }
+  }
+  weeksUntil(target: string) {
+    const then = (new Date(+target.substr(0, 4),
+      +target.substr(5, 2), +target.substr(7, 2)))
+      .valueOf() / this.divisor;
+    return Math.floor( then - this.now );
   }
 
   inGroup(prayer: Prayer, group: number) {

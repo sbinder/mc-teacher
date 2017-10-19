@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  href: 'http://mitzvahcentral.net/api/',
+  signalr: 'http://mitzvahcentral.net/signalr'
 };

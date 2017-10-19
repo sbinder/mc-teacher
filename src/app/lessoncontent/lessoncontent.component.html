@@ -1,6 +1,9 @@
-   <h3>{{student.fname}} {{student.lname}}</h3>
-   <p>Torah - {{student.torah}} &nbsp;&nbsp;&nbsp; Haftara - {{student.haftara}}
-     <button class="btn btn-sm btn-danger" (click)="sendEnd()">End Lesson</button></p>
+   <h3>{{student.fname}} {{student.lname}} &nbsp;&nbsp;&nbsp;
+     <button class="btn btn-sm btn-danger" (click)="sendEnd()">End Lesson</button> </h3>
+   <p>Torah - {{student.torah}} &nbsp;&nbsp;&nbsp;
+     Haftara - {{student.haftara}}  &nbsp;&nbsp;&nbsp;
+     [{{ weeksUntil(student.target) }} weeks]
+     </p>
   <ul>
   <li *ngFor="let prayer of prayers"
   [ngStyle]="{'display': inGroup(prayer, student.group) ? 'inherit' : 'none'}"
