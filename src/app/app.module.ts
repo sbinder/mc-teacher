@@ -32,6 +32,9 @@ import { TokenInterceptor } from './services/token.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './services/jwt.interceptor';
 import { CheckinlistComponent } from './checkinlist/checkinlist.component';
+import { EditParentComponent } from './editors/edit-parent/edit-parent.component';
+import { EditStudentComponent } from './editors/edit-student/edit-student.component';
+import { EditTeacherComponent } from './editors/edit-teacher/edit-teacher.component';
 
 const appRoutes: Routes = [
   { path: '', component: ModeselectComponent },
@@ -58,7 +61,10 @@ const appRoutes: Routes = [
     ClasslistComponent,
     LessoncontentComponent,
     SigninComponent,
-    CheckinlistComponent
+    CheckinlistComponent,
+    EditParentComponent,
+    EditStudentComponent,
+    EditTeacherComponent
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule, BrowserAnimationsModule,

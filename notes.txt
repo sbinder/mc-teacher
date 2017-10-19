@@ -1,0 +1,3 @@
+(pre)production build
+ng build --env=prod --base-href /teacher/
+
