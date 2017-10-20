@@ -1,0 +1,16 @@
+div.choices{
+  margin-bottom: 10px;
+}
+
+div.choice {
+  cursor: pointer;
+}
+
+div.choice:hover {
+  background-color: ghostwhite;
+}
+
+div.buttons {
+  width: 100%;
+  text-align: center;
+}

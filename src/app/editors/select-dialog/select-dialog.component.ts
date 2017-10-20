@@ -10,7 +10,7 @@ import { MdDialogRef } from '@angular/material';
 export class SelectDialogComponent implements OnInit {
   // plist: Parent[];
   title: string;
-  choices: string[];
+  choices: { name: string, value: any }[];
 
   constructor(public dialogRef: MdDialogRef<SelectDialogComponent>) {
   }

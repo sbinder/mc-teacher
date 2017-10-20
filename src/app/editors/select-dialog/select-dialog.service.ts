@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class SelectDialogService {
   constructor(private dialog: MdDialog) {}
-  public confirm(title: string, stuff: string[]): Observable<boolean> {
+  public confirm(title: string, stuff: { name: string, value: any }[]): Observable<number> {
     let dialogRef: MdDialogRef<SelectDialogComponent>;
     dialogRef = this.dialog.open(SelectDialogComponent);
     dialogRef.componentInstance.title = title;

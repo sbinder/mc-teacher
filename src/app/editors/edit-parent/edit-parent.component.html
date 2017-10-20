@@ -1,24 +1,17 @@
-<div ><h3>Select Parent</h3>
-  <form>
-      <div class="form-group">
-        <label for="lname">Last Name</label>
-        <input type="text" class="form-control" id="lname" name="lname" required [(ngModel)]="lname">
-      </div>
-      <button type="submit" class="btn btn-success"
-      (click)="findParent()">Submit</button>
+<div class="container" *ngIf="parent === null">
+  <h3>Select Parent</h3>
+  <form autocomplete="off">
+    <div class="form-group">
+      <label for="lname">Last Name</label>
+      <input type="text" class="form-control" id="lname" name="lname" #lnamefield
+      autofocus required [(ngModel)]="lname">
+    </div>
+    <button type="submit" class="btn btn-success" (click)="findParent()">Submit</button>
   </form>
-  </div>
-  <!--
-  <md-dialog-container aria-label="Select Parent dialog">
-    <md-dialog-content>
-        <md-list>
-            <md-list-item ng-repeat="parent in plist">
-              <p>{{parent.fname1}} {{parent.lname1}} & {{parent.fname2}} {{parent.lname2}}</p>
-            </md-list-item>
-          </md-list>
-    </md-dialog-content>
-    <md-dialog-actions>
-        <button class="btn btn-default" ng-click="closeDialog()">Cancel</button>
-      </md-dialog-actions>
-  </md-dialog-container>
--->
+</div>
+<div class="container" *ngIf="parent !== null">
+  {{parent.title1}} {{parent.fname1}} {{parent.lname1}}
+  <div>
+  <button type="submit" class="btn btn-success" (click)="resetForm()">Clear</button>
+</div>
+</div>

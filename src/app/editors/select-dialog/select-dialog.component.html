@@ -1,11 +1,9 @@
 <div>
-  {{title}}
-  <ul>
-    <li *ngFor="let c of choices">
-      {{c}}
-    </li>
-  </ul>
-
-  <button type="button" md-raised-button (click)="dialogRef.close(true)">OK</button>
+  <h2>{{title}}</h2>
+  <div class="choices">
+    <div class="choice" *ngFor="let c of choices" (click)="dialogRef.close(c.value)"> {{c.name}} </div>
+  </div>
+  <div class="buttons">
   <button type="button" md-button (click)="dialogRef.close()">Cancel</button>
+</div>
 </div>

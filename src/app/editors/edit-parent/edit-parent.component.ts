@@ -14,10 +14,12 @@ import { element } from 'protractor';
 })
 export class EditParentComponent implements OnInit {
 
+  parent: Parent = null;
+
   plist: Parent[];
-  parent: Parent = new Parent();
   lname: string;
-  constructor(private http: HttpClient, private dialog: SelectDialogService) { }
+
+    constructor(private http: HttpClient, private dialog: SelectDialogService) { }
 
   ngOnInit() {
   }
@@ -26,23 +28,43 @@ export class EditParentComponent implements OnInit {
     const my = this;
     if (this.lname.length === 0) { return; }
     this.http.get<Parent[]>(environment.href + 'parent?namepart=' + this.lname)
-    .subscribe(res =>{
+    .subscribe(res => {
       my.plist = res.slice();
       console.log('plist:', my.plist);
-      const pp = new Array<string>();
+      const pp = new Array<{ name: string, value: any }>();
       this.plist.forEach(element => {
-        pp.push(element.lname1 + ', ' + element.fname1);
+        let name1 = element.title1;
+        name1 += name1.length > 0 ? ' ' : '';
+        name1 += element.fname1.length > 0 ? element.fname1 + ' ' : '';
+        if (element.lname2 !== element.lname1) {
+          name1 += element.lname1.length > 0 ?  element.lname1 + ' ' : '';
+        }
+        if (element.fname2.length > 0) {
+          name1 += ' & ' + (element.title2.length > 0 ? element.title2 + ' ' : '');
+          name1 += element.fname2;
+        }
+        name1 += ' ' + element.lname2;
+
+        pp.push({ name: name1, value: element.pid });
       });
       this.dialog.confirm('Select Parent', pp)
-      .subscribe(dres => { console.log('Dialog says', dres); });
+      .subscribe(pid => {
+        if (pid !== undefined) {
+          this.plist.forEach(element => {
+            if (element.pid === pid) {
+              this.parent = element;
+            }
+          });
+        }
 
-
-      this.dlg();
+      });
     });
   }
-
-  dlg() {
-
+  resetForm() {
+    this.lname = '';
+    this.parent = null;
+//    this.el.nativeElement.focus();
+//    this._renderer.invokeElementMethod(
+//      this.input1ElementRef.nativeElement, 'focus', []);
   }
-
 }
