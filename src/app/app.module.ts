@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { PrayerlistComponent } from './prayerlist/prayerlist.component';
@@ -13,7 +12,7 @@ import { StudentlistheaderComponent } from './studentlist/studentlistheader/stud
 import { PrayersheetComponent } from './prayersheet/prayersheet.component';
 import { PrayernodeComponent } from './prayersheet/prayernode/prayernode.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from '@angular/material';
+import { MaterialModule, MdNativeDateModule } from '@angular/material';
 import { ProgressComponent } from './prayersheet/prayernode/progress/progress.component';
 import { CommentsComponent } from './prayersheet/prayernode/comments/comments.component';
 import { ModeService } from './services/mode.service';
@@ -72,9 +71,9 @@ const appRoutes: Routes = [
   ],
   entryComponents: [SelectDialogComponent],
   imports: [
-    NgbModule.forRoot(), BrowserModule, BrowserAnimationsModule,
+    BrowserModule, BrowserAnimationsModule,
     MaterialModule, HttpClientModule, FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes), MdNativeDateModule
   ],
   providers: [PrayersService, StudentsService, ModeService, LessonService, Hub, AuthService,
   {

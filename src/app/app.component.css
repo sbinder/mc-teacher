@@ -34,7 +34,7 @@ div.mc-menubar {
   background-color: skyblue;
   border-bottom: 2px solid darkblue;
 }
-a, div.a-span {
+a, span.a-span {
   color: darkgreen;
   text-decoration: none;
   cursor: pointer;

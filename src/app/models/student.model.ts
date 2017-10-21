@@ -27,4 +27,5 @@ export class Student {
     this.group = group;
     this.target = target;
   }
+
 }

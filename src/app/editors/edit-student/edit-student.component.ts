@@ -44,6 +44,7 @@ export class EditStudentComponent implements OnInit {
         my.slist = res.slice();
         if (my.slist.length === 1) {
           this.student = my.slist[0];
+          console.log('loaded student', this.student);
           return;
         }
         const pp = new Array<{ name: string, value: any }>();
@@ -63,6 +64,7 @@ export class EditStudentComponent implements OnInit {
         });
       });
     }
+
 
     saveForm() {
       this.http.put(environment.href + 'student', this.student)
