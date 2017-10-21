@@ -19,7 +19,8 @@ export class Student {
   selected: boolean;
   present: boolean;
 
-  constructor(stid: number, fname: string, lname: string, group: number, target: Date) {
+  constructor(stid: number = 0, fname: string = '', lname: string = '',
+    group: number = 0, target: Date = new Date()) {
     this.stid = stid;
     this.fname = fname;
     this.lname = lname;

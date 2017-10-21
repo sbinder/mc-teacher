@@ -13,7 +13,7 @@ import { StudentlistheaderComponent } from './studentlist/studentlistheader/stud
 import { PrayersheetComponent } from './prayersheet/prayersheet.component';
 import { PrayernodeComponent } from './prayersheet/prayernode/prayernode.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule, MdFormFieldModule, MdInputModule } from '@angular/material';
+import { MaterialModule } from '@angular/material';
 import { ProgressComponent } from './prayersheet/prayernode/progress/progress.component';
 import { CommentsComponent } from './prayersheet/prayernode/comments/comments.component';
 import { ModeService } from './services/mode.service';
@@ -43,7 +43,8 @@ const appRoutes: Routes = [
   { path: 'class', component: ClassComponent },
   { path: 'login', component: SigninComponent },
   { path: 'checkin', component: CheckinlistComponent },
-  { path: 'parent', component: EditParentComponent }
+  { path: 'parent', component: EditParentComponent },
+  { path: 'student', component: EditStudentComponent }
 ];
 
 @NgModule({

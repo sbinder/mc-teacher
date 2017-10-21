@@ -24,13 +24,18 @@ export class EditParentComponent implements OnInit {
   ngOnInit() {
   }
 
+  createParent() {
+    this.parent = new Parent();
+    this.parent.pid = 0;
+  }
+
   findParent() {
     const my = this;
     if (this.lname.length === 0) { return; }
     this.http.get<Parent[]>(environment.href + 'parent?namepart=' + this.lname)
     .subscribe(res => {
       my.plist = res.slice();
-      if (my.plist.length == 1) {
+      if (my.plist.length === 1) {
         this.parent = my.plist[0];
         return;
       }

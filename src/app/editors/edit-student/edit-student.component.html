@@ -1,3 +1,53 @@
-<p>
-  edit-student works!
-</p>
+<div>
+  <h2>Edit Student</h2>
+  <div class="container" *ngIf="student === null">
+    <form autocomplete="off">
+      <div class="form-group">
+        <label for="lname">Last name of student record to edit:</label>
+        <input type="text" class="form-control" id="lname" name="lname" autofocus required [(ngModel)]="lname">
+      </div>
+      <button type="submit" class="btn btn-success" (click)="findStudent()">Lookup Student</button>
+      <button class="btn btn-default" (click)="createStudent()">New Student</button>
+    </form>
+  </div>
+  <div class="container" *ngIf="student !== null">
+    <form autocomplete="off" name="studentForm" class="form-horizontal">
+
+      <div class="row namebox">
+        <div class="col-md-6">
+          <input class="form-control" name="fname" [(ngModel)]="student.fname" placeholder="First Name" />
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" name="lname" [(ngModel)]="student.lname" placeholder="Last Name" />
+        </div>
+        <div class="col-sm-12">
+          <input class="form-control" name="email" [(ngModel)]="student.email" placeholder="Email" />
+        </div>
+      </div>
+
+      <div class="row namebox">
+        <div class="col-md6">
+          <input type="datetime" class="form-control" name="target" [(ngModel)]="student.target" />
+        </div>
+        <div class="col-md-6">
+          <select class="form-control" name="teacher" [(ngModel)]="student.tid">
+            <option *ngFor="let t of teachers" ng-value="t.tid">
+              {{t.fname}} {{t.lname}}
+            </option>
+            </select>
+        </div>
+        </div>
+        <div class="row namebox">
+          <div class="col-md-12">
+            <textarea class="form-control" name="comment" [(ngModel)]="student.comment" placeholder="Comment"></textarea>
+          </div>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-success" (click)="saveForm()">Save</button>
+            <button type="submit" class="btn btn-danger" (click)="resetForm()">Cancel</button>
+          </div>
+        </form>
+      </div>
+  </div>
+

@@ -6,7 +6,8 @@
         <label for="lname">Last name of parent record to edit:</label>
         <input type="text" class="form-control" id="lname" name="lname" autofocus required [(ngModel)]="lname">
       </div>
-      <button type="submit" class="btn btn-success" (click)="findParent()">Submit</button>
+      <button type="submit" class="btn btn-success" (click)="findParent()">Lookup Parent</button>
+      <button class="btn btn-default" (click)="createParent()">New Parent</button>
     </form>
   </div>
   <div class="container" *ngIf="parent !== null">
