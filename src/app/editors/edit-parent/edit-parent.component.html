@@ -1,17 +1,79 @@
-<div class="container" *ngIf="parent === null">
-  <h3>Select Parent</h3>
-  <form autocomplete="off">
-    <div class="form-group">
-      <label for="lname">Last Name</label>
-      <input type="text" class="form-control" id="lname" name="lname" #lnamefield
-      autofocus required [(ngModel)]="lname">
+<div>
+  <h2>Edit Parent</h2>
+  <div class="container" *ngIf="parent === null">
+    <form autocomplete="off">
+      <div class="form-group">
+        <label for="lname">Last name of parent record to edit:</label>
+        <input type="text" class="form-control" id="lname" name="lname" autofocus required [(ngModel)]="lname">
+      </div>
+      <button type="submit" class="btn btn-success" (click)="findParent()">Submit</button>
+    </form>
+  </div>
+  <div class="container" *ngIf="parent !== null">
+    <form autocomplete="off" name="parentForm" class="form-horizontal">
+
+      <div class="row namebox">
+        <div class="col-sm-6 col-lg-2">
+          <input class="form-control" name="title1" [(ngModel)]="parent.title1" placeholder="Title" />
+        </div>
+        <div class="col-sm-8 col-lg-5">
+          <input class="form-control" name="fname1" [(ngModel)]="parent.fname1" placeholder="First Name" />
+        </div>
+        <div class="col-sm-8 col-lg-5">
+          <input class="form-control" name="lname1" [(ngModel)]="parent.lname1" placeholder="Last Name" />
+        </div>
+        <div class="col-sm-12">
+          <input class="form-control" name="email1" [(ngModel)]="parent.email1" placeholder="Email" />
+        </div>
+      </div>
+
+      <div class="row namebox">
+        <div class="col-sm-6 col-lg-2">
+          <input class="form-control" name="title2" [(ngModel)]="parent.title2" placeholder="Title" />
+        </div>
+        <div class="col-sm-8 col-lg-5">
+          <input class="form-control" name="fname2" [(ngModel)]="parent.fname2" placeholder="First Name" />
+        </div>
+        <div class="col-sm-8 col-lg-5">
+          <input class="form-control" name="lname2" [(ngModel)]="parent.lname2" placeholder="Last Name" />
+        </div>
+        <div class="col-sm-12">
+          <input class="form-control" name="email2" [(ngModel)]="parent.email2" placeholder="Email" />
+        </div>
+      </div>
+
+      <div class="row namebox">
+        <div class="col-md-6">
+          <input class="form-control" name="address1" [(ngModel)]="parent.address1" placeholder="Address" />
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" name="address2" [(ngModel)]="parent.address2" placeholder="" />
+        </div>
+      </div>
+
+      <div class="row namebox">
+        <div class="col-md-5">
+          <input class="form-control" name="city" [(ngModel)]="parent.city" placeholder="City" />
+        </div>
+        <div class="col-md-5">
+          <input class="form-control" name="state" [(ngModel)]="parent.state" placeholder="State" />
+        </div>
+        <div class="col-md-2">
+          <input class="form-control" name="zip" [(ngModel)]="parent.zip" placeholder="Zip" />
+        </div>
+      </div>
+
+      <div class="row namebox">
+        <div class="col-md-12">
+          <textarea class="form-control" name="comment" [(ngModel)]="parent.comment" placeholder="Comment"></textarea>
+        </div>
+      </div>
+
+    </form>
+
+    <div>
+      <button type="submit" class="btn btn-success" (click)="saveForm()">Save</button>
+      <button type="submit" class="btn btn-danger" (click)="resetForm()">Cancel</button>
     </div>
-    <button type="submit" class="btn btn-success" (click)="findParent()">Submit</button>
-  </form>
-</div>
-<div class="container" *ngIf="parent !== null">
-  {{parent.title1}} {{parent.fname1}} {{parent.lname1}}
-  <div>
-  <button type="submit" class="btn btn-success" (click)="resetForm()">Clear</button>
-</div>
+  </div>
 </div>

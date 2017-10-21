@@ -30,7 +30,10 @@ export class EditParentComponent implements OnInit {
     this.http.get<Parent[]>(environment.href + 'parent?namepart=' + this.lname)
     .subscribe(res => {
       my.plist = res.slice();
-      console.log('plist:', my.plist);
+      if (my.plist.length == 1) {
+        this.parent = my.plist[0];
+        return;
+      }
       const pp = new Array<{ name: string, value: any }>();
       this.plist.forEach(element => {
         let name1 = element.title1;
@@ -60,11 +63,19 @@ export class EditParentComponent implements OnInit {
       });
     });
   }
+
+  saveForm() {
+    this.http.put(environment.href + 'parent', this.parent)
+    .subscribe(res => {
+      this.resetForm();
+    }, err => {
+      alert(err);
+    });
+
+  }
+
   resetForm() {
     this.lname = '';
     this.parent = null;
-//    this.el.nativeElement.focus();
-//    this._renderer.invokeElementMethod(
-//      this.input1ElementRef.nativeElement, 'focus', []);
   }
 }

@@ -1,3 +1,14 @@
 div.container {
   width: 80%;
 }
+
+div.namebox {
+  padding: 8px;
+  background-color: ghostwhite;
+  border-radius: 8px;
+  margin: 8px;
+}
+
+div.namebox div {
+  margin: 4px 0;
+}
