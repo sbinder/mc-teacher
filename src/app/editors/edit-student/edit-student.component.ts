@@ -15,6 +15,7 @@ import { Teacher } from '../../models/teacher.model';
 export class EditStudentComponent implements OnInit {
 
   student: Student = null;
+  target: string;
 
     slist: Student[];
     teachers: Teacher[];
@@ -36,6 +37,7 @@ export class EditStudentComponent implements OnInit {
 
     createStudent() {
       this.student = new Student();
+      this.target = '';
     }
 
     findStudent() {
@@ -45,7 +47,8 @@ export class EditStudentComponent implements OnInit {
       .subscribe(res => {
         my.slist = res.slice();
         if (my.slist.length === 1) {
-          this.student = my.slist[0];
+          my.student = my.slist[0];
+          // my.target = this.yyyymmdd(my.student.target);
           console.log('loaded student', this.student);
           return;
         }
@@ -62,6 +65,7 @@ export class EditStudentComponent implements OnInit {
               this.slist.forEach(element => {
                 if (element.stid === stid) {
                   this.student = element;
+                  // this.target = this.yyyymmdd(this.student.target);
                 }
               });
             }
@@ -85,4 +89,16 @@ export class EditStudentComponent implements OnInit {
       this.student = null;
     }
 
+//    yyyymmdd(date: Date) {
+//      console.log('target', date);
+//      const d = date.toISOString().substring(0, 10);
+//      console.log(d);
+//      return d;
+//      const Y = date.getFullYear.toString();
+//      let M = date.getMonth.toString();
+//      let D = date.getDay.toString();
+//      if (M.length < 2) { M = '0' + M; }
+//      if (D.length < 2) { D = '0' + D; }
+//      return Y + '-' + M + '-' + D;
+ //   }
   }

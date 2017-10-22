@@ -12,7 +12,7 @@ import { StudentlistheaderComponent } from './studentlist/studentlistheader/stud
 import { PrayersheetComponent } from './prayersheet/prayersheet.component';
 import { PrayernodeComponent } from './prayersheet/prayernode/prayernode.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProgressComponent } from './prayersheet/prayernode/progress/progress.component';
 import { CommentsComponent } from './prayersheet/prayernode/comments/comments.component';
 import { ModeService } from './services/mode.service';
@@ -73,8 +73,8 @@ const appRoutes: Routes = [
   entryComponents: [SelectDialogComponent],
   imports: [
     BrowserModule, BrowserAnimationsModule,
-    HttpClientModule, FormsModule, MatDialogModule, MatDatepickerModule,
-    RouterModule.forRoot(appRoutes), MatNativeDateModule, MatSliderModule
+    HttpClientModule, FormsModule, MatDialogModule, NgbModule.forRoot(),
+    RouterModule.forRoot(appRoutes), MatSliderModule, MatNativeDateModule
   ],
   providers: [PrayersService, StudentsService, ModeService, LessonService, Hub, AuthService,
   {

@@ -27,15 +27,16 @@
 
       <div class="row namebox">
         <div class="col-md6">
-            <mat-form-field>
-                <input matInput [matDatepicker]="picker" placeholder="Choose a date"
-                [(ngModel)]="student.target" name="target" class="form-control">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker ></mat-datepicker>
-              </mat-form-field>
-
-<!--          <mat-datepicker name="target" [(ngModel)]="student.target" ngDefaultControl ></mat-datepicker> -->
-          <!-- <input type="datetime" class="form-control" name="target" [(ngModel)]="student.target" />-->
+            <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control" placeholder="yyyy-mm-dd"
+                         name="target" [(ngModel)]="student.target" ngbDatepicker #d="ngbDatepicker">
+                  <button class="input-group-addon" (click)="d.toggle()" type="button">
+                    <!--<img src="img/calendar-icon.svg"-->
+                    <span style="width: 1.2rem; height: 1rem; cursor: pointer;">X</span>
+                  </button>
+                </div>
+              </div>
         </div>
         <div class="col-md-6">
           <select class="form-control" name="teacher" [(ngModel)]="student.teacher">
