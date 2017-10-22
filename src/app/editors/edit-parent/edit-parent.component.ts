@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Parent } from '../../models/parent';
-import { MdDialog } from '@angular/material';
-import { SelectDialogService } from '../select-dialog/select-dialog.service';
 import { element } from 'protractor';
+import { MatDialog } from '@angular/material';
+import { SelectDialogComponent } from '../select-dialog/select-dialog.component';
 
 @Component({
   selector: 'app-edit-parent',
   templateUrl: './edit-parent.component.html',
   styleUrls: ['./edit-parent.component.css'],
-  providers: [SelectDialogService]
+  providers: []
 })
 export class EditParentComponent implements OnInit {
 
@@ -19,8 +19,7 @@ export class EditParentComponent implements OnInit {
   plist: Parent[];
   lname: string;
 
-    constructor(private http: HttpClient, private dialog: SelectDialogService) { }
-
+  constructor(private http: HttpClient, private dialog: MatDialog) { }
   ngOnInit() {
   }
 
@@ -55,6 +54,20 @@ export class EditParentComponent implements OnInit {
 
         pp.push({ name: name1, value: element.pid });
       });
+      const dialogRef = this.dialog.open(SelectDialogComponent,
+      { data: {title: 'Select Parent', picklist: pp} });
+
+      dialogRef.afterClosed().subscribe(pid => {
+        if (pid !== undefined) {
+          this.plist.forEach(element => {
+            if (element.pid === pid) {
+              this.parent = element;
+            }
+          });
+        }
+      });
+
+/*
       this.dialog.confirm('Select Parent', pp)
       .subscribe(pid => {
         if (pid !== undefined) {
@@ -66,6 +79,7 @@ export class EditParentComponent implements OnInit {
         }
 
       });
+      */
     });
   }
 

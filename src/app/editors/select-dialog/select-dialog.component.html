@@ -1,5 +1,5 @@
 <div>
-  <h2>{{title}}</h2>
+  <h2 mat-dialog-title>{{title}}</h2>
   <div class="choices">
     <div class="choice" *ngFor="let c of choices" (click)="dialogRef.close(c.value)"> {{c.name}} </div>
   </div>

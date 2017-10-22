@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MdDialogRef } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 
 @Component({
@@ -8,14 +8,15 @@ import { MdDialogRef } from '@angular/material';
   styleUrls: ['./select-dialog.component.css']
 })
 export class SelectDialogComponent implements OnInit {
-  // plist: Parent[];
   title: string;
   choices: { name: string, value: any }[];
 
-  constructor(public dialogRef: MdDialogRef<SelectDialogComponent>) {
-  }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<SelectDialogComponent>) {}
 
   ngOnInit() {
+    this.title = this.data.title;
+    this.choices = this.data.picklist;
   }
 
 }

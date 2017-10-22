@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { MatDialogModule, MatNativeDateModule, MatSliderModule, MatDatepickerModule } from '@angular/material';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { PrayerlistComponent } from './prayerlist/prayerlist.component';
@@ -12,7 +12,7 @@ import { StudentlistheaderComponent } from './studentlist/studentlistheader/stud
 import { PrayersheetComponent } from './prayersheet/prayersheet.component';
 import { PrayernodeComponent } from './prayersheet/prayernode/prayernode.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule, MdNativeDateModule } from '@angular/material';
+
 import { ProgressComponent } from './prayersheet/prayernode/progress/progress.component';
 import { CommentsComponent } from './prayersheet/prayernode/comments/comments.component';
 import { ModeService } from './services/mode.service';
@@ -35,6 +35,7 @@ import { EditParentComponent } from './editors/edit-parent/edit-parent.component
 import { EditStudentComponent } from './editors/edit-student/edit-student.component';
 import { EditTeacherComponent } from './editors/edit-teacher/edit-teacher.component';
 import { SelectDialogComponent } from './editors/select-dialog/select-dialog.component';
+
 
 const appRoutes: Routes = [
   { path: '', component: ModeselectComponent },
@@ -72,8 +73,8 @@ const appRoutes: Routes = [
   entryComponents: [SelectDialogComponent],
   imports: [
     BrowserModule, BrowserAnimationsModule,
-    MaterialModule, HttpClientModule, FormsModule,
-    RouterModule.forRoot(appRoutes), MdNativeDateModule
+    HttpClientModule, FormsModule, MatDialogModule, MatDatepickerModule,
+    RouterModule.forRoot(appRoutes), MatNativeDateModule, MatSliderModule
   ],
   providers: [PrayersService, StudentsService, ModeService, LessonService, Hub, AuthService,
   {

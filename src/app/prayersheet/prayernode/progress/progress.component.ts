@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Progress } from '../../../models/progress.model';
 import { element } from 'protractor';
+import {MatSliderModule} from '@angular/material';
 
 @Component({
   selector: 'app-progress',

@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../../models/student.model';
 import { HttpClient } from '@angular/common/http';
-import { SelectDialogService } from '../select-dialog/select-dialog.service';
 import { environment } from '../../../environments/environment';
+import { MatDialog, MatNativeDateModule } from '@angular/material';
+import { SelectDialogComponent } from '../select-dialog/select-dialog.component';
 import { Teacher } from '../../models/teacher.model';
 
 @Component({
   selector: 'app-edit-student',
   templateUrl: './edit-student.component.html',
   styleUrls: ['./edit-student.component.css'],
-  providers: [SelectDialogService]
+  providers: []
 })
 export class EditStudentComponent implements OnInit {
 
@@ -20,7 +21,8 @@ export class EditStudentComponent implements OnInit {
 
     lname: string;
 
-      constructor(private http: HttpClient, private dialog: SelectDialogService) { }
+    constructor(private http: HttpClient, private dialog: MatDialog,
+      public dater: MatNativeDateModule) { }
 
     ngOnInit() {
       // TEMP:
@@ -52,17 +54,19 @@ export class EditStudentComponent implements OnInit {
           const name1 = element.lname + ', ' + element.fname;
           pp.push({ name: name1, value: element.stid });
         });
-        this.dialog.confirm('Select Student', pp)
-        .subscribe(stid => {
-          if (stid !== undefined) {
-            this.slist.forEach(element => {
-              if (element.stid === stid) {
-                this.student = element;
-              }
-            });
-          }
+        const dialogRef = this.dialog.open(SelectDialogComponent,
+          { data: {title: 'Select Parent', picklist: pp} });
+
+          dialogRef.afterClosed().subscribe(stid => {
+            if (stid !== undefined) {
+              this.slist.forEach(element => {
+                if (element.stid === stid) {
+                  this.student = element;
+                }
+              });
+            }
+          });
         });
-      });
     }
 
 
@@ -80,4 +84,5 @@ export class EditStudentComponent implements OnInit {
       this.lname = '';
       this.student = null;
     }
+
   }
