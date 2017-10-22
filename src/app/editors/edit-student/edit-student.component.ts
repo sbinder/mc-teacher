@@ -3,6 +3,7 @@ import { Student } from '../../models/student.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { MatDialog, MatNativeDateModule } from '@angular/material';
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import { SelectDialogComponent } from '../select-dialog/select-dialog.component';
 import { Teacher } from '../../models/teacher.model';
 
@@ -15,15 +16,15 @@ import { Teacher } from '../../models/teacher.model';
 export class EditStudentComponent implements OnInit {
 
   student: Student = null;
-  target: string;
+  target: NgbDateStruct;
 
     slist: Student[];
     teachers: Teacher[];
 
     lname: string;
 
-    constructor(private http: HttpClient, private dialog: MatDialog,
-      public dater: MatNativeDateModule) { }
+    constructor(private http: HttpClient, private dialog: MatDialog
+      ) { }
 
     ngOnInit() {
       // TEMP:
@@ -37,7 +38,7 @@ export class EditStudentComponent implements OnInit {
 
     createStudent() {
       this.student = new Student();
-      this.target = '';
+      this.fillTarget(new Date());
     }
 
     findStudent() {
@@ -48,7 +49,7 @@ export class EditStudentComponent implements OnInit {
         my.slist = res.slice();
         if (my.slist.length === 1) {
           my.student = my.slist[0];
-          // my.target = this.yyyymmdd(my.student.target);
+          this.fillTarget(my.student.target);
           console.log('loaded student', this.student);
           return;
         }
@@ -58,14 +59,14 @@ export class EditStudentComponent implements OnInit {
           pp.push({ name: name1, value: element.stid });
         });
         const dialogRef = this.dialog.open(SelectDialogComponent,
-          { data: {title: 'Select Parent', picklist: pp} });
+          { data: {title: 'Select Student', picklist: pp} });
 
           dialogRef.afterClosed().subscribe(stid => {
             if (stid !== undefined) {
               this.slist.forEach(element => {
                 if (element.stid === stid) {
                   this.student = element;
-                  // this.target = this.yyyymmdd(this.student.target);
+                  this.fillTarget(this.student.target);
                 }
               });
             }
@@ -89,16 +90,8 @@ export class EditStudentComponent implements OnInit {
       this.student = null;
     }
 
-//    yyyymmdd(date: Date) {
-//      console.log('target', date);
-//      const d = date.toISOString().substring(0, 10);
-//      console.log(d);
-//      return d;
-//      const Y = date.getFullYear.toString();
-//      let M = date.getMonth.toString();
-//      let D = date.getDay.toString();
-//      if (M.length < 2) { M = '0' + M; }
-//      if (D.length < 2) { D = '0' + D; }
-//      return Y + '-' + M + '-' + D;
- //   }
+    fillTarget(dt: Date) {
+      const now = new Date(dt);
+      this.target = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
+    }
   }

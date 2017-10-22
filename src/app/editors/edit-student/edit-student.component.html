@@ -13,50 +13,59 @@
   <div class="container" *ngIf="student !== null">
     <form autocomplete="off" name="studentForm" class="form-horizontal">
 
-      <div class="row namebox">
-        <div class="col-md-6">
-          <input class="form-control" name="fname" [(ngModel)]="student.fname" placeholder="First Name" />
+      <div class='namebox'>
+        <div class="row">
+          <div class="col-md-6">
+            <input class="form-control" name="fname" [(ngModel)]="student.fname" placeholder="First Name" />
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" name="lname" [(ngModel)]="student.lname" placeholder="Last Name" />
+          </div>
         </div>
-        <div class="col-md-6">
-          <input class="form-control" name="lname" [(ngModel)]="student.lname" placeholder="Last Name" />
-        </div>
-        <div class="col-sm-12">
-          <input class="form-control" name="email" [(ngModel)]="student.email" placeholder="Email" />
+        <div class='row'>
+          <div class="col-md-4">
+            <input class="form-control" name="email" [(ngModel)]="student.email" placeholder="Email" />
+          </div>
+          <div class="col-md-4">
+              <input class="form-control" name="username" [(ngModel)]="student.username" placeholder="Username" />
+            </div>
+            <div class="col-md-4">
+                <input class="form-control" name="password" [(ngModel)]="student.password" placeholder="Password" />
+              </div>
         </div>
       </div>
 
       <div class="row namebox">
         <div class="col-md6">
-            <div class="form-group">
-                <div class="input-group">
-                  <input class="form-control" placeholder="yyyy-mm-dd"
-                         name="target" [(ngModel)]="student.target" ngbDatepicker #d="ngbDatepicker">
-                  <button class="input-group-addon" (click)="d.toggle()" type="button">
-                    <!--<img src="img/calendar-icon.svg"-->
-                    <span style="width: 1.2rem; height: 1rem; cursor: pointer;">X</span>
-                  </button>
-                </div>
-              </div>
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="taget" [(ngModel)]="target" ngbDatepicker #d="ngbDatepicker">
+              <button class="btn btn-default input-group-addon" (click)="d.toggle()" type="button">
+                <!--<img src="img/calendar-icon.svg"
+                    <span style="width: 1.2rem; height: 1rem; cursor: pointer;">X</span>-->
+                X
+              </button>
+            </div>
+          </div>
         </div>
         <div class="col-md-6">
-          <select class="form-control" name="teacher" [(ngModel)]="student.teacher">
+          <select class="form-control" name="teacher" [(ngModel)]="student.teacher" placeholder="Teacher">
             <option *ngFor="let t of teachers" ng-value="t.tid">
               {{t.fname}} {{t.lname}}
             </option>
-            </select>
+          </select>
         </div>
-        </div>
-        <div class="row namebox">
-          <div class="col-md-12">
-            <textarea class="form-control" name="comment" [(ngModel)]="student.comment" placeholder="Comment"></textarea>
-          </div>
-        </div>
-
-        <div>
-            <button type="submit" class="btn btn-success" (click)="saveForm()">Save</button>
-            <button type="submit" class="btn btn-danger" (click)="resetForm()">Cancel</button>
-          </div>
-        </form>
       </div>
-  </div>
+      <div class="row namebox">
+        <div class="col-md-12">
+          <textarea class="form-control" name="comment" [(ngModel)]="student.comment" placeholder="Comment"></textarea>
+        </div>
+      </div>
 
+      <div>
+        <button type="submit" class="btn btn-success" (click)="saveForm()">Save</button>
+        <button type="submit" class="btn btn-danger" (click)="resetForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

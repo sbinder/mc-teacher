@@ -16,6 +16,7 @@ export class Student {
   group: number;
   torah: string;
   haftara: string;
+  comment: string;
   selected: boolean;
   present: boolean;
 

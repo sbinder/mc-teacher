@@ -3,6 +3,7 @@ import { PrayersService } from '../services/prayers.service';
 import { Prayer } from '../models/prayer.model';
 import { Progress } from '../models/progress.model';
 import { LessonService } from '../services/lesson.service';
+import { Student } from '../models/student.model';
 
 @Component({
   selector: 'app-lessoncontent',
@@ -15,9 +16,7 @@ export class LessoncontentComponent implements OnInit {
 
   prayers: Prayer[];
   progress: Progress[];
-
-  private divisor = 1000 * 60 * 60 * 24 * 7;
-  private now = new Date().valueOf() / this.divisor;
+  weeksleft: number;
 
   constructor(private prayerService: PrayersService,
     private lessonService: LessonService) { }
@@ -26,6 +25,7 @@ export class LessoncontentComponent implements OnInit {
     this.prayers = this.prayerService.getPrayers();
     this.lessonService.loadTasks([this.student], false);
     this.progress = this.lessonService.getTasks();
+    this.weeksleft = this.weeksUntil(this.student.target);
   }
 
   sendEnd() {
@@ -50,11 +50,15 @@ export class LessoncontentComponent implements OnInit {
       return newp;
     }
   }
-  weeksUntil(target: string) {
-    const then = (new Date(+target.substr(0, 4),
-      +target.substr(5, 2), +target.substr(7, 2)))
-      .valueOf() / this.divisor;
-    return Math.floor( then - this.now );
+    weeksUntil(target: Date) {
+    const divisor = 1000 * 60 * 60 * 24 * 7;
+    const now = new Date();
+
+    const tg = new Date(target);
+    const diff = tg.getTime() - now.getTime();
+
+      console.log(target, tg, now, diff / divisor );
+    return Math.floor(diff / divisor) ;
   }
 
   inGroup(prayer: Prayer, group: number) {

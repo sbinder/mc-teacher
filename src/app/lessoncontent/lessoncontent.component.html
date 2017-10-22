@@ -2,7 +2,7 @@
      <button class="btn btn-sm btn-danger" (click)="sendEnd()">End Lesson</button> </h3>
    <p>Torah - {{student.torah}} &nbsp;&nbsp;&nbsp;
      Haftara - {{student.haftara}}  &nbsp;&nbsp;&nbsp;
-     [{{ weeksUntil(student.target) }} weeks]
+     [{{ weeksleft }} weeks]
      </p>
   <ul>
   <li *ngFor="let prayer of prayers"
