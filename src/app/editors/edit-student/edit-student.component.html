@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-md-6">
               <button class="btn btn-default" style="width:100%;" (click)="parentClicked()">
-                {{student.parent > 0 ? student.parent : 'Select Parent'}}
+                {{parentname}}
               </button>
             </div>
             <div class="col-md-6">
@@ -74,7 +74,7 @@
 
       <div class="row namebox">
         <div class="col-md-12">
-          <textarea class="form-control" name="comment" [(ngModel)]="student.comment" placeholder="Comment"></textarea>
+          <textarea class="form-control" name="note" [(ngModel)]="student.note" placeholder="Comment"></textarea>
         </div>
       </div>
       <div class="row namebox">

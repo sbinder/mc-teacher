@@ -9,6 +9,7 @@ import { Teacher } from '../../models/teacher.model';
 import { Prayer } from '../../models/prayer.model';
 import { StudentsService } from '../../services/students.service';
 import { Router } from '@angular/router';
+import { Parent } from '../../models/parent';
 
 @Component({
   selector: 'app-edit-student',
@@ -24,6 +25,7 @@ export class EditStudentComponent implements OnInit {
     slist: Student[];
     prayers: { group: number, label: string }[];
     teachers: Teacher[];
+    parentname = '';
     blankUsername: boolean;
     lname: string;
 
@@ -42,9 +44,9 @@ export class EditStudentComponent implements OnInit {
       this.teachers.push(teach);
 
       if (this.studentService.workingStudent != null) {
-        this.student = this.studentService.workingStudent;
+        // this.student = this.studentService.workingStudent;
+        this.setupStudent(this.studentService.workingStudent);
         this.studentService.workingStudent = null;
-
       }
     }
 
@@ -85,11 +87,13 @@ export class EditStudentComponent implements OnInit {
 
 
     saveForm() {
+      this.student.target = new Date(this.target.year, this.target.month - 1, this.target.day);
       this.http.put(environment.href + 'student', this.student)
       .subscribe(res => {
         this.resetForm();
       }, err => {
-        alert(err);
+        console.log(err);
+        alert(err.name + ' ' + err.statusText);
       });
 
     }
@@ -108,10 +112,19 @@ export class EditStudentComponent implements OnInit {
 
     setupStudent(s: Student) {
       this.student = s;
+      const my = this;
       this.fillTarget(this.student.target);
       if (this.student.username !== undefined)
       {
         this.blankUsername = this.student.username.length === 0;
+      }
+      if (this.student.parent === undefined || this.student.parent === 0 ) {
+        this.parentname = 'Select Parent';
+      } else {
+        this.http.get<Parent>(environment.href + 'parent/' + this.student.parent)
+        .subscribe(res => {
+          this.parentname = my.studentService.makeParentName(res);
+        });
       }
     }
 
