@@ -11,7 +11,9 @@
   <span class="buttons right"><span *ngIf="router.url !== '/checkin'">
     <a routerLink="/class">Class Mode</a>
     <a routerLink="/lesson">Lesson Mode</a>
-    <a routerLink="/checkin">Checkin</a></span>
+    <a routerLink="/checkin">Checkin</a>
+    <a routerLink="/parent">P</a>
+    <a routerLink="/student">S</a></span>
     <span class="a-span"  (click)="this.authService.logout()">Logout</span>
   </span>
 </div>

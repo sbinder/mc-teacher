@@ -96,7 +96,7 @@ export class EditParentComponent implements OnInit {
         this.resetForm();
       },
       err => {
-        alert(err);
+        console.log(err);
       }
     );
   }
