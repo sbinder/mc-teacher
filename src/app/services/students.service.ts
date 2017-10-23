@@ -6,12 +6,12 @@ import { LessonService } from './lesson.service';
 import { Hub } from './hub.service';
 import { ModeService } from './mode.service';
 import { environment } from '../../environments/environment';
+import { Parent } from '../models/parent';
 
 @Injectable()
 export class StudentsService {
 
   private students: Student[] = [];
-
   private selectedStudents = [];
   private groupSelected = [false, false, false, false];
 
@@ -22,6 +22,7 @@ export class StudentsService {
     this.markSelectedStudents();
   });
 
+  public workingStudent: Student = null;
 
   constructor(private http: HttpClient, private lessonService: LessonService,
     private modeService: ModeService, private hub: Hub) {
@@ -152,17 +153,23 @@ export class StudentsService {
       }
     }
 
-    /*
-    const s = { ...this.students };
-    this.students.length = 0;
-    s.forEach(student => {
-      if (student.stid !== stn) {
-        this.students.push(student);
-      } else {console.log('removed', stn);}
-    });
-    console.log('after removal:', this.students);
-  */
 
+  }
+
+  makeParentName(element: Parent): string {
+    let name1 = element.title1;
+    name1 += name1.length > 0 ? ' ' : '';
+    name1 += element.fname1.length > 0 ? element.fname1 + ' ' : '';
+    if (element.lname2 !== element.lname1) {
+      name1 += element.lname1.length > 0 ? element.lname1 + ' ' : '';
+    }
+    if (element.fname2.length > 0) {
+      name1 +=
+        ' & ' + (element.title2.length > 0 ? element.title2 + ' ' : '');
+      name1 += element.fname2;
+    }
+    name1 += ' ' + element.lname2;
+    return name1;
   }
 
 }
