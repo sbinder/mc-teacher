@@ -12,3 +12,14 @@ div.namebox {
 div.namebox div {
   margin: 4px 0;
 }
+
+div.phone {
+  text-align: left;
+  padding-left: 12px;
+  background-color: white;
+}
+
+div.phonelabel {
+  text-align: right;
+  background-color: white;
+}

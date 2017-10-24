@@ -1,4 +1,7 @@
+<pre>{{closeResult}}</pre>
 <div>
+  <!--    <button class="btn btn-lg btn-outline-primary" (click)="open(phones)">Launch demo modal</button> -->
+
   <h2>Edit Parent</h2>
   <div class="container" *ngIf="parent === null">
     <form autocomplete="off">
@@ -43,6 +46,23 @@
         </div>
       </div>
 
+      <div class="namebox">
+        <div class="row" *ngFor="let fon of phoneList">
+          <div class="col-md-6 phonelabel">
+            {{ fon.label }}
+          </div>
+          <div class="col-md-6 phone">
+              {{ fon.Format() }}
+            </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-12" style="margin-top=8px;">
+            <button type="button" class="btn btn-info" (click)="open(phones)">Edit Phones</button>
+          </div>
+        </div>
+      </div>
+
       <div class="row namebox">
         <div class="col-md-6">
           <input class="form-control" name="address1" [(ngModel)]="parent.address1" placeholder="Address" />
@@ -78,3 +98,29 @@
     </div>
   </div>
 </div>
+
+<ng-template #phones let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Phone Numbers</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="row" *ngFor="let fon of phoneList">
+        <div class="col-md-6 phonelabel">
+            <input class="form-control" type="text" [(ngModel)]="fon.label" placeholder="Label" />
+        </div>
+
+      <div class="col-md-6 phone">
+            <input class="form-control" type="tel" [(ngModel)]="fon.digits" placeholder="Tel. Number"/>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+          <button type="button" class="btn btn-success" (click)="addNumber()">Add Number</button>
+        </div>
+  </div>
+</ng-template>
