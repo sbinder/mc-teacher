@@ -1,12 +1,7 @@
+
+<!--
 <div class='mc-menubar'>
   <span class="left">Mitzvah Central Lesson Portal</span>
-  <!--
-  <span class="btn-group right" role="group" aria-label="Select View">
-      <button type="button" class="btn">Class Mode</button>
-      <button type="button" class="btn">Lesson Mode</button>
-      <button type="button" class="btn">Checkin</button>
-  </span>
--->
 
   <span class="buttons right"><span *ngIf="router.url !== '/checkin'">
     <a routerLink="/class">Class Mode</a>
@@ -17,6 +12,14 @@
     <span class="a-span"  (click)="this.authService.logout()">Logout</span>
   </span>
 </div>
+-->
+
+
+<nav class="navbar navbar-inverse bg-primary">
+    <h1 class="navbar-brand mb-0">Mitzvah Central</h1>
+
+  </nav>
+
 <div style="text-align:center">
   <div class="container">
     <router-outlet></router-outlet>
