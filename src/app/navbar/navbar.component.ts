@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   isIn = false;   // store state
-
+  m1In = false;
   constructor() { }
 
   ngOnInit() {

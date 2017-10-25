@@ -19,6 +19,15 @@
         <li>
           <a>Link 2</a>
         </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" (click)="m1In = !m1In">Page 1
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu collapse" [ngClass]="{ 'in': m1In }">
+            <li><a href="#">Page 1-1</a></li>
+            <li><a href="#">Page 1-2</a></li>
+            <li><a href="#">Page 1-3</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
     <!-- #3 -->

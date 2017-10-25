@@ -21,6 +21,7 @@ import { MatMenu, MatButton } from '@angular/material';
 
 })
 export class AppComponent implements OnInit, OnDestroy {
+  public isNavbarCollapsed = false;
   public currentRoute: string;
 
   public teachingMode = 'C';  // : string;
