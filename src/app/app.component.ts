@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './services/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { MatMenu, MatButton } from '@angular/material';
 
 @Component({
   selector: 'app-root',

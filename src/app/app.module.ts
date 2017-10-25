@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatDialogModule, MatNativeDateModule, MatSliderModule, MatDatepickerModule } from '@angular/material';
+import { MatDialogModule, MatNativeDateModule, MatSliderModule,
+  MatDatepickerModule, MatMenu, MatButtonModule } from '@angular/material';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { PrayerlistComponent } from './prayerlist/prayerlist.component';
@@ -35,6 +36,7 @@ import { EditParentComponent } from './editors/edit-parent/edit-parent.component
 import { EditStudentComponent } from './editors/edit-student/edit-student.component';
 import { EditTeacherComponent } from './editors/edit-teacher/edit-teacher.component';
 import { SelectDialogComponent } from './editors/select-dialog/select-dialog.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 const appRoutes: Routes = [
@@ -68,7 +70,8 @@ const appRoutes: Routes = [
     EditParentComponent,
     EditStudentComponent,
     EditTeacherComponent,
-    SelectDialogComponent
+    SelectDialogComponent,
+    NavbarComponent
   ],
   entryComponents: [SelectDialogComponent],
   imports: [
