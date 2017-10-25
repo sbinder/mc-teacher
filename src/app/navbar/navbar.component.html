@@ -1,35 +1,21 @@
-<nav class="navbar navbar-inverse ">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed"
-        (click)="isIn = !isIn">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <!-- #1 -->
-      <a class="navbar-brand">Mitzvah Central</a>
+<header  *ngIf="router.url !== '/checkin'" class="navbar navbar-light navbar-fixed-top navbar-expand-lg">
+
+  <span class="navbar-brand">Mitzvah Central</span>
+
+  <button class="navbar-toggler navbar-toggler-right" type="button" (click)="navbarCollapsed = !navbarCollapsed" [attr.aria-expanded]="!navbarCollapsed"
+    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="navbar-collapse" [ngbCollapse]="navbarCollapsed" id="navbarContent">
+    <div class="navbar-nav mr-auto">
+        <a class="nav-link" [routerLink]="['/student']" (click)="navbarCollapsed = true">Student</a>
+        <a class="nav-link" [routerLink]="['/parent']" (click)="navbarCollapsed = true">Parent</a>
+        <a class="nav-link" [routerLink]="['/class']" (click)="navbarCollapsed = true">Class Mode</a>
+        <a class="nav-link" [routerLink]="['/lesson']" (click)="navbarCollapsed = true">Lesson Mode</a>
+        <a class="nav-link" [routerLink]="['/checkin']" (click)="navbarCollapsed = true">Student Checkin</a>
+        <a class="nav-link" (click)="this.authService.logout()">Logout</a>
+      </div>
     </div>
-    <div class="collapse navbar-collapse" [ngClass]="{ 'in': isIn }">
-      <ul class="nav navbar-nav">
-        <li>
-          <a>Link 1</a>
-        </li>
-        <li>
-          <a>Link 2</a>
-        </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" (click)="m1In = !m1In">Page 1
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu collapse" [ngClass]="{ 'in': m1In }">
-            <li><a href="#">Page 1-1</a></li>
-            <li><a href="#">Page 1-2</a></li>
-            <li><a href="#">Page 1-3</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <!-- #3 -->
-  </div>
-</nav>
+
+</header>
