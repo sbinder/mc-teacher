@@ -23,3 +23,7 @@ div.phonelabel {
   text-align: right;
   background-color: white;
 }
+
+div.modal-footer button {
+  min-width: 10em;
+}
