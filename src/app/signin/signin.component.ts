@@ -31,10 +31,12 @@ export class SigninComponent implements OnInit {
     const params = new HttpParams().set('orgid', this.user.orgid)
     .set('un', this.user.un).set('pw', this.user.pw);
 
-    this.http.get<{key: string, value: string}>(environment.href + 'token', { params }).subscribe(
+    this.http.get<string>(environment.href + 'token', { params })
+    .subscribe(
     res => {
-      // console.log('recd token', res);
-      const t = res['token'];
+      const keyval = JSON.parse(res);
+      // console.log('keyval', keyval);
+      const t = keyval['token'];
       // console.log('saving', t);
       this.auth.updateToken(t);
       this.router.navigate(['/']);

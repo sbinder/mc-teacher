@@ -1,5 +1,5 @@
-<app-studentlistheader (GroupEvent)="updateGroups($event)"
->
+<div id="studentlist">
+  <app-studentlistheader (GroupEvent)="updateGroups($event)">
 </app-studentlistheader>
 <ul>
   <li *ngFor="let student of students"
@@ -15,4 +15,4 @@
     </div>
   </li>
 </ul>
-
+</div>

@@ -1,4 +1,4 @@
-<header  *ngIf="router.url !== '/checkin'" class="navbar navbar-light navbar-fixed-top navbar-expand-lg">
+<header *ngIf="router.url !== '/checkin'" class="bg-warning navbar navbar-light navbar-fixed-top navbar-expand-lg">
 
   <span class="navbar-brand">Mitzvah Central</span>
 
@@ -8,14 +8,26 @@
   </button>
 
   <div class="navbar-collapse" [ngbCollapse]="navbarCollapsed" id="navbarContent">
-    <div class="navbar-nav mr-auto">
-        <a class="nav-link" [routerLink]="['/student']" (click)="navbarCollapsed = true">Student</a>
-        <a class="nav-link" [routerLink]="['/parent']" (click)="navbarCollapsed = true">Parent</a>
-        <a class="nav-link" [routerLink]="['/class']" (click)="navbarCollapsed = true">Class Mode</a>
-        <a class="nav-link" [routerLink]="['/lesson']" (click)="navbarCollapsed = true">Lesson Mode</a>
-        <a class="nav-link" [routerLink]="['/checkin']" (click)="navbarCollapsed = true">Student Checkin</a>
-        <a class="nav-link" (click)="this.authService.logout()">Logout</a>
+    <div class="navbar-nav ml-auto">
+      <div ngbDropdown class="d-inline-block">
+        <div class="" id="dropdown1" ngbDropdownToggle>Mode</div>
+        <div ngbDropdownMenu aria-labelledby="dropdown1">
+          <a class="dropdown-item nav-link" [routerLink]="['/class']" (click)="navbarCollapsed = true">Class Mode</a>
+          <a class="dropdown-item nav-link" [routerLink]="['/lesson']" (click)="navbarCollapsed = true">Lesson Mode</a>
+          <a class="dropdown-item nav-link" [routerLink]="['/checkin']" (click)="navbarCollapsed = true">Student Checkin</a>
+        </div>
       </div>
+
+      <div ngbDropdown class="d-inline-block">
+        <div class="" id="dropdown2" ngbDropdownToggle>Edit</div>
+        <div ngbDropdownMenu aria-labelledby="dropdown2">
+          <a class="dropdown-item nav-link" [routerLink]="['/student']" (click)="navbarCollapsed = true">Students</a>
+          <a class="dropdown-item nav-link" [routerLink]="['/parent']" (click)="navbarCollapsed = true">Parents</a>
+          <a class="dropdown-item nav-link disabled" [routerLink]="['/teacher']" (click)="navbarCollapsed = true">Teachers</a>
+        </div>
+      </div>
+      <a class="nav-link" (click)="this.authService.logout()">Logout</a>
     </div>
+  </div>
 
 </header>

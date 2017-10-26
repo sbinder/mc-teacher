@@ -1,5 +1,6 @@
 
 button {
   border:1px solid black;
+  min-width: 5em;
 }
 

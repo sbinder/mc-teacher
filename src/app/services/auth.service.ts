@@ -14,7 +14,7 @@ export class AuthService {
   }
 
   public updateToken(token: string) {
-    // console.log('storing token:', token);
+     console.log('storing token:', token);
     localStorage.setItem('token', token);
     this.retryFailedRequests();
   }

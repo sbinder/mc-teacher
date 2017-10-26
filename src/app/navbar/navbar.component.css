@@ -1,0 +1,21 @@
+header.navbar {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+div.dropdown-toggle {
+  padding-top: 8px;
+}
+.dropdown-toggle, .nav-link {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.navbar-fixed-top {
+  border-bottom: 1px solid black;
+}
+/*
+.nav-link:not(.dropdown-item) {
+  color: white;
+}
+*/
