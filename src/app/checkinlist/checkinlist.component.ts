@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class CheckinlistComponent implements OnInit {
 
-  // students$: Subscription;
+  timers = new Map<number, any>();
 
   constructor(private changeDetector: ChangeDetectorRef, private hub: Hub,
     private studentService: StudentsService) { }
@@ -70,8 +70,16 @@ export class CheckinlistComponent implements OnInit {
     this.slist.forEach(element => {
       if (element.stid === id) {
         element.present = !element.present;
-        this.sendMessage(id, element.present);
+//        this.sendMessage(id, element.present);
+        if (!this.clearTimer(id)) {
+          // invoke 2 second debounce delay
+          this.timers.set(id, setTimeout(() => {
+            this.SendNotification(id, element.present);
+          } , 2000));
+        }
+        console.log(this.timers);
       }
+
     });
 //    console.log('dispatching click', this.slist);
 //    switch (this.getStatus(id)) {
@@ -84,6 +92,23 @@ export class CheckinlistComponent implements OnInit {
 //        this.sendMessage(id, true);
 //    }
 //    console.log('click result', this.slist);
+  }
+
+  clearTimer(id: number ) {
+    if (this.timers.get(id)) {
+      clearTimeout(this.timers.get(id));
+      this.timers.delete(id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  SendNotification(id: number, present: boolean) {
+    this.sendMessage(id, present);
+    // alert('Got a POP from ' + id);
+    this.timers.delete(id);
+    // console.log(this.timers);
   }
 
   getStatus(id): string {

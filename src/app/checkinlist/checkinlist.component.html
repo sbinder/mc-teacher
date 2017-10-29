@@ -4,7 +4,6 @@
           <div *ngIf="checkDate(student.target)" class="datemark">
               {{getdate(student.target) | date:'MMM d, y'}}
           </div>
-        <!--<div class="student" [ngClass]="student.present ? 'present' : ''"-->
             <div [ngClass]="{ student: true, present: student.present }"
           (click)="gotClicked(student.stid)">{{student.lname}}, {{student.fname}}
         </div>
